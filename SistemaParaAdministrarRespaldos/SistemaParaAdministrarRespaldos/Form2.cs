@@ -23,7 +23,7 @@ namespace SistemaParaAdministrarRespaldos
             else
             {
                 this.DialogResult = DialogResult.OK; // registra el resultado del boton OK para que realize lo del form1 iff
-                    conexion.Open();
+                conexion.Open();
                 string format = "yyyy-MM-dd HH:mm:ss";
                 string fecha = dateTimePicker1.Value.ToString(format);
                 string comando = "insert into Tabla_Tarea (nombretarea,fecha)values('"+txt_nombretarea.Text +"','"+ fecha + "');";
