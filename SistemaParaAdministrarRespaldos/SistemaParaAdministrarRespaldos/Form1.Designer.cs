@@ -47,15 +47,18 @@
             this.panel1.Controls.Add(this.btn_alta);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(441, 281);
+            this.panel1.Size = new System.Drawing.Size(479, 405);
             this.panel1.TabIndex = 0;
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(3, 63);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(240, 150);
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.Size = new System.Drawing.Size(363, 268);
             this.dataGridView1.TabIndex = 5;
             // 
             // btn_ejecutar
@@ -90,19 +93,21 @@
             // 
             // btn_alta
             // 
+            this.btn_alta.BackColor = System.Drawing.SystemColors.Control;
+            this.btn_alta.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btn_alta.Location = new System.Drawing.Point(3, 3);
             this.btn_alta.Name = "btn_alta";
             this.btn_alta.Size = new System.Drawing.Size(75, 30);
             this.btn_alta.TabIndex = 0;
             this.btn_alta.Text = "Alta";
-            this.btn_alta.UseVisualStyleBackColor = true;
+            this.btn_alta.UseVisualStyleBackColor = false;
             this.btn_alta.Click += new System.EventHandler(this.btn_alta_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(503, 331);
+            this.ClientSize = new System.Drawing.Size(503, 429);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;

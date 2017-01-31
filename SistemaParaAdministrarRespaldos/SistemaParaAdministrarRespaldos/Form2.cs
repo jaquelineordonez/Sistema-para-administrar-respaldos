@@ -26,13 +26,10 @@ namespace SistemaParaAdministrarRespaldos
                 conexion.Open();
                 string format = "yyyy-MM-dd HH:mm:ss";
                 string fecha = dateTimePicker1.Value.ToString(format);
-                string comando = "insert into Tabla_Tarea (nombretarea,fecha)values('"+txt_nombretarea.Text +"','"+ fecha + "');";
-                    SQLiteCommand insercion = new SQLiteCommand(comando, conexion);
-                    insercion.ExecuteNonQuery();
-                    conexion.Close();
-                
-
-               
+                string comando = "insert into Tabla_Tarea (Nombre_Tarea,Fecha)values('"+txt_nombretarea.Text +"','"+ fecha + "');";
+                SQLiteCommand insercion = new SQLiteCommand(comando, conexion);
+                insercion.ExecuteNonQuery();
+                conexion.Close();
             }
            
         }

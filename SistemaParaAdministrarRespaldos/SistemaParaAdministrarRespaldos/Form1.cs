@@ -10,13 +10,10 @@ namespace SistemaParaAdministrarRespaldos
     public partial class Form1 : Form
     {
         private SQLiteConnection conexion;
-        //// private int contador;
   
         public Form1()
         {
-            // contador = 0;
             InitializeComponent();
-
         }
 
         private void btn_alta_Click(object sender, EventArgs e)
@@ -26,14 +23,8 @@ namespace SistemaParaAdministrarRespaldos
             {
                 CargarDatos();
                 MessageBox.Show("Tarea Agregada");
-
-            }
-            else
-            {
-
             }
         }
-
 
         private void btn_modificar_Click(object sender, EventArgs e)
         {
@@ -47,11 +38,33 @@ namespace SistemaParaAdministrarRespaldos
 
         private void btn_baja_Click(object sender, EventArgs e)
         {
-        }
-
-        private void Form2_Load(object sender, EventArgs e)
-        {
-
+            SQLiteDataAdapter adaptador;
+            DataSet ds = new DataSet();
+            DataTable tabla = new DataTable();
+            SQLiteConnection conexion = new SQLiteConnection("Data source = D:\\Sistema para manejar respaldos\\Sistema-para-administrar-respaldos\\mydatabase.sqlite;Version=3;New=False;Compress=true;");
+            conexion.Open();
+            string comando = "SELECT * FROM Tabla_Tarea";
+            adaptador = new SQLiteDataAdapter(comando, conexion);
+            ds.Reset();
+            adaptador.Fill(ds);
+            tabla = ds.Tables[0];
+            SQLiteCommandBuilder cb = new SQLiteCommandBuilder(adaptador);
+            cb.QuotePrefix = "[";
+            cb.QuoteSuffix = "]";
+            adaptador.InsertCommand = cb.GetDeleteCommand();
+            int fila = dataGridView1.CurrentCell.RowIndex;
+            if (fila > tabla.Rows.Count - 1)
+            {
+                MessageBox.Show("Seleccione un registro");
+            }
+            if (MessageBox.Show("¿Seguro que desea eliminar este registro?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                tabla.Rows[fila].Delete();
+                adaptador.Update(tabla);
+                tabla.AcceptChanges();
+                dataGridView1.DataSource = tabla;
+                conexion.Close();
+            }
         }
 
         private void CargarDatos()
