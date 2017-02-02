@@ -33,6 +33,11 @@
             this.btn_guardar = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.btn_agregar = new System.Windows.Forms.Button();
+            this.btn_quitar = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -77,11 +82,46 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Fecha";
             // 
+            // dataGridView2
+            // 
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(328, 12);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(288, 150);
+            this.dataGridView2.TabIndex = 5;
+            // 
+            // btn_agregar
+            // 
+            this.btn_agregar.Location = new System.Drawing.Point(375, 169);
+            this.btn_agregar.Name = "btn_agregar";
+            this.btn_agregar.Size = new System.Drawing.Size(75, 30);
+            this.btn_agregar.TabIndex = 6;
+            this.btn_agregar.Text = "Agregar";
+            this.btn_agregar.UseVisualStyleBackColor = true;
+            this.btn_agregar.Click += new System.EventHandler(this.btn_agregar_Click);
+            // 
+            // btn_quitar
+            // 
+            this.btn_quitar.Location = new System.Drawing.Point(495, 169);
+            this.btn_quitar.Name = "btn_quitar";
+            this.btn_quitar.Size = new System.Drawing.Size(75, 30);
+            this.btn_quitar.TabIndex = 7;
+            this.btn_quitar.Text = "Quitar";
+            this.btn_quitar.UseVisualStyleBackColor = true;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(345, 151);
+            this.ClientSize = new System.Drawing.Size(628, 229);
+            this.Controls.Add(this.btn_quitar);
+            this.Controls.Add(this.btn_agregar);
+            this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.btn_guardar);
@@ -90,7 +130,10 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form2";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Datos de la Tarea";
+            this.Load += new System.EventHandler(this.Form2_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -103,5 +146,9 @@
         private System.Windows.Forms.Button btn_guardar;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.Button btn_agregar;
+        private System.Windows.Forms.Button btn_quitar;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }

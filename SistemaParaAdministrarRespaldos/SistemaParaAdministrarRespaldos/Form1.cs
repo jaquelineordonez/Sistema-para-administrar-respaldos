@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace SistemaParaAdministrarRespaldos
 {
-    public partial class Form1 : Form
+    public partial class Form1 : System.Windows.Forms.Form
     {
         private SQLiteConnection conexion;
   
@@ -28,7 +28,12 @@ namespace SistemaParaAdministrarRespaldos
 
         private void btn_modificar_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Tarea modificada");
+            Form2 form2 = new Form2(conexion, Convert.ToInt32(dataGridView1["ID_Tarea", dataGridView1.CurrentRow.Index].Value), dataGridView1["Nombre_Tarea", dataGridView1.CurrentRow.Index].Value, System.Convert.ToDateTime(dataGridView1["Fecha", dataGridView1.CurrentRow.Index].Value));
+            if (form2.ShowDialog(this) == DialogResult.OK)
+            {
+                CargarDatos();
+                MessageBox.Show("Tarea Modificada");
+            }
         }
 
         private void btn_ejecutar_Click(object sender, EventArgs e)
