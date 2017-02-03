@@ -36,12 +36,11 @@ namespace SistemaParaAdministrarRespaldos
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            this.btn_agregar.Click += new System.EventHandler(this.btn_agregar_Click);
             try
             {
                 DataGridViewTextBoxColumn c1 = new DataGridViewTextBoxColumn();
                 c1.Name = "Nombre";
-                DataGridViewButtonColumn c2 = new DataGridViewButtonColumn();
+                DataGridViewTextBoxColumn c2 = new DataGridViewTextBoxColumn();
                 c2.Name = "Ruta";
                 this.dataGridView2.Columns.AddRange(c1, c2);
             }
@@ -106,16 +105,14 @@ namespace SistemaParaAdministrarRespaldos
         private void btn_agregar_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Filter = "Cursor Files|*.docx"; ///.cur
-            openFileDialog1.Title = "Seleccione un archivo";
             openFileDialog1.Multiselect = true;
+            openFileDialog1.Filter = "Cursor Files|*.docx"; 
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                /////this.Cursor = new Cursor(openFileDialog1.OpenFile());
                 string[] ofdSelectedFiles = openFileDialog1.SafeFileNames;
-                foreach (string fontFileNames in ofdSelectedFiles)
+                foreach (string fontFileNames in ofdSelectedFiles) 
                 {
-                    dataGridView2.Rows.Add(fontFileNames);
+                    dataGridView2.Rows.Add(fontFileNames, openFileDialog1.FileName);
                 }
             }
         }
