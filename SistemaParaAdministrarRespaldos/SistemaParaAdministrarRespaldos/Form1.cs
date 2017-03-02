@@ -10,23 +10,139 @@ namespace SistemaParaAdministrarRespaldos
     public partial class Form1 : System.Windows.Forms.Form
     {
         private SQLiteConnection conexion;
-  
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void btn_alta_Click(object sender, EventArgs e)
+        private DataTable tabla = new DataTable();
+        private SQLiteDataAdapter adaptador;
+        private SQLiteCommandBuilder builder;
+
+
+        private void CargarDatos()
         {
-            Form2 form2 = new Form2(conexion);
-            if (form2.ShowDialog(this) == DialogResult.OK)
+            tabla = new DataTable();
+            adaptador = new SQLiteDataAdapter("SELECT * FROM Tabla_Tarea", conexion);
+            adaptador.Fill(tabla);
+            builder = new SQLiteCommandBuilder(adaptador);
+            tabla.Columns.Add("Seleccionar", typeof(bool));
+            dataGridView1.DataSource = tabla;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            /////dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            try
             {
+                conexion = new SQLiteConnection("Data source = D:\\Sistema para manejar respaldos\\Sistema-para-administrar-respaldos\\mydatabase.sqlite;Version=3");
+                conexion.Open();
                 CargarDatos();
-                MessageBox.Show("Tarea Agregada");
+            }
+            catch (SQLiteException ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
             }
         }
 
-        private void btn_modificar_Click(object sender, EventArgs e)
+        private void tsb_nueva_Click(object sender, EventArgs e)
+        {
+            {
+
+                Form2 form2 = new Form2(conexion);
+                if (form2.ShowDialog(this) == DialogResult.OK)
+                {
+                    CargarDatos();
+                    MessageBox.Show("Tarea Agregada");
+                }
+            }
+        }
+
+        private void tsb_editar_Click(object sender, EventArgs e)
+        {
+            Form2 form2 = new Form2(conexion, Convert.ToInt32(dataGridView1["ID_Tarea", dataGridView1.CurrentRow.Index].Value), dataGridView1["Nombre_Tarea", dataGridView1.CurrentRow.Index].Value, System.Convert.ToDateTime(dataGridView1["Fecha", dataGridView1.CurrentRow.Index].Value));
+            if (form2.ShowDialog(this) == DialogResult.OK)
+            {
+                CargarDatos();
+                MessageBox.Show("Tarea Modificada");
+            }
+
+        }
+
+        private void tsb_eliminar_Click(object sender, EventArgs e)
+        {
+            SQLiteTransaction transaccion = conexion.BeginTransaction();
+            object id_Tarea = 0;
+            SQLiteCommand comando;
+            try
+            {
+                dataGridView1.EndEdit(); ///se abria beginEdit() pero no se cerraba, por eso no funcionaba el check  hasta que el foco dejaba de estar en el renglon
+                tabla.AcceptChanges();
+
+                DataRow[] rowsSeleccionados = tabla.Select("Seleccionar = " + true);
+                if (rowsSeleccionados != null && rowsSeleccionados.Length >= 1)
+                {
+                    if (MessageBox.Show("¿Seguro que desea eliminar este registro?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        for (int x = 0; x < rowsSeleccionados.Length; x++)
+                        {
+                            id_Tarea = dataGridView1["ID_Tarea", x].Value;
+                            comando = new SQLiteCommand("DELETE FROM Tabla_Archivo WHERE (ID_Tarea = " + id_Tarea + ")", conexion, transaccion);
+                            comando.ExecuteNonQuery();
+                            comando = new SQLiteCommand("DELETE FROM Tabla_Tarea WHERE (ID_Tarea = " + id_Tarea + ")", conexion, transaccion);
+                            comando.ExecuteNonQuery();
+                        }
+
+                        adaptador.Update(tabla);
+                        dataGridView1.DataSource = null;
+                        dataGridView1.DataSource = tabla;
+                        CargarDatos();
+
+                        transaccion.Commit();
+                    }
+                }
+                else
+                {
+                    object seleccionado = false;
+                    for (int x = 0; x < dataGridView1.Rows.Count; x++)
+                    {
+                        seleccionado = dataGridView1["Seleccionar", x].Value;
+                        if (seleccionado != DBNull.Value)
+                        {
+                            if (Convert.ToBoolean(seleccionado))
+                            {
+                                dataGridView1.Rows.RemoveAt(x);
+                                x--;
+                            }
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("ERROR EN TRANSACCION");
+                transaccion.Rollback();
+            }
+        
+
+        }
+
+        private void tsb_ejecutar_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Tarea ejecutada");
+            /*if (conexion.State != ConnectionState.Open)
+            {
+                conexion.Open();
+            }
+            Form3 forma = new Form3(conexion);
+            forma.ShowDialog();*/
+        }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             Form2 form2 = new Form2(conexion, Convert.ToInt32(dataGridView1["ID_Tarea", dataGridView1.CurrentRow.Index].Value), dataGridView1["Nombre_Tarea", dataGridView1.CurrentRow.Index].Value, System.Convert.ToDateTime(dataGridView1["Fecha", dataGridView1.CurrentRow.Index].Value));
             if (form2.ShowDialog(this) == DialogResult.OK)
@@ -36,60 +152,11 @@ namespace SistemaParaAdministrarRespaldos
             }
         }
 
-        private void btn_ejecutar_Click(object sender, EventArgs e)
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Tarea ejecutada");
-        }
-
-        private void btn_baja_Click(object sender, EventArgs e)
-        {
-            SQLiteDataAdapter adaptador;
-            DataSet ds = new DataSet();
-            DataTable tabla = new DataTable();
-            SQLiteConnection conexion = new SQLiteConnection("Data source = D:\\Sistema para manejar respaldos\\Sistema-para-administrar-respaldos\\mydatabase.sqlite;Version=3;New=False;Compress=true;");
-            conexion.Open();
-            string comando = "SELECT * FROM Tabla_Tarea";
-            adaptador = new SQLiteDataAdapter(comando, conexion);
-            ds.Reset();
-            adaptador.Fill(ds);
-            tabla = ds.Tables[0];
-            SQLiteCommandBuilder cb = new SQLiteCommandBuilder(adaptador);
-            cb.QuotePrefix = "[";
-            cb.QuoteSuffix = "]";
-            adaptador.InsertCommand = cb.GetDeleteCommand();
-            int fila = dataGridView1.CurrentCell.RowIndex;
-            if (fila > tabla.Rows.Count - 1)
+            if (MessageBox.Show("¿Seguro que desea salir?", "Salir", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
             {
-                MessageBox.Show("Seleccione un registro");
-            }
-            if (MessageBox.Show("¿Seguro que desea eliminar este registro?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                tabla.Rows[fila].Delete();
-                adaptador.Update(tabla);
-                tabla.AcceptChanges();
-                dataGridView1.DataSource = tabla;
-                conexion.Close();
-            }
-        }
-
-        private void CargarDatos()
-        {
-            SQLiteDataAdapter adaptador = new SQLiteDataAdapter("select * from  Tabla_Tarea", conexion);
-            DataTable tabla = new DataTable("tareas");
-            adaptador.Fill(tabla);
-            dataGridView1.DataSource = tabla;
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                conexion = new SQLiteConnection("Data source = D:\\Sistema para manejar respaldos\\Sistema-para-administrar-respaldos\\mydatabase.sqlite;Version=3");
-                CargarDatos();
-            }
-            catch (SQLiteException ex)
-            {
-                MessageBox.Show(ex.Message, "Error");
+                Application.Exit();
             }
         }
     }
