@@ -127,8 +127,6 @@ namespace SistemaParaAdministrarRespaldos
                 MessageBox.Show("ERROR EN TRANSACCION");
                 transaccion.Rollback();
             }
-        
-
         }
 
         private void tsb_ejecutar_Click(object sender, EventArgs e)
