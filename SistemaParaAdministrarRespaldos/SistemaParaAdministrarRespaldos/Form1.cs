@@ -70,7 +70,6 @@ namespace SistemaParaAdministrarRespaldos
                 CargarDatos();
                 MessageBox.Show("Tarea Modificada");
             }
-
         }
 
         private void tsb_eliminar_Click(object sender, EventArgs e)
