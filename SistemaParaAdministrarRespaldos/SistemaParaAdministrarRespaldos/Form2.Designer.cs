@@ -45,13 +45,22 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.btn_quitar = new System.Windows.Forms.Button();
             this.btn_agregar = new System.Windows.Forms.Button();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.txt_contraseña = new System.Windows.Forms.TextBox();
+            this.chk_password = new System.Windows.Forms.CheckBox();
+            this.chk_sobreescribir = new System.Windows.Forms.CheckBox();
+            this.btn_ruta = new System.Windows.Forms.Button();
+            this.txt_ruta = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.btn_guardar = new System.Windows.Forms.Button();
             this.btn_cancelar = new System.Windows.Forms.Button();
+            this.fbd1 = new System.Windows.Forms.FolderBrowserDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -141,6 +150,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.ImageList = this.imageList1;
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
@@ -160,7 +170,7 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(531, 218);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Nombre";
+            this.tabPage1.Text = "Configuracion Principal";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
@@ -202,6 +212,79 @@
             this.btn_agregar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_agregar.UseVisualStyleBackColor = true;
             this.btn_agregar.Click += new System.EventHandler(this.btn_agregar_Click);
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.txt_contraseña);
+            this.tabPage3.Controls.Add(this.chk_password);
+            this.tabPage3.Controls.Add(this.chk_sobreescribir);
+            this.tabPage3.Controls.Add(this.btn_ruta);
+            this.tabPage3.Controls.Add(this.txt_ruta);
+            this.tabPage3.Controls.Add(this.label3);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(531, 218);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Ruta de salida";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // txt_contraseña
+            // 
+            this.txt_contraseña.Enabled = false;
+            this.txt_contraseña.Location = new System.Drawing.Point(168, 91);
+            this.txt_contraseña.MaxLength = 100;
+            this.txt_contraseña.Name = "txt_contraseña";
+            this.txt_contraseña.PasswordChar = '*';
+            this.txt_contraseña.Size = new System.Drawing.Size(284, 20);
+            this.txt_contraseña.TabIndex = 5;
+            // 
+            // chk_password
+            // 
+            this.chk_password.AutoSize = true;
+            this.chk_password.Location = new System.Drawing.Point(81, 91);
+            this.chk_password.Name = "chk_password";
+            this.chk_password.Size = new System.Drawing.Size(80, 17);
+            this.chk_password.TabIndex = 4;
+            this.chk_password.Text = "Contraseña";
+            this.chk_password.UseVisualStyleBackColor = true;
+            this.chk_password.CheckedChanged += new System.EventHandler(this.chk_contraseña_CheckedChanged);
+            // 
+            // chk_sobreescribir
+            // 
+            this.chk_sobreescribir.AutoSize = true;
+            this.chk_sobreescribir.Location = new System.Drawing.Point(81, 68);
+            this.chk_sobreescribir.Name = "chk_sobreescribir";
+            this.chk_sobreescribir.Size = new System.Drawing.Size(133, 17);
+            this.chk_sobreescribir.TabIndex = 3;
+            this.chk_sobreescribir.Text = "Sobre escribir respaldo";
+            this.chk_sobreescribir.UseVisualStyleBackColor = true;
+            // 
+            // btn_ruta
+            // 
+            this.btn_ruta.Location = new System.Drawing.Point(458, 26);
+            this.btn_ruta.Name = "btn_ruta";
+            this.btn_ruta.Size = new System.Drawing.Size(35, 23);
+            this.btn_ruta.TabIndex = 2;
+            this.btn_ruta.Text = "...";
+            this.btn_ruta.UseVisualStyleBackColor = true;
+            this.btn_ruta.Click += new System.EventHandler(this.btn_ruta_Click);
+            // 
+            // txt_ruta
+            // 
+            this.txt_ruta.Location = new System.Drawing.Point(81, 28);
+            this.txt_ruta.Name = "txt_ruta";
+            this.txt_ruta.Size = new System.Drawing.Size(371, 20);
+            this.txt_ruta.TabIndex = 1;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(13, 30);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(63, 13);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Guardar en:";
             // 
             // imageList1
             // 
@@ -256,6 +339,8 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -280,5 +365,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ID_Archivo;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID_Tarea;
         private System.Windows.Forms.DataGridViewTextBoxColumn Datos_Archivo;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TextBox txt_contraseña;
+        private System.Windows.Forms.CheckBox chk_password;
+        private System.Windows.Forms.CheckBox chk_sobreescribir;
+        private System.Windows.Forms.Button btn_ruta;
+        private System.Windows.Forms.TextBox txt_ruta;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.FolderBrowserDialog fbd1;
     }
 }

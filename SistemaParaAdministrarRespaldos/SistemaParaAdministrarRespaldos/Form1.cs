@@ -35,7 +35,6 @@ namespace SistemaParaAdministrarRespaldos
         {
             dataGridView1.AutoGenerateColumns = false;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            /////dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             try
             {
@@ -74,6 +73,7 @@ namespace SistemaParaAdministrarRespaldos
 
         private void tsb_eliminar_Click(object sender, EventArgs e)
         {
+            
             SQLiteTransaction transaccion = conexion.BeginTransaction();
             object id_Tarea = 0;
             SQLiteCommand comando;
@@ -88,15 +88,16 @@ namespace SistemaParaAdministrarRespaldos
                     if (MessageBox.Show("¿Seguro que desea eliminar este registro?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
                         for (int x = 0; x < rowsSeleccionados.Length; x++)
-                        {
-                            id_Tarea = dataGridView1["ID_Tarea", x].Value;
+                        {                           
+                            id_Tarea = rowsSeleccionados[x][0];
+                            string a = "DELETE FROM Tabla_Archivo WHERE (ID_Tarea = " + id_Tarea + ")";
                             comando = new SQLiteCommand("DELETE FROM Tabla_Archivo WHERE (ID_Tarea = " + id_Tarea + ")", conexion, transaccion);
                             comando.ExecuteNonQuery();
                             comando = new SQLiteCommand("DELETE FROM Tabla_Tarea WHERE (ID_Tarea = " + id_Tarea + ")", conexion, transaccion);
                             comando.ExecuteNonQuery();
+                            rowsSeleccionados[x].Delete();
                         }
 
-                        adaptador.Update(tabla);
                         dataGridView1.DataSource = null;
                         dataGridView1.DataSource = tabla;
                         CargarDatos();
@@ -106,7 +107,7 @@ namespace SistemaParaAdministrarRespaldos
                 }
                 else
                 {
-                    object seleccionado = false;
+                    object seleccionado = null;
                     for (int x = 0; x < dataGridView1.Rows.Count; x++)
                     {
                         seleccionado = dataGridView1["Seleccionar", x].Value;

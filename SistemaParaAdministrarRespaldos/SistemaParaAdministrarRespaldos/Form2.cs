@@ -43,7 +43,6 @@ namespace SistemaParaAdministrarRespaldos
             }
 
             dataGridView2.AutoGenerateColumns = false;
-            //////dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
             if (idtarea > 0)
@@ -70,14 +69,13 @@ namespace SistemaParaAdministrarRespaldos
         {
             if (insertar)
             {
-                if (string.IsNullOrEmpty(txt_nombretarea.Text) || (dataGridView2.Rows.Count == 0))
+                if (string.IsNullOrEmpty(txt_nombretarea.Text) || (dataGridView2.Rows.Count == 0) || string.IsNullOrEmpty(txt_ruta.Text))
                 {
-                    MessageBox.Show("Debe completar la informacion");
+                    MessageBox.Show("Debe completar la informacion", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
                 else
                 {
 
-                    this.DialogResult = DialogResult.OK; // registra el resultado del boton OK para que realize lo del form1 if
 
                     SQLiteTransaction transaccion = conexion.BeginTransaction(); 
 
@@ -94,6 +92,16 @@ namespace SistemaParaAdministrarRespaldos
 
                         string comando2 = "insert into Tabla_Archivo (Datos_Archivo,ID_Tarea) values(@Datos_Archivo,@idtarea)";
                         SQLiteCommand insercion2 = new SQLiteCommand(comando2, conexion, transaccion);
+
+                        string comando3 = "insert into Tabla_Ruta (Ruta_Salida,sobreescribir,password,Contraseña,ID_Tarea) values(@Ruta_Salida,@sobreescribir,@password,@Contraseña,@idtarea)";
+                        SQLiteCommand insercion3 = new SQLiteCommand(comando3, conexion, transaccion);
+                        insercion3.Parameters.AddWithValue("@Ruta_Salida", txt_ruta.Text);
+                        insercion3.Parameters.AddWithValue("@sobreescribir", chk_sobreescribir.Checked);
+                        insercion3.Parameters.AddWithValue("@password", chk_password.Checked);
+                        insercion3.Parameters.AddWithValue("@Contraseña", txt_contraseña.Text);
+                        insercion3.Parameters.AddWithValue("@idtarea", idtarea);
+                        insercion3.ExecuteNonQuery();
+
                         object archivoruta = 0;
                         for (int x = 0; x < dataGridView2.Rows.Count; x++)
                         {
@@ -104,9 +112,12 @@ namespace SistemaParaAdministrarRespaldos
                         }
 
                         transaccion.Commit();
+                        this.DialogResult = DialogResult.OK; // registra el resultado del boton OK para que realize lo del form1 if
+
                     }
                     catch
                     {
+                        MessageBox.Show("ERROR EN TRANSACCION");
                         transaccion.Rollback();
                     }
                 }
@@ -205,12 +216,24 @@ namespace SistemaParaAdministrarRespaldos
             this.Close();
         }
 
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void chk_contraseña_CheckedChanged(object sender, EventArgs e)
         {
-            if (e.ColumnIndex == this.dataGridView2.Columns[0].Index)
+            if (chk_password.Checked == true)
             {
-                DataGridViewCheckBoxCell chkCelda = (DataGridViewCheckBoxCell)this.dataGridView2.Rows[e.RowIndex].Cells[0];
+                txt_contraseña.Enabled = true;
+            }
+            else
+            {
+                txt_contraseña.Enabled = false;
+            }
+        }
 
+        private void btn_ruta_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog fbd1 = new FolderBrowserDialog();
+            if (fbd1.ShowDialog() == DialogResult.OK)
+            {
+                txt_ruta.Text = fbd1.SelectedPath;
             }
         }
     }

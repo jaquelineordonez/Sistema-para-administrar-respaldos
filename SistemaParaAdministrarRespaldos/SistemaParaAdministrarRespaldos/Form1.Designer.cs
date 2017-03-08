@@ -84,6 +84,8 @@
             this.ID_Tarea.HeaderText = "ID";
             this.ID_Tarea.MinimumWidth = 50;
             this.ID_Tarea.Name = "ID_Tarea";
+            this.ID_Tarea.ReadOnly = true;
+            this.ID_Tarea.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.ID_Tarea.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             this.ID_Tarea.Visible = false;
             // 
@@ -243,8 +245,9 @@
             // 
             // salirToolStripMenuItem
             // 
+            this.salirToolStripMenuItem.Image = global::SistemaParaAdministrarRespaldos.Properties.Resources._1486521491_close2;
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 

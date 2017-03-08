@@ -153,6 +153,7 @@
     <None Include="Resources\1486172013_icon-7.ico" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\1486521491_close2.ico" />
     <Content Include="Toma4025-Rumax-Folder-documents.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
