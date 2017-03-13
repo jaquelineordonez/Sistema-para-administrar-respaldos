@@ -56,6 +56,8 @@
             this.btn_guardar = new System.Windows.Forms.Button();
             this.btn_cancelar = new System.Windows.Forms.Button();
             this.fbd1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.txt_sal = new System.Windows.Forms.TextBox();
+            this.txt_encriptado = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -164,7 +166,7 @@
             this.tabPage1.Controls.Add(this.txt_nombretarea);
             this.tabPage1.Controls.Add(this.dateTimePicker1);
             this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.ImageIndex = 0;
+            this.tabPage1.ImageIndex = 2;
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -178,7 +180,7 @@
             this.tabPage2.Controls.Add(this.dataGridView2);
             this.tabPage2.Controls.Add(this.btn_quitar);
             this.tabPage2.Controls.Add(this.btn_agregar);
-            this.tabPage2.ImageIndex = 1;
+            this.tabPage2.ImageIndex = 3;
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -195,7 +197,7 @@
             this.btn_quitar.Name = "btn_quitar";
             this.btn_quitar.Size = new System.Drawing.Size(55, 40);
             this.btn_quitar.TabIndex = 7;
-            this.btn_quitar.Text = "Quitar";
+            this.btn_quitar.Text = "&Quitar";
             this.btn_quitar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_quitar.UseVisualStyleBackColor = true;
             this.btn_quitar.Click += new System.EventHandler(this.btn_quitar_Click);
@@ -208,19 +210,22 @@
             this.btn_agregar.Name = "btn_agregar";
             this.btn_agregar.Size = new System.Drawing.Size(55, 40);
             this.btn_agregar.TabIndex = 6;
-            this.btn_agregar.Text = "Agregar";
+            this.btn_agregar.Text = "&Agregar";
             this.btn_agregar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_agregar.UseVisualStyleBackColor = true;
             this.btn_agregar.Click += new System.EventHandler(this.btn_agregar_Click);
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.txt_encriptado);
+            this.tabPage3.Controls.Add(this.txt_sal);
             this.tabPage3.Controls.Add(this.txt_contraseña);
             this.tabPage3.Controls.Add(this.chk_password);
             this.tabPage3.Controls.Add(this.chk_sobreescribir);
             this.tabPage3.Controls.Add(this.btn_ruta);
             this.tabPage3.Controls.Add(this.txt_ruta);
             this.tabPage3.Controls.Add(this.label3);
+            this.tabPage3.ImageIndex = 5;
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -292,6 +297,10 @@
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList1.Images.SetKeyName(0, "nu1.png");
             this.imageList1.Images.SetKeyName(1, "nu2.png");
+            this.imageList1.Images.SetKeyName(2, "numero.png");
+            this.imageList1.Images.SetKeyName(3, "numero (1).png");
+            this.imageList1.Images.SetKeyName(4, "numero (2).png");
+            this.imageList1.Images.SetKeyName(5, "numero (5).png");
             // 
             // btn_guardar
             // 
@@ -301,7 +310,7 @@
             this.btn_guardar.Name = "btn_guardar";
             this.btn_guardar.Size = new System.Drawing.Size(65, 40);
             this.btn_guardar.TabIndex = 2;
-            this.btn_guardar.Text = "Guardar";
+            this.btn_guardar.Text = "&Guardar";
             this.btn_guardar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_guardar.UseVisualStyleBackColor = true;
             this.btn_guardar.Click += new System.EventHandler(this.btn_guardar_Click);
@@ -314,10 +323,26 @@
             this.btn_cancelar.Name = "btn_cancelar";
             this.btn_cancelar.Size = new System.Drawing.Size(65, 40);
             this.btn_cancelar.TabIndex = 9;
-            this.btn_cancelar.Text = "Cancelar";
+            this.btn_cancelar.Text = "&Cancelar";
             this.btn_cancelar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btn_cancelar.UseVisualStyleBackColor = true;
             this.btn_cancelar.Click += new System.EventHandler(this.btn_cancelar_Click);
+            // 
+            // txt_sal
+            // 
+            this.txt_sal.Location = new System.Drawing.Point(168, 118);
+            this.txt_sal.Name = "txt_sal";
+            this.txt_sal.Size = new System.Drawing.Size(284, 20);
+            this.txt_sal.TabIndex = 6;
+            this.txt_sal.Visible = false;
+            // 
+            // txt_encriptado
+            // 
+            this.txt_encriptado.Location = new System.Drawing.Point(168, 145);
+            this.txt_encriptado.Name = "txt_encriptado";
+            this.txt_encriptado.Size = new System.Drawing.Size(284, 20);
+            this.txt_encriptado.TabIndex = 7;
+            this.txt_encriptado.Visible = false;
             // 
             // Form2
             // 
@@ -373,5 +398,7 @@
         private System.Windows.Forms.TextBox txt_ruta;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.FolderBrowserDialog fbd1;
+        private System.Windows.Forms.TextBox txt_sal;
+        private System.Windows.Forms.TextBox txt_encriptado;
     }
 }

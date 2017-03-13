@@ -95,6 +95,8 @@ namespace SistemaParaAdministrarRespaldos
                             comando.ExecuteNonQuery();
                             comando = new SQLiteCommand("DELETE FROM Tabla_Tarea WHERE (ID_Tarea = " + id_Tarea + ")", conexion, transaccion);
                             comando.ExecuteNonQuery();
+                            comando = new SQLiteCommand("DELETE FROM Tabla_Ruta WHERE (ID_Tarea = " + id_Tarea + ")", conexion, transaccion);
+                            comando.ExecuteNonQuery();
                             rowsSeleccionados[x].Delete();
                         }
 

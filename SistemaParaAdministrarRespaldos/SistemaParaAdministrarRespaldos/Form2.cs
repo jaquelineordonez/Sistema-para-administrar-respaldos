@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Data;
 using System.Data.SQLite;
+using System.Security.Cryptography;
 using System.Windows.Forms;
+using SimpleCrypto;
 
 namespace SistemaParaAdministrarRespaldos
 {
     public partial class Form2 : System.Windows.Forms.Form
     {
+        private ICryptoService cryptoservice = new PBKDF2();
         private SQLiteConnection conexion;
         private bool insertar = false;
         private bool modificar = false;
         private object nombreTarea;
         private DateTime fecha;
         private int idtarea;
-
 
         public Form2(SQLiteConnection conexion)
         {
@@ -34,7 +36,7 @@ namespace SistemaParaAdministrarRespaldos
             this.dateTimePicker1.Value = fecha;
             this.btn_guardar.Text = "Actualizar";
         }
-
+        
         private void Form2_Load_1(object sender, EventArgs e)
         {
             if (conexion.State != ConnectionState.Open)
@@ -48,12 +50,16 @@ namespace SistemaParaAdministrarRespaldos
             if (idtarea > 0)
             {
                 cargardatos();
+                cargarrutas();
             }
         }
 
         private DataTable tablaArchivos = new DataTable();
         private SQLiteDataAdapter adapter;
         private SQLiteCommandBuilder builder;
+
+        private DataTable tablarutas = new DataTable();
+        private SQLiteDataAdapter adp;
 
         private void cargardatos()
         {
@@ -65,6 +71,25 @@ namespace SistemaParaAdministrarRespaldos
             dataGridView2.DataSource = tablaArchivos;
         }
 
+        private void cargarrutas()
+        {
+            tablarutas = new DataTable();
+            adp = new SQLiteDataAdapter("SELECT * FROM Tabla_Ruta="+idtarea, conexion);
+            adp.Fill(tablarutas);
+            builder = new SQLiteCommandBuilder(adp);
+            
+        }
+
+        private void encriptar()
+        {
+            string contraseña = txt_contraseña.Text;
+            if (!string.IsNullOrWhiteSpace(contraseña))
+            {
+                txt_sal.Text = cryptoservice.GenerateSalt();
+                txt_encriptado.Text = cryptoservice.Compute(contraseña);
+            }
+        } 
+            
         private void btn_guardar_Click(object sender, EventArgs e)
         {
             if (insertar)
@@ -75,8 +100,6 @@ namespace SistemaParaAdministrarRespaldos
                 }
                 else
                 {
-
-
                     SQLiteTransaction transaccion = conexion.BeginTransaction(); 
 
                     try
@@ -93,12 +116,13 @@ namespace SistemaParaAdministrarRespaldos
                         string comando2 = "insert into Tabla_Archivo (Datos_Archivo,ID_Tarea) values(@Datos_Archivo,@idtarea)";
                         SQLiteCommand insercion2 = new SQLiteCommand(comando2, conexion, transaccion);
 
-                        string comando3 = "insert into Tabla_Ruta (Ruta_Salida,sobreescribir,password,Contraseña,ID_Tarea) values(@Ruta_Salida,@sobreescribir,@password,@Contraseña,@idtarea)";
+                        encriptar();
+                        string comando3 = ("insert into Tabla_Ruta (Ruta_Salida,sobreescribir,password,Contraseña,ID_Tarea) values(@Ruta_Salida,@sobreescribir,@password,@contraseña,@idtarea)");
                         SQLiteCommand insercion3 = new SQLiteCommand(comando3, conexion, transaccion);
                         insercion3.Parameters.AddWithValue("@Ruta_Salida", txt_ruta.Text);
                         insercion3.Parameters.AddWithValue("@sobreescribir", chk_sobreescribir.Checked);
                         insercion3.Parameters.AddWithValue("@password", chk_password.Checked);
-                        insercion3.Parameters.AddWithValue("@Contraseña", txt_contraseña.Text);
+                        insercion3.Parameters.AddWithValue("@Contraseña", txt_encriptado.Text);
                         insercion3.Parameters.AddWithValue("@idtarea", idtarea);
                         insercion3.ExecuteNonQuery();
 
