@@ -73,6 +73,26 @@ namespace SistemaParaAdministrarRespaldos.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _1489533756_eye {
+            get {
+                object obj = ResourceManager.GetObject("1489533756_eye", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _1489533888_eye {
+            get {
+                object obj = ResourceManager.GetObject("1489533888_eye", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Chrysanthemum {
             get {
                 object obj = ResourceManager.GetObject("Chrysanthemum", resourceCulture);

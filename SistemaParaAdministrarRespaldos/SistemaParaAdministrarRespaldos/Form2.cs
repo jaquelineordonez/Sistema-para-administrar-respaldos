@@ -36,7 +36,7 @@ namespace SistemaParaAdministrarRespaldos
             this.dateTimePicker1.Value = fecha;
             this.btn_guardar.Text = "Actualizar";
         }
-        
+
         private void Form2_Load_1(object sender, EventArgs e)
         {
             if (conexion.State != ConnectionState.Open)
@@ -64,7 +64,7 @@ namespace SistemaParaAdministrarRespaldos
         private void cargardatos()
         {
             tablaArchivos = new DataTable();
-            adapter = new SQLiteDataAdapter("SELECT * FROM Tabla_Archivo where ID_Tarea="+idtarea, conexion);
+            adapter = new SQLiteDataAdapter("SELECT * FROM Tabla_Archivo where ID_Tarea=" + idtarea, conexion);
             adapter.Fill(tablaArchivos);
             builder = new SQLiteCommandBuilder(adapter);
             tablaArchivos.Columns.Add("Seleccionar", typeof(bool));
@@ -74,22 +74,25 @@ namespace SistemaParaAdministrarRespaldos
         private void cargarrutas()
         {
             tablarutas = new DataTable();
-            adp = new SQLiteDataAdapter("SELECT * FROM Tabla_Ruta="+idtarea, conexion);
+            adp = new SQLiteDataAdapter("SELECT * FROM Tabla_Ruta where ID_Tarea=" + idtarea, conexion);
             adp.Fill(tablarutas);
             builder = new SQLiteCommandBuilder(adp);
-            
+
+
         }
+
+        private string textoencriptado;
+        private string sal = "102190l.0+rWPiR3/RLWW8bvVVZuPfJAclxi2WYiAKTbY1vuGaJH9w==";
 
         private void encriptar()
         {
             string contraseña = txt_contraseña.Text;
             if (!string.IsNullOrWhiteSpace(contraseña))
             {
-                txt_sal.Text = cryptoservice.GenerateSalt();
-                txt_encriptado.Text = cryptoservice.Compute(contraseña);
+                textoencriptado = cryptoservice.Compute(contraseña);
             }
-        } 
-            
+        }
+
         private void btn_guardar_Click(object sender, EventArgs e)
         {
             if (insertar)
@@ -100,7 +103,7 @@ namespace SistemaParaAdministrarRespaldos
                 }
                 else
                 {
-                    SQLiteTransaction transaccion = conexion.BeginTransaction(); 
+                    SQLiteTransaction transaccion = conexion.BeginTransaction();
 
                     try
                     {
@@ -122,7 +125,7 @@ namespace SistemaParaAdministrarRespaldos
                         insercion3.Parameters.AddWithValue("@Ruta_Salida", txt_ruta.Text);
                         insercion3.Parameters.AddWithValue("@sobreescribir", chk_sobreescribir.Checked);
                         insercion3.Parameters.AddWithValue("@password", chk_password.Checked);
-                        insercion3.Parameters.AddWithValue("@Contraseña", txt_encriptado.Text);
+                        insercion3.Parameters.AddWithValue("@Contraseña", textoencriptado);
                         insercion3.Parameters.AddWithValue("@idtarea", idtarea);
                         insercion3.ExecuteNonQuery();
 
@@ -152,7 +155,9 @@ namespace SistemaParaAdministrarRespaldos
                 {
                     dataGridView2.EndEdit();
                     adapter.Update(tablaArchivos);
+                    adp.Update(tablarutas);
                     tablaArchivos.AcceptChanges();
+                    tablarutas.AcceptChanges();
                     dataGridView2.DataSource = null;
                     dataGridView2.DataSource = tablaArchivos;
                     this.DialogResult = DialogResult.OK;
@@ -184,10 +189,10 @@ namespace SistemaParaAdministrarRespaldos
                     {
                         dataGridView2.Rows.Add(new object[] { false, null, null, nombres });
                     }
-                   
+
                 }
             }
-            
+
         }
 
         private void btn_quitar_Click(object sender, EventArgs e)
@@ -210,7 +215,7 @@ namespace SistemaParaAdministrarRespaldos
                         dataGridView2.DataSource = null;
                         dataGridView2.DataSource = tablaArchivos;
                     }
- 
+
                 }
                 else
                 {
@@ -259,6 +264,49 @@ namespace SistemaParaAdministrarRespaldos
             {
                 txt_ruta.Text = fbd1.SelectedPath;
             }
+        }
+
+        private void btn_visible_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chk_visible_CheckedChanged(object sender, EventArgs e)
+        {
+            txt_contraseña.UseSystemPasswordChar = chk_visible.Checked ? false : true;
+        }
+
+        private string validarencriptado;
+        private string consulta = "SELECT* FROM Tabla_Ruta where ID_Tarea";
+
+        private void btn_validar_Click(object sender, EventArgs e)
+        {
+            string contraseñaus = this.txt_contraseña.Text;
+            if (!string.IsNullOrWhiteSpace(contraseñaus))
+            {
+                validarencriptado = cryptoservice.Compute(contraseñaus, sal); 
+
+                bool ispasswordvalid = cryptoservice.Compare(consulta, validarencriptado);
+                if (ispasswordvalid)
+                {
+                    MessageBox.Show("Correcto");
+                }
+                else
+                {
+                    MessageBox.Show("Incorrecto");
+
+                }
+            }
+        }
+
+        private void btn_visible_MouseDown(object sender, MouseEventArgs e)
+        {
+            
+        }
+
+        private void btn_visible_MouseUp(object sender, MouseEventArgs e)
+        {
+
         }
     }
 }

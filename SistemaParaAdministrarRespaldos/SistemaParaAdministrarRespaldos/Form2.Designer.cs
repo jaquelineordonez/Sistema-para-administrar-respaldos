@@ -46,6 +46,10 @@
             this.btn_quitar = new System.Windows.Forms.Button();
             this.btn_agregar = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btn_validar = new System.Windows.Forms.Button();
+            this.chk_visible = new System.Windows.Forms.CheckBox();
+            this.btn_visible = new System.Windows.Forms.Button();
             this.txt_contraseña = new System.Windows.Forms.TextBox();
             this.chk_password = new System.Windows.Forms.CheckBox();
             this.chk_sobreescribir = new System.Windows.Forms.CheckBox();
@@ -53,11 +57,9 @@
             this.txt_ruta = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.btn_guardar = new System.Windows.Forms.Button();
-            this.btn_cancelar = new System.Windows.Forms.Button();
             this.fbd1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.txt_sal = new System.Windows.Forms.TextBox();
-            this.txt_encriptado = new System.Windows.Forms.TextBox();
+            this.btn_cancelar = new System.Windows.Forms.Button();
+            this.btn_guardar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -217,8 +219,10 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.txt_encriptado);
-            this.tabPage3.Controls.Add(this.txt_sal);
+            this.tabPage3.Controls.Add(this.label4);
+            this.tabPage3.Controls.Add(this.btn_validar);
+            this.tabPage3.Controls.Add(this.chk_visible);
+            this.tabPage3.Controls.Add(this.btn_visible);
             this.tabPage3.Controls.Add(this.txt_contraseña);
             this.tabPage3.Controls.Add(this.chk_password);
             this.tabPage3.Controls.Add(this.chk_sobreescribir);
@@ -234,15 +238,57 @@
             this.tabPage3.Text = "Ruta de salida";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(41, 129);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "label4";
+            // 
+            // btn_validar
+            // 
+            this.btn_validar.Location = new System.Drawing.Point(243, 142);
+            this.btn_validar.Name = "btn_validar";
+            this.btn_validar.Size = new System.Drawing.Size(75, 23);
+            this.btn_validar.TabIndex = 8;
+            this.btn_validar.Text = "Validar";
+            this.btn_validar.UseVisualStyleBackColor = true;
+            this.btn_validar.Click += new System.EventHandler(this.btn_validar_Click);
+            // 
+            // chk_visible
+            // 
+            this.chk_visible.AutoSize = true;
+            this.chk_visible.Image = global::SistemaParaAdministrarRespaldos.Properties.Resources._1489533888_eye;
+            this.chk_visible.Location = new System.Drawing.Point(458, 86);
+            this.chk_visible.Name = "chk_visible";
+            this.chk_visible.Size = new System.Drawing.Size(47, 32);
+            this.chk_visible.TabIndex = 7;
+            this.chk_visible.UseVisualStyleBackColor = true;
+            this.chk_visible.CheckedChanged += new System.EventHandler(this.chk_visible_CheckedChanged);
+            // 
+            // btn_visible
+            // 
+            this.btn_visible.Image = global::SistemaParaAdministrarRespaldos.Properties.Resources._1489533888_eye;
+            this.btn_visible.Location = new System.Drawing.Point(41, 86);
+            this.btn_visible.Name = "btn_visible";
+            this.btn_visible.Size = new System.Drawing.Size(35, 25);
+            this.btn_visible.TabIndex = 6;
+            this.btn_visible.UseVisualStyleBackColor = true;
+            this.btn_visible.Click += new System.EventHandler(this.btn_visible_Click);
+            this.btn_visible.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn_visible_MouseDown);
+            this.btn_visible.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn_visible_MouseUp);
+            // 
             // txt_contraseña
             // 
             this.txt_contraseña.Enabled = false;
             this.txt_contraseña.Location = new System.Drawing.Point(168, 91);
             this.txt_contraseña.MaxLength = 100;
             this.txt_contraseña.Name = "txt_contraseña";
-            this.txt_contraseña.PasswordChar = '*';
             this.txt_contraseña.Size = new System.Drawing.Size(284, 20);
             this.txt_contraseña.TabIndex = 5;
+            this.txt_contraseña.UseSystemPasswordChar = true;
             // 
             // chk_password
             // 
@@ -267,6 +313,7 @@
             // 
             // btn_ruta
             // 
+            this.btn_ruta.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_ruta.Location = new System.Drawing.Point(458, 26);
             this.btn_ruta.Name = "btn_ruta";
             this.btn_ruta.Size = new System.Drawing.Size(35, 23);
@@ -301,19 +348,7 @@
             this.imageList1.Images.SetKeyName(3, "numero (1).png");
             this.imageList1.Images.SetKeyName(4, "numero (2).png");
             this.imageList1.Images.SetKeyName(5, "numero (5).png");
-            // 
-            // btn_guardar
-            // 
-            this.btn_guardar.Image = ((System.Drawing.Image)(resources.GetObject("btn_guardar.Image")));
-            this.btn_guardar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_guardar.Location = new System.Drawing.Point(359, 262);
-            this.btn_guardar.Name = "btn_guardar";
-            this.btn_guardar.Size = new System.Drawing.Size(65, 40);
-            this.btn_guardar.TabIndex = 2;
-            this.btn_guardar.Text = "&Guardar";
-            this.btn_guardar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btn_guardar.UseVisualStyleBackColor = true;
-            this.btn_guardar.Click += new System.EventHandler(this.btn_guardar_Click);
+            this.imageList1.Images.SetKeyName(6, "1489533756_eye.png");
             // 
             // btn_cancelar
             // 
@@ -328,21 +363,18 @@
             this.btn_cancelar.UseVisualStyleBackColor = true;
             this.btn_cancelar.Click += new System.EventHandler(this.btn_cancelar_Click);
             // 
-            // txt_sal
+            // btn_guardar
             // 
-            this.txt_sal.Location = new System.Drawing.Point(168, 118);
-            this.txt_sal.Name = "txt_sal";
-            this.txt_sal.Size = new System.Drawing.Size(284, 20);
-            this.txt_sal.TabIndex = 6;
-            this.txt_sal.Visible = false;
-            // 
-            // txt_encriptado
-            // 
-            this.txt_encriptado.Location = new System.Drawing.Point(168, 145);
-            this.txt_encriptado.Name = "txt_encriptado";
-            this.txt_encriptado.Size = new System.Drawing.Size(284, 20);
-            this.txt_encriptado.TabIndex = 7;
-            this.txt_encriptado.Visible = false;
+            this.btn_guardar.Image = ((System.Drawing.Image)(resources.GetObject("btn_guardar.Image")));
+            this.btn_guardar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btn_guardar.Location = new System.Drawing.Point(359, 262);
+            this.btn_guardar.Name = "btn_guardar";
+            this.btn_guardar.Size = new System.Drawing.Size(65, 40);
+            this.btn_guardar.TabIndex = 2;
+            this.btn_guardar.Text = "&Guardar";
+            this.btn_guardar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btn_guardar.UseVisualStyleBackColor = true;
+            this.btn_guardar.Click += new System.EventHandler(this.btn_guardar_Click);
             // 
             // Form2
             // 
@@ -398,7 +430,9 @@
         private System.Windows.Forms.TextBox txt_ruta;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.FolderBrowserDialog fbd1;
-        private System.Windows.Forms.TextBox txt_sal;
-        private System.Windows.Forms.TextBox txt_encriptado;
+        private System.Windows.Forms.Button btn_visible;
+        private System.Windows.Forms.CheckBox chk_visible;
+        private System.Windows.Forms.Button btn_validar;
+        private System.Windows.Forms.Label label4;
     }
 }
