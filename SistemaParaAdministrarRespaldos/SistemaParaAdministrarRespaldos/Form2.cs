@@ -19,19 +19,21 @@ namespace SistemaParaAdministrarRespaldos
 
         public Form2(SQLiteConnection conexion)
         {
+            InitializeComponent();
+
             this.conexion = conexion;
             this.insertar = true;
-            InitializeComponent();
         }
 
         public Form2(SQLiteConnection conexion, int id_tarea, object nombretarea, DateTime fecha)
         {
+            InitializeComponent();
+
             this.conexion = conexion;
             this.idtarea = id_tarea;
             this.modificar = true;
             this.nombreTarea = nombretarea;
             this.fecha = fecha;
-            InitializeComponent();
             this.txt_nombretarea.Text = Convert.ToString(nombretarea);
             this.dateTimePicker1.Value = fecha;
             this.btn_guardar.Text = "Actualizar";
@@ -81,18 +83,6 @@ namespace SistemaParaAdministrarRespaldos
 
         }
 
-        private string textoencriptado;
-        private string sal = "102190l.0+rWPiR3/RLWW8bvVVZuPfJAclxi2WYiAKTbY1vuGaJH9w==";
-
-        private void encriptar()
-        {
-            string contraseña = txt_contraseña.Text;
-            if (!string.IsNullOrWhiteSpace(contraseña))
-            {
-                textoencriptado = cryptoservice.Compute(contraseña);
-            }
-        }
-
         private void btn_guardar_Click(object sender, EventArgs e)
         {
             if (insertar)
@@ -119,13 +109,12 @@ namespace SistemaParaAdministrarRespaldos
                         string comando2 = "insert into Tabla_Archivo (Datos_Archivo,ID_Tarea) values(@Datos_Archivo,@idtarea)";
                         SQLiteCommand insercion2 = new SQLiteCommand(comando2, conexion, transaccion);
 
-                        encriptar();
                         string comando3 = ("insert into Tabla_Ruta (Ruta_Salida,sobreescribir,password,Contraseña,ID_Tarea) values(@Ruta_Salida,@sobreescribir,@password,@contraseña,@idtarea)");
                         SQLiteCommand insercion3 = new SQLiteCommand(comando3, conexion, transaccion);
                         insercion3.Parameters.AddWithValue("@Ruta_Salida", txt_ruta.Text);
                         insercion3.Parameters.AddWithValue("@sobreescribir", chk_sobreescribir.Checked);
                         insercion3.Parameters.AddWithValue("@password", chk_password.Checked);
-                        insercion3.Parameters.AddWithValue("@Contraseña", textoencriptado);
+                        insercion3.Parameters.AddWithValue("@Contraseña", StringCipher.Encrypt(txt_contraseña.Text));
                         insercion3.Parameters.AddWithValue("@idtarea", idtarea);
                         insercion3.ExecuteNonQuery();
 
@@ -276,37 +265,37 @@ namespace SistemaParaAdministrarRespaldos
             txt_contraseña.UseSystemPasswordChar = chk_visible.Checked ? false : true;
         }
 
-        private string validarencriptado;
-        private string consulta = "SELECT* FROM Tabla_Ruta where ID_Tarea";
 
         private void btn_validar_Click(object sender, EventArgs e)
         {
-            string contraseñaus = this.txt_contraseña.Text;
-            if (!string.IsNullOrWhiteSpace(contraseñaus))
+            string conexs = null;
+            string consulta = "SELECT Contraseña FROM Tabla_Ruta WHERE Contraseña = values(@contraseña)";
+            SQLiteConnection cnn = new SQLiteConnection(conexs);
+
+            SQLiteCommand cebd = new SQLiteCommand(consulta, conexion);
+            SQLiteDataReader leer = cebd.ExecuteReader();
+            string exu = System.Convert.ToString(cebd.ExecuteNonQuery());
+            string contraseñaEnBaseDeDatosDesencriptada = StringCipher.Decrypt(exu);
+
+            if (txt_contraseña.Text == contraseñaEnBaseDeDatosDesencriptada)
             {
-                validarencriptado = cryptoservice.Compute(contraseñaus, sal); 
-
-                bool ispasswordvalid = cryptoservice.Compare(consulta, validarencriptado);
-                if (ispasswordvalid)
-                {
-                    MessageBox.Show("Correcto");
-                }
-                else
-                {
-                    MessageBox.Show("Incorrecto");
-
-                }
+                MessageBox.Show("Correcto");
+            }
+            else
+            {
+                MessageBox.Show("Incorrecto");
             }
         }
 
         private void btn_visible_MouseDown(object sender, MouseEventArgs e)
         {
-            
+            this.MouseDown += new MouseEventHandler(this.btn_visible_MouseDown);
         }
+
 
         private void btn_visible_MouseUp(object sender, MouseEventArgs e)
         {
-
+            MessageBox.Show("up");
         }
     }
 }

@@ -46,7 +46,6 @@
             this.btn_quitar = new System.Windows.Forms.Button();
             this.btn_agregar = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.label4 = new System.Windows.Forms.Label();
             this.btn_validar = new System.Windows.Forms.Button();
             this.chk_visible = new System.Windows.Forms.CheckBox();
             this.btn_visible = new System.Windows.Forms.Button();
@@ -219,7 +218,6 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.label4);
             this.tabPage3.Controls.Add(this.btn_validar);
             this.tabPage3.Controls.Add(this.chk_visible);
             this.tabPage3.Controls.Add(this.btn_visible);
@@ -237,15 +235,6 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Ruta de salida";
             this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(41, 129);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "label4";
             // 
             // btn_validar
             // 
@@ -433,6 +422,5 @@
         private System.Windows.Forms.Button btn_visible;
         private System.Windows.Forms.CheckBox chk_visible;
         private System.Windows.Forms.Button btn_validar;
-        private System.Windows.Forms.Label label4;
     }
 }

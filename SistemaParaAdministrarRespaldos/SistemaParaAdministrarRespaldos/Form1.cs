@@ -3,8 +3,6 @@ using System.Data;
 using System.Data.SQLite;
 using System.Windows.Forms;
 
-
-
 namespace SistemaParaAdministrarRespaldos
 {
     public partial class Form1 : System.Windows.Forms.Form
@@ -50,14 +48,11 @@ namespace SistemaParaAdministrarRespaldos
 
         private void tsb_nueva_Click(object sender, EventArgs e)
         {
+            Form2 form2 = new Form2(conexion);
+            if (form2.ShowDialog(this) == DialogResult.OK)
             {
-
-                Form2 form2 = new Form2(conexion);
-                if (form2.ShowDialog(this) == DialogResult.OK)
-                {
-                    CargarDatos();
-                    MessageBox.Show("Tarea Agregada");
-                }
+                CargarDatos();
+                MessageBox.Show("Tarea Agregada");
             }
         }
 
@@ -73,7 +68,6 @@ namespace SistemaParaAdministrarRespaldos
 
         private void tsb_eliminar_Click(object sender, EventArgs e)
         {
-            
             SQLiteTransaction transaccion = conexion.BeginTransaction();
             object id_Tarea = 0;
             SQLiteCommand comando;
