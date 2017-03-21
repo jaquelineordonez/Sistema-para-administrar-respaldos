@@ -268,22 +268,19 @@ namespace SistemaParaAdministrarRespaldos
 
         private void btn_validar_Click(object sender, EventArgs e)
         {
-            string conexs = null;
-            string consulta = "SELECT Contraseña FROM Tabla_Ruta WHERE Contraseña = values(@contraseña)";
-            SQLiteConnection cnn = new SQLiteConnection(conexs);
-
-            SQLiteCommand cebd = new SQLiteCommand(consulta, conexion);
-            SQLiteDataReader leer = cebd.ExecuteReader();
-            string exu = System.Convert.ToString(cebd.ExecuteNonQuery());
-            string contraseñaEnBaseDeDatosDesencriptada = StringCipher.Decrypt(exu);
-
-            if (txt_contraseña.Text == contraseñaEnBaseDeDatosDesencriptada)
+            if (idtarea > 0)
             {
-                MessageBox.Show("Correcto");
-            }
-            else
-            {
-                MessageBox.Show("Incorrecto");
+                SQLiteCommand comando = new SQLiteCommand("SELECT Contraseña FROM Tabla_Ruta WHERE ID_Tarea=" + idtarea, conexion);
+                string contraseñadesencriptada = StringCipher.Decrypt(comando.ExecuteScalar().ToString());
+
+                if (txt_contraseña.Text == contraseñadesencriptada)
+                {
+                    MessageBox.Show("Correcto");
+                }
+                else
+                {
+                    MessageBox.Show("Incorrecto");
+                }
             }
         }
 
