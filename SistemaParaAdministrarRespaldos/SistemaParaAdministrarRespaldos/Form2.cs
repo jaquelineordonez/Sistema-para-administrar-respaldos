@@ -9,7 +9,6 @@ namespace SistemaParaAdministrarRespaldos
 {
     public partial class Form2 : System.Windows.Forms.Form
     {
-        private ICryptoService cryptoservice = new PBKDF2();
         private SQLiteConnection conexion;
         private bool insertar = false;
         private bool modificar = false;
@@ -59,9 +58,8 @@ namespace SistemaParaAdministrarRespaldos
         private DataTable tablaArchivos = new DataTable();
         private SQLiteDataAdapter adapter;
         private SQLiteCommandBuilder builder;
-
-        private DataTable tablarutas = new DataTable();
-        private SQLiteDataAdapter adp;
+        private DataTable tb = new DataTable();
+        private SQLiteDataAdapter adptb;
 
         private void cargardatos()
         {
@@ -75,12 +73,22 @@ namespace SistemaParaAdministrarRespaldos
 
         private void cargarrutas()
         {
-            tablarutas = new DataTable();
-            adp = new SQLiteDataAdapter("SELECT * FROM Tabla_Ruta where ID_Tarea=" + idtarea, conexion);
-            adp.Fill(tablarutas);
-            builder = new SQLiteCommandBuilder(adp);
+            if (idtarea > 0)
+            {
+                string cons = ("SELECT * FROM Tabla_Ruta where ID_Tarea=" + idtarea);
+                SQLiteCommand cmd = new SQLiteCommand(cons, conexion);
+                adptb = new SQLiteDataAdapter(cons, conexion);
+                adptb.Fill(tb);
 
+                string rutasal = tb.Rows[0]["Ruta_Salida"].ToString();
+                txt_ruta.Text = rutasal;
 
+                
+
+                SQLiteCommand comando = new SQLiteCommand("SELECT Contraseña FROM Tabla_Ruta WHERE ID_Tarea=" + idtarea, conexion);
+                string contraseñadesencriptada = StringCipher.Decrypt(comando.ExecuteScalar().ToString());
+                txt_contraseña.Text = contraseñadesencriptada;
+            }
         }
 
         private void btn_guardar_Click(object sender, EventArgs e)
@@ -144,9 +152,9 @@ namespace SistemaParaAdministrarRespaldos
                 {
                     dataGridView2.EndEdit();
                     adapter.Update(tablaArchivos);
-                    adp.Update(tablarutas);
+                    adptb.Update(tb);
                     tablaArchivos.AcceptChanges();
-                    tablarutas.AcceptChanges();
+                    tb.AcceptChanges();
                     dataGridView2.DataSource = null;
                     dataGridView2.DataSource = tablaArchivos;
                     this.DialogResult = DialogResult.OK;
@@ -255,11 +263,6 @@ namespace SistemaParaAdministrarRespaldos
             }
         }
 
-        private void btn_visible_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void chk_visible_CheckedChanged(object sender, EventArgs e)
         {
             txt_contraseña.UseSystemPasswordChar = chk_visible.Checked ? false : true;
@@ -286,13 +289,19 @@ namespace SistemaParaAdministrarRespaldos
 
         private void btn_visible_MouseDown(object sender, MouseEventArgs e)
         {
-            this.MouseDown += new MouseEventHandler(this.btn_visible_MouseDown);
+            if (e.Button==System.Windows.Forms.MouseButtons.Left)
+            {
+                txt_contraseña.UseSystemPasswordChar = false;
+            }
         }
 
 
         private void btn_visible_MouseUp(object sender, MouseEventArgs e)
         {
-            MessageBox.Show("up");
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                txt_contraseña.UseSystemPasswordChar = true;
+            }
         }
     }
 }

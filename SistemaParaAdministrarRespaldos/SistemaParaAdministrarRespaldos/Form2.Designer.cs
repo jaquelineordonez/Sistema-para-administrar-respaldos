@@ -265,7 +265,6 @@
             this.btn_visible.Size = new System.Drawing.Size(35, 25);
             this.btn_visible.TabIndex = 6;
             this.btn_visible.UseVisualStyleBackColor = true;
-            this.btn_visible.Click += new System.EventHandler(this.btn_visible_Click);
             this.btn_visible.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn_visible_MouseDown);
             this.btn_visible.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn_visible_MouseUp);
             // 
