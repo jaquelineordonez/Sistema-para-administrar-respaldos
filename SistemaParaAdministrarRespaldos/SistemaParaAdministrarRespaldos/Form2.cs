@@ -80,10 +80,9 @@ namespace SistemaParaAdministrarRespaldos
                 adptb = new SQLiteDataAdapter(cons, conexion);
                 adptb.Fill(tb);
 
-                string rutasal = tb.Rows[0]["Ruta_Salida"].ToString();
-                txt_ruta.Text = rutasal;
-
-                
+                txt_ruta.Text= Convert.ToString(tb.Rows[0][1]);
+                chk_sobreescribir.Checked = Convert.ToBoolean(tb.Rows[0][2]);
+                chk_password.Checked = Convert.ToBoolean(tb.Rows[0][3]);
 
                 SQLiteCommand comando = new SQLiteCommand("SELECT Contraseña FROM Tabla_Ruta WHERE ID_Tarea=" + idtarea, conexion);
                 string contraseñadesencriptada = StringCipher.Decrypt(comando.ExecuteScalar().ToString());
@@ -150,18 +149,54 @@ namespace SistemaParaAdministrarRespaldos
             {
                 if (modificar)
                 {
-                    dataGridView2.EndEdit();
-                    adapter.Update(tablaArchivos);
-                    adptb.Update(tb);
-                    tablaArchivos.AcceptChanges();
-                    tb.AcceptChanges();
-                    dataGridView2.DataSource = null;
-                    dataGridView2.DataSource = tablaArchivos;
-                    this.DialogResult = DialogResult.OK;
+                    if (string.IsNullOrEmpty(txt_nombretarea.Text) || (dataGridView2.Rows.Count == 0) || string.IsNullOrEmpty(txt_ruta.Text))
+                    {
+                        MessageBox.Show("Debe completar la informacion", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+                    else
+                    {
+                        SQLiteTransaction transaccion = conexion.BeginTransaction();
+                        try
+                        {
+                            string modifi = "UPDATE Tabla_Tarea SET Nombre_Tarea=@Nombre_Tarea, Fecha=@Fecha WHERE (ID_Tarea = @ID_Tarea)";
+                            SQLiteCommand actualizacion = new SQLiteCommand(modifi, conexion);
+                            actualizacion.Parameters.AddWithValue("@Nombre_Tarea", txt_nombretarea.Text);
+                            actualizacion.Parameters.AddWithValue("@Fecha", dateTimePicker1.Value);
+                            actualizacion.Parameters.AddWithValue("@ID_Tarea", idtarea);
+
+                            dataGridView2.EndEdit();
+                            adapter.Update(tablaArchivos);
+                            tablaArchivos.AcceptChanges();
+                            dataGridView2.DataSource = null;
+                            dataGridView2.DataSource = tablaArchivos;
+
+                            string modif = "UPDATE Tabla_Ruta SET Ruta_Salida=@Ruta_Salida, sobreescribir=@sobreescribir, password=@password, Contraseña=@Contraseña WHERE (ID_Tarea = @ID_Tarea)";
+                            SQLiteCommand actualizacion2 = new SQLiteCommand(modif, conexion);
+                            actualizacion2.Parameters.AddWithValue("@Ruta_Salida", txt_ruta.Text);
+                            actualizacion2.Parameters.AddWithValue("@sobreescribir", chk_sobreescribir.Checked);
+                            actualizacion2.Parameters.AddWithValue("@password", chk_password.Checked);
+                            actualizacion2.Parameters.AddWithValue("@Contraseña", StringCipher.Encrypt(txt_contraseña.Text));
+                            actualizacion2.Parameters.AddWithValue("@ID_Tarea", idtarea);
+
+                            if (actualizacion2.ExecuteNonQuery() > 0 && actualizacion.ExecuteNonQuery() > 0)
+                            {
+                                modificar = true;
+                            }
+
+                            transaccion.Commit();
+                            this.DialogResult = DialogResult.OK;
+
+                        }
+                        catch
+                        {
+                            MessageBox.Show("ERROR EN TRANSACCION");
+                            transaccion.Rollback();
+                        }
+                    }
+                }
+
                 }
             }
-
-        }
 
         private void btn_agregar_Click(object sender, EventArgs e)
         {
@@ -251,6 +286,7 @@ namespace SistemaParaAdministrarRespaldos
             else
             {
                 txt_contraseña.Enabled = false;
+                txt_contraseña.Clear();
             }
         }
 
