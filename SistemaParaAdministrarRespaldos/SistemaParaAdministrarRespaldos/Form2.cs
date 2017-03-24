@@ -121,7 +121,15 @@ namespace SistemaParaAdministrarRespaldos
                         insercion3.Parameters.AddWithValue("@Ruta_Salida", txt_ruta.Text);
                         insercion3.Parameters.AddWithValue("@sobreescribir", chk_sobreescribir.Checked);
                         insercion3.Parameters.AddWithValue("@password", chk_password.Checked);
-                        insercion3.Parameters.AddWithValue("@Contraseña", StringCipher.Encrypt(txt_contraseña.Text));
+                        if (string.IsNullOrEmpty(txt_contraseña.Text))
+                        {
+                            insercion3.Parameters.AddWithValue("@Contraseña", DBNull.Value);
+                        }
+                        else
+                        {
+                            insercion3.Parameters.AddWithValue("@Contraseña", StringCipher.Encrypt(txt_contraseña.Text));
+
+                        }
                         insercion3.Parameters.AddWithValue("@idtarea", idtarea);
                         insercion3.ExecuteNonQuery();
 
@@ -175,7 +183,15 @@ namespace SistemaParaAdministrarRespaldos
                             actualizacion2.Parameters.AddWithValue("@Ruta_Salida", txt_ruta.Text);
                             actualizacion2.Parameters.AddWithValue("@sobreescribir", chk_sobreescribir.Checked);
                             actualizacion2.Parameters.AddWithValue("@password", chk_password.Checked);
-                            actualizacion2.Parameters.AddWithValue("@Contraseña", StringCipher.Encrypt(txt_contraseña.Text));
+                            if (string.IsNullOrEmpty(txt_contraseña.Text))
+                            {
+                                actualizacion2.Parameters.AddWithValue("@Contraseña", DBNull.Value);
+                            }
+                            else
+                            {
+                                actualizacion2.Parameters.AddWithValue("@Contraseña", StringCipher.Encrypt(txt_contraseña.Text));
+
+                            }
                             actualizacion2.Parameters.AddWithValue("@ID_Tarea", idtarea);
 
                             if (actualizacion2.ExecuteNonQuery() > 0 && actualizacion.ExecuteNonQuery() > 0)
