@@ -320,7 +320,6 @@ namespace SistemaParaAdministrarRespaldos
             txt_contraseña.UseSystemPasswordChar = chk_visible.Checked ? false : true;
         }
 
-
         private void btn_validar_Click(object sender, EventArgs e)
         {
             if (idtarea > 0)

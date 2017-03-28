@@ -56,6 +56,7 @@
     <ApplicationIcon>Toma4025-Rumax-Folder-documents.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="SimpleCrypto, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">

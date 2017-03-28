@@ -1,24 +1,35 @@
 ﻿using System;
 using System.Data;
 using System.Data.SQLite;
+using System.IO;
+using System.IO.Compression;
 using System.Windows.Forms;
+using Microsoft.VisualBasic.Devices;
 
 namespace SistemaParaAdministrarRespaldos
 {
     public partial class Form1 : System.Windows.Forms.Form
     {
         private SQLiteConnection conexion;
+        private int idtarea;
+        private Computer mycomputer = new Computer();
 
         public Form1()
         {
             InitializeComponent();
         }
 
+        public Form1(SQLiteConnection conexion, int id_tarea)
+        {
+            this.conexion = conexion;
+            this.idtarea = id_tarea;
+        }
+
         private DataTable tabla = new DataTable();
         private SQLiteDataAdapter adaptador;
         private SQLiteCommandBuilder builder;
 
-
+       
         private void CargarDatos()
         {
             tabla = new DataTable();
@@ -93,7 +104,7 @@ namespace SistemaParaAdministrarRespaldos
                             comando.ExecuteNonQuery();
                             rowsSeleccionados[x].Delete();
                         }
-
+                        
                         dataGridView1.DataSource = null;
                         dataGridView1.DataSource = tabla;
                         CargarDatos();
@@ -127,6 +138,43 @@ namespace SistemaParaAdministrarRespaldos
 
         private void tsb_ejecutar_Click(object sender, EventArgs e)
         {
+            if (dataGridView1.Rows.Count >= 1)
+            {
+
+
+                ///SQLiteCommand nom = new SQLiteCommand("SELECT Nombre_Tarea FROM Tabla_Tarea WHERE ID_Tarea=" + idtarea, conexion);
+                string nombreruta = "xx";
+                ////SQLiteCommand comandoinicio = new SQLiteCommand("SELECT Datos_Archivo FROM Tabla_Archivo WHERE ID_Tarea=" + idtarea, conexion);
+                string rutainicio = @"C:\Users\residente.sistemas\Documents\5.1 Permitir agregar ruta de salida de una tarea.docx";
+                /////SQLiteCommand comandosalida = new SQLiteCommand("SELECT Ruta_Salida FROM Tabla_Ruta WHERE ID_Tarea=" + idtarea, conexion);
+                string rutasalida = @"C:\Users\residente.sistemas\Desktop\salida";
+
+                string archivoinicio = System.IO.Path.Combine(rutainicio, nombreruta);
+                string archivosalida = System.IO.Path.Combine(rutasalida, nombreruta);
+
+                if (!System.IO.Directory.Exists(rutasalida))
+                {
+                    System.IO.Directory.CreateDirectory(rutasalida);
+                }
+
+                /////System.IO.File.Copy(archivoinicio, archivosalida, true);
+                
+                if (System.IO.File.Exists(rutainicio))
+                {
+                    string[] doc = System.IO.Directory.GetFiles(rutainicio);
+                    foreach (string x in doc)
+                    {
+                        nombreruta = System.IO.Path.GetFileName(x);
+                        archivosalida = System.IO.Path.Combine(rutasalida, nombreruta);
+                        System.IO.File.Copy(x, archivosalida, true);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No existe");
+                }
+            }
+
             MessageBox.Show("Tarea ejecutada");
             /*if (conexion.State != ConnectionState.Open)
             {
