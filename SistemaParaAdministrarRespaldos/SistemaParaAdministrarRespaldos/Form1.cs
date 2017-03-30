@@ -29,7 +29,7 @@ namespace SistemaParaAdministrarRespaldos
         private SQLiteDataAdapter adaptador;
         private SQLiteCommandBuilder builder;
 
-       
+
         private void CargarDatos()
         {
             tabla = new DataTable();
@@ -90,10 +90,10 @@ namespace SistemaParaAdministrarRespaldos
                 DataRow[] rowsSeleccionados = tabla.Select("Seleccionar = " + true);
                 if (rowsSeleccionados != null && rowsSeleccionados.Length >= 1)
                 {
-                    if (MessageBox.Show("¿Seguro que desea eliminar este registro?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    if (MessageBox.Show("¿Seguro que desea eliminar este registro?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         for (int x = 0; x < rowsSeleccionados.Length; x++)
-                        {                           
+                        {
                             id_Tarea = rowsSeleccionados[x][0];
                             string a = "DELETE FROM Tabla_Archivo WHERE (ID_Tarea = " + id_Tarea + ")";
                             comando = new SQLiteCommand("DELETE FROM Tabla_Archivo WHERE (ID_Tarea = " + id_Tarea + ")", conexion, transaccion);
@@ -104,7 +104,7 @@ namespace SistemaParaAdministrarRespaldos
                             comando.ExecuteNonQuery();
                             rowsSeleccionados[x].Delete();
                         }
-                        
+
                         dataGridView1.DataSource = null;
                         dataGridView1.DataSource = tabla;
                         CargarDatos();
@@ -114,6 +114,8 @@ namespace SistemaParaAdministrarRespaldos
                 }
                 else
                 {
+                    MessageBox.Show("Seleccione al menos una tarea", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    
                     object seleccionado = null;
                     for (int x = 0; x < dataGridView1.Rows.Count; x++)
                     {
@@ -138,51 +140,90 @@ namespace SistemaParaAdministrarRespaldos
 
         private void tsb_ejecutar_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.Rows.Count >= 1)
+            SQLiteTransaction transaccion = conexion.BeginTransaction();
+            object id_Tarea = 0;
+            try
             {
+                dataGridView1.EndEdit(); 
+                tabla.AcceptChanges();
 
-
-                ///SQLiteCommand nom = new SQLiteCommand("SELECT Nombre_Tarea FROM Tabla_Tarea WHERE ID_Tarea=" + idtarea, conexion);
-                string nombreruta = "xx";
-                ////SQLiteCommand comandoinicio = new SQLiteCommand("SELECT Datos_Archivo FROM Tabla_Archivo WHERE ID_Tarea=" + idtarea, conexion);
-                string rutainicio = @"C:\Users\residente.sistemas\Documents\5.1 Permitir agregar ruta de salida de una tarea.docx";
-                /////SQLiteCommand comandosalida = new SQLiteCommand("SELECT Ruta_Salida FROM Tabla_Ruta WHERE ID_Tarea=" + idtarea, conexion);
-                string rutasalida = @"C:\Users\residente.sistemas\Desktop\salida";
-
-                string archivoinicio = System.IO.Path.Combine(rutainicio, nombreruta);
-                string archivosalida = System.IO.Path.Combine(rutasalida, nombreruta);
-
-                if (!System.IO.Directory.Exists(rutasalida))
+                DataRow[] rowsSeleccionados = tabla.Select("Seleccionar = " + true);
+                if (rowsSeleccionados != null && rowsSeleccionados.Length >= 1)
                 {
-                    System.IO.Directory.CreateDirectory(rutasalida);
-                }
-
-                /////System.IO.File.Copy(archivoinicio, archivosalida, true);
-                
-                if (System.IO.File.Exists(rutainicio))
-                {
-                    string[] doc = System.IO.Directory.GetFiles(rutainicio);
-                    foreach (string x in doc)
+                    for (int x = 0; x < rowsSeleccionados.Length; x++)
                     {
-                        nombreruta = System.IO.Path.GetFileName(x);
-                        archivosalida = System.IO.Path.Combine(rutasalida, nombreruta);
-                        System.IO.File.Copy(x, archivosalida, true);
+                        id_Tarea = rowsSeleccionados[x][0];
+                        SQLiteCommand nom = new SQLiteCommand("SELECT Nombre_Tarea FROM Tabla_Tarea WHERE (ID_Tarea = " + id_Tarea + ")", conexion, transaccion);
+                        string nombreruta = nom.ExecuteScalar().ToString();
+                        MessageBox.Show(Convert.ToString(nombreruta));
+
+                        SQLiteCommand comandosalida = new SQLiteCommand("SELECT Ruta_Salida FROM Tabla_Ruta WHERE (ID_Tarea= " + id_Tarea + ")", conexion, transaccion);
+                        string rutasalida = comandosalida.ExecuteScalar().ToString();
+                        MessageBox.Show(Convert.ToString(rutasalida));
+
+                        SQLiteCommand comandoinicio = new SQLiteCommand("SELECT Datos_Archivo FROM Tabla_Archivo WHERE (ID_Tarea= " + id_Tarea + ")", conexion, transaccion);
+                        SQLiteDataReader rutainicio = comandoinicio.ExecuteReader();
+                        string rutaArchivop = string.Empty;
+                        while (rutainicio.Read())
+                        {
+                            rutaArchivop = Convert.ToString(rutainicio.GetValue(0));
+                            if (File.Exists(rutaArchivop))
+                            {
+                                
+                                File.Copy(rutaArchivop, rutasalida + "\\" + Path.GetFileName(rutaArchivop), true);
+                            }
+                            else
+                            {
+                                MessageBox.Show("El archivo ya no se encuentra en la ruta: " + rutaArchivop, "File not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                        
+                        ////string rutainicio = comandoinicio.ExecuteReaderAsync().ToString();
+
+                        ////string archivoinicio = System.IO.Path.Combine(rutainicio.ToString(), nombreruta);
+                        ////string archivosalida = System.IO.Path.Combine(rutasalida, nombreruta);
+
+                        /////////System.IO.File.Copy(archivoinicio, archivosalida, true);
+
+                        ////if (System.IO.File.Exists(rutainicio.ToString()))
+                        ////{
+                        ////    string[] doc = System.IO.Directory.GetFiles(rutainicio.ToString());
+                        ////    foreach (string y in doc)
+                        ////    {
+                        ////        nombreruta = System.IO.Path.GetFileName(y);
+                        ////        archivosalida = System.IO.Path.Combine(rutasalida, nombreruta);
+                        ////        System.IO.File.Copy(y, archivosalida, true);
+                        ////    }
+                        ////}
                     }
+
+                    transaccion.Commit();
+                    MessageBox.Show("Tarea ejecutada");
+                    CargarDatos();
                 }
                 else
                 {
-                    MessageBox.Show("No existe");
+                    MessageBox.Show("Seleccione al menos una tarea", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
-            }
+                
 
-            MessageBox.Show("Tarea ejecutada");
+            }
+            catch
+            {
+                MessageBox.Show("ERROR EN TRANSACCION");
+                transaccion.Rollback();
+            }
+        }
+
+            
+
             /*if (conexion.State != ConnectionState.Open)
             {
                 conexion.Open();
             }
             Form3 forma = new Form3(conexion);
             forma.ShowDialog();*/
-        }
+        
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -196,7 +237,7 @@ namespace SistemaParaAdministrarRespaldos
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("¿Seguro que desea salir?", "Salir", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
+            if (MessageBox.Show("¿Seguro que desea salir?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
             {
                 Application.Exit();
             }

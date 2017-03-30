@@ -252,7 +252,7 @@ namespace SistemaParaAdministrarRespaldos
                 if (rowsSeleccionados != null && rowsSeleccionados.Length >= 1)
                 {
 
-                    if (MessageBox.Show("¿Seguro que desea eliminar este registro?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    if (MessageBox.Show("¿Seguro que desea eliminar este registro?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         for (int x = 0; x < rowsSeleccionados.Length; x++)
                         {
@@ -267,7 +267,7 @@ namespace SistemaParaAdministrarRespaldos
                 }
                 else
                 {
-                    MessageBox.Show("Seleccione al menos un archivo.", "Error!!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Seleccione al menos un archivo", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
             else
