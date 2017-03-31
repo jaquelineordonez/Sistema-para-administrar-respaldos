@@ -210,10 +210,9 @@ namespace SistemaParaAdministrarRespaldos
                         }
                     }
                 }
-
-                }
             }
-
+        }
+            
         private void btn_agregar_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
@@ -240,9 +239,8 @@ namespace SistemaParaAdministrarRespaldos
 
                 }
             }
-
         }
-
+            
         private void btn_quitar_Click(object sender, EventArgs e)
         {
             tablaArchivos.AcceptChanges();
@@ -290,7 +288,14 @@ namespace SistemaParaAdministrarRespaldos
 
         private void btn_cancelar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            if (dataGridView2.Rows.Count == 0)
+            {
+                MessageBox.Show("Debe completar la informacion", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                this.Close();
+            }
         }
 
         private void chk_contraseña_CheckedChanged(object sender, EventArgs e)
@@ -346,12 +351,24 @@ namespace SistemaParaAdministrarRespaldos
             }
         }
 
-
         private void btn_visible_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
                 txt_contraseña.UseSystemPasswordChar = true;
+            }
+        }
+
+        private void chk_seleccionartodo_CheckedChanged(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dataGridView2.Rows)
+            {
+                row.Cells["Seleccionar"].Value = true;
+                if (chk_seleccionartodo.Checked == false)
+                {
+                    row.Cells["Seleccionar"].Value = false;
+
+                }
             }
         }
     }

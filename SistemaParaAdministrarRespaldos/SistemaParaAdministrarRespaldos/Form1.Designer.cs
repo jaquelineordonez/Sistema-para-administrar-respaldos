@@ -30,10 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.ID_Tarea = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Nombre_Tarea = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.tsb_nueva = new System.Windows.Forms.ToolStripButton();
             this.tsb_editar = new System.Windows.Forms.ToolStripButton();
@@ -48,6 +44,11 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chk_seleccionartodo = new System.Windows.Forms.CheckBox();
+            this.ID_Tarea = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Nombre_Tarea = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -75,50 +76,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(432, 201);
             this.dataGridView1.TabIndex = 5;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
-            // 
-            // ID_Tarea
-            // 
-            this.ID_Tarea.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader;
-            this.ID_Tarea.DataPropertyName = "ID_Tarea";
-            this.ID_Tarea.FillWeight = 200F;
-            this.ID_Tarea.HeaderText = "ID";
-            this.ID_Tarea.MinimumWidth = 50;
-            this.ID_Tarea.Name = "ID_Tarea";
-            this.ID_Tarea.ReadOnly = true;
-            this.ID_Tarea.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ID_Tarea.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.ID_Tarea.Visible = false;
-            // 
-            // Seleccionar
-            // 
-            this.Seleccionar.DataPropertyName = "Seleccionar";
-            this.Seleccionar.HeaderText = "Seleccionar";
-            this.Seleccionar.MinimumWidth = 69;
-            this.Seleccionar.Name = "Seleccionar";
-            // 
-            // Nombre_Tarea
-            // 
-            this.Nombre_Tarea.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader;
-            this.Nombre_Tarea.DataPropertyName = "Nombre_Tarea";
-            this.Nombre_Tarea.FillWeight = 200F;
-            this.Nombre_Tarea.HeaderText = "Nombre de la Tarea";
-            this.Nombre_Tarea.MinimumWidth = 150;
-            this.Nombre_Tarea.Name = "Nombre_Tarea";
-            this.Nombre_Tarea.ReadOnly = true;
-            this.Nombre_Tarea.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.Nombre_Tarea.Width = 150;
-            // 
-            // Fecha
-            // 
-            this.Fecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader;
-            this.Fecha.DataPropertyName = "Fecha";
-            this.Fecha.FillWeight = 200F;
-            this.Fecha.HeaderText = "Fecha de creacion";
-            this.Fecha.MinimumWidth = 150;
-            this.Fecha.Name = "Fecha";
-            this.Fecha.ReadOnly = true;
-            this.Fecha.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.Fecha.Width = 150;
             // 
             // toolStrip2
             // 
@@ -220,6 +177,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.chk_seleccionartodo);
             this.splitContainer1.Panel1.Controls.Add(this.dataGridView1);
             this.splitContainer1.Size = new System.Drawing.Size(432, 344);
             this.splitContainer1.SplitterDistance = 201;
@@ -251,6 +209,61 @@
             this.salirToolStripMenuItem.Text = "&Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
+            // chk_seleccionartodo
+            // 
+            this.chk_seleccionartodo.AutoSize = true;
+            this.chk_seleccionartodo.Location = new System.Drawing.Point(48, 4);
+            this.chk_seleccionartodo.Name = "chk_seleccionartodo";
+            this.chk_seleccionartodo.Size = new System.Drawing.Size(15, 14);
+            this.chk_seleccionartodo.TabIndex = 6;
+            this.chk_seleccionartodo.UseVisualStyleBackColor = true;
+            this.chk_seleccionartodo.CheckedChanged += new System.EventHandler(this.chk_seleccionartodo_CheckedChanged);
+            // 
+            // ID_Tarea
+            // 
+            this.ID_Tarea.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader;
+            this.ID_Tarea.DataPropertyName = "ID_Tarea";
+            this.ID_Tarea.FillWeight = 200F;
+            this.ID_Tarea.HeaderText = "ID";
+            this.ID_Tarea.MinimumWidth = 50;
+            this.ID_Tarea.Name = "ID_Tarea";
+            this.ID_Tarea.ReadOnly = true;
+            this.ID_Tarea.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ID_Tarea.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.ID_Tarea.Visible = false;
+            this.ID_Tarea.Width = 50;
+            // 
+            // Seleccionar
+            // 
+            this.Seleccionar.DataPropertyName = "Seleccionar";
+            this.Seleccionar.HeaderText = "";
+            this.Seleccionar.MinimumWidth = 69;
+            this.Seleccionar.Name = "Seleccionar";
+            // 
+            // Nombre_Tarea
+            // 
+            this.Nombre_Tarea.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader;
+            this.Nombre_Tarea.DataPropertyName = "Nombre_Tarea";
+            this.Nombre_Tarea.FillWeight = 200F;
+            this.Nombre_Tarea.HeaderText = "Nombre de la Tarea";
+            this.Nombre_Tarea.MinimumWidth = 150;
+            this.Nombre_Tarea.Name = "Nombre_Tarea";
+            this.Nombre_Tarea.ReadOnly = true;
+            this.Nombre_Tarea.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Nombre_Tarea.Width = 150;
+            // 
+            // Fecha
+            // 
+            this.Fecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader;
+            this.Fecha.DataPropertyName = "Fecha";
+            this.Fecha.FillWeight = 200F;
+            this.Fecha.HeaderText = "Fecha de creacion";
+            this.Fecha.MinimumWidth = 150;
+            this.Fecha.Name = "Fecha";
+            this.Fecha.ReadOnly = true;
+            this.Fecha.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Fecha.Width = 150;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -275,6 +288,7 @@
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
@@ -300,6 +314,7 @@
         private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.CheckBox chk_seleccionartodo;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID_Tarea;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Seleccionar;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre_Tarea;

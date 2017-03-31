@@ -155,18 +155,16 @@ namespace SistemaParaAdministrarRespaldos
                         id_Tarea = rowsSeleccionados[x][0];
                         SQLiteCommand nom = new SQLiteCommand("SELECT Nombre_Tarea FROM Tabla_Tarea WHERE (ID_Tarea = " + id_Tarea + ")", conexion, transaccion);
                         string nombreruta = nom.ExecuteScalar().ToString();
-                        MessageBox.Show(Convert.ToString(nombreruta));
 
                         SQLiteCommand comandosalida = new SQLiteCommand("SELECT Ruta_Salida FROM Tabla_Ruta WHERE (ID_Tarea= " + id_Tarea + ")", conexion, transaccion);
                         string rutasalida = comandosalida.ExecuteScalar().ToString();
-                        MessageBox.Show(Convert.ToString(rutasalida));
 
                         SQLiteCommand comandoinicio = new SQLiteCommand("SELECT Datos_Archivo FROM Tabla_Archivo WHERE (ID_Tarea= " + id_Tarea + ")", conexion, transaccion);
                         SQLiteDataReader rutainicio = comandoinicio.ExecuteReader();
                         string rutaArchivop = string.Empty;
                         while (rutainicio.Read())
                         {
-                            rutaArchivop = Convert.ToString(rutainicio.GetValue(0));
+                            rutaArchivop = Convert.ToString(rutainicio.GetValue(0)); 
                             if (File.Exists(rutaArchivop))
                             {
                                 
@@ -177,24 +175,6 @@ namespace SistemaParaAdministrarRespaldos
                                 MessageBox.Show("El archivo ya no se encuentra en la ruta: " + rutaArchivop, "File not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
-                        
-                        ////string rutainicio = comandoinicio.ExecuteReaderAsync().ToString();
-
-                        ////string archivoinicio = System.IO.Path.Combine(rutainicio.ToString(), nombreruta);
-                        ////string archivosalida = System.IO.Path.Combine(rutasalida, nombreruta);
-
-                        /////////System.IO.File.Copy(archivoinicio, archivosalida, true);
-
-                        ////if (System.IO.File.Exists(rutainicio.ToString()))
-                        ////{
-                        ////    string[] doc = System.IO.Directory.GetFiles(rutainicio.ToString());
-                        ////    foreach (string y in doc)
-                        ////    {
-                        ////        nombreruta = System.IO.Path.GetFileName(y);
-                        ////        archivosalida = System.IO.Path.Combine(rutasalida, nombreruta);
-                        ////        System.IO.File.Copy(y, archivosalida, true);
-                        ////    }
-                        ////}
                     }
 
                     transaccion.Commit();
@@ -205,8 +185,6 @@ namespace SistemaParaAdministrarRespaldos
                 {
                     MessageBox.Show("Seleccione al menos una tarea", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
-                
-
             }
             catch
             {
@@ -214,16 +192,6 @@ namespace SistemaParaAdministrarRespaldos
                 transaccion.Rollback();
             }
         }
-
-            
-
-            /*if (conexion.State != ConnectionState.Open)
-            {
-                conexion.Open();
-            }
-            Form3 forma = new Form3(conexion);
-            forma.ShowDialog();*/
-        
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -240,6 +208,18 @@ namespace SistemaParaAdministrarRespaldos
             if (MessageBox.Show("¿Seguro que desea salir?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
             {
                 Application.Exit();
+            }
+        }
+
+        private void chk_seleccionartodo_CheckedChanged(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                row.Cells["Seleccionar"].Value = true;
+                if (chk_seleccionartodo.Checked == false)
+                {
+                    row.Cells["Seleccionar"].Value = false;
+                }
             }
         }
     }

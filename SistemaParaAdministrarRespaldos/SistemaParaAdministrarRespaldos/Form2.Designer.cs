@@ -35,10 +35,6 @@
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.ID_Archivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ID_Tarea = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Datos_Archivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -59,6 +55,11 @@
             this.fbd1 = new System.Windows.Forms.FolderBrowserDialog();
             this.btn_cancelar = new System.Windows.Forms.Button();
             this.btn_guardar = new System.Windows.Forms.Button();
+            this.chk_seleccionartodo = new System.Windows.Forms.CheckBox();
+            this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ID_Archivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID_Tarea = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Datos_Archivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -117,33 +118,6 @@
             this.dataGridView2.Size = new System.Drawing.Size(519, 150);
             this.dataGridView2.TabIndex = 5;
             // 
-            // Seleccionar
-            // 
-            this.Seleccionar.DataPropertyName = "Seleccionar";
-            this.Seleccionar.HeaderText = "Seleccionar";
-            this.Seleccionar.Name = "Seleccionar";
-            // 
-            // ID_Archivo
-            // 
-            this.ID_Archivo.DataPropertyName = "ID_Archivo";
-            this.ID_Archivo.HeaderText = "ID_Archivo";
-            this.ID_Archivo.Name = "ID_Archivo";
-            this.ID_Archivo.Visible = false;
-            // 
-            // ID_Tarea
-            // 
-            this.ID_Tarea.DataPropertyName = "ID_Tarea";
-            this.ID_Tarea.HeaderText = "ID_Tarea";
-            this.ID_Tarea.Name = "ID_Tarea";
-            this.ID_Tarea.Visible = false;
-            // 
-            // Datos_Archivo
-            // 
-            this.Datos_Archivo.DataPropertyName = "Datos_Archivo";
-            this.Datos_Archivo.HeaderText = "Archivo";
-            this.Datos_Archivo.Name = "Datos_Archivo";
-            this.Datos_Archivo.ReadOnly = true;
-            // 
             // openFileDialog1
             // 
             this.openFileDialog1.AddExtension = false;
@@ -178,6 +152,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.chk_seleccionartodo);
             this.tabPage2.Controls.Add(this.dataGridView2);
             this.tabPage2.Controls.Add(this.btn_quitar);
             this.tabPage2.Controls.Add(this.btn_agregar);
@@ -364,6 +339,46 @@
             this.btn_guardar.UseVisualStyleBackColor = true;
             this.btn_guardar.Click += new System.EventHandler(this.btn_guardar_Click);
             // 
+            // chk_seleccionartodo
+            // 
+            this.chk_seleccionartodo.AutoSize = true;
+            this.chk_seleccionartodo.Location = new System.Drawing.Point(75, 19);
+            this.chk_seleccionartodo.Name = "chk_seleccionartodo";
+            this.chk_seleccionartodo.Size = new System.Drawing.Size(15, 14);
+            this.chk_seleccionartodo.TabIndex = 8;
+            this.chk_seleccionartodo.UseVisualStyleBackColor = true;
+            this.chk_seleccionartodo.CheckedChanged += new System.EventHandler(this.chk_seleccionartodo_CheckedChanged);
+            // 
+            // Seleccionar
+            // 
+            this.Seleccionar.DataPropertyName = "Seleccionar";
+            this.Seleccionar.FillWeight = 111.6751F;
+            this.Seleccionar.HeaderText = "";
+            this.Seleccionar.MinimumWidth = 69;
+            this.Seleccionar.Name = "Seleccionar";
+            // 
+            // ID_Archivo
+            // 
+            this.ID_Archivo.DataPropertyName = "ID_Archivo";
+            this.ID_Archivo.HeaderText = "ID_Archivo";
+            this.ID_Archivo.Name = "ID_Archivo";
+            this.ID_Archivo.Visible = false;
+            // 
+            // ID_Tarea
+            // 
+            this.ID_Tarea.DataPropertyName = "ID_Tarea";
+            this.ID_Tarea.HeaderText = "ID_Tarea";
+            this.ID_Tarea.Name = "ID_Tarea";
+            this.ID_Tarea.Visible = false;
+            // 
+            // Datos_Archivo
+            // 
+            this.Datos_Archivo.DataPropertyName = "Datos_Archivo";
+            this.Datos_Archivo.FillWeight = 88.32487F;
+            this.Datos_Archivo.HeaderText = "Archivo";
+            this.Datos_Archivo.Name = "Datos_Archivo";
+            this.Datos_Archivo.ReadOnly = true;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -384,6 +399,7 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
@@ -406,10 +422,6 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Button btn_cancelar;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Seleccionar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID_Archivo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID_Tarea;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Datos_Archivo;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TextBox txt_contraseña;
         private System.Windows.Forms.CheckBox chk_password;
@@ -421,5 +433,10 @@
         private System.Windows.Forms.Button btn_visible;
         private System.Windows.Forms.CheckBox chk_visible;
         private System.Windows.Forms.Button btn_validar;
+        private System.Windows.Forms.CheckBox chk_seleccionartodo;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Seleccionar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID_Archivo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID_Tarea;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Datos_Archivo;
     }
 }
