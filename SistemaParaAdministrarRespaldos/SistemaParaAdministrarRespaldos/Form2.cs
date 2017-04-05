@@ -123,7 +123,7 @@ namespace SistemaParaAdministrarRespaldos
                         insercion3.Parameters.AddWithValue("@password", chk_password.Checked);
                         if (string.IsNullOrEmpty(txt_contraseña.Text))
                         {
-                            insercion3.Parameters.AddWithValue("@Contraseña", DBNull.Value);
+                            insercion3.Parameters.AddWithValue("@Contraseña", string.Empty);
                         }
                         else
                         {
@@ -185,7 +185,7 @@ namespace SistemaParaAdministrarRespaldos
                             actualizacion2.Parameters.AddWithValue("@password", chk_password.Checked);
                             if (string.IsNullOrEmpty(txt_contraseña.Text))
                             {
-                                actualizacion2.Parameters.AddWithValue("@Contraseña", DBNull.Value);
+                                actualizacion2.Parameters.AddWithValue("@Contraseña", string.Empty);
                             }
                             else
                             {
@@ -288,9 +288,16 @@ namespace SistemaParaAdministrarRespaldos
 
         private void btn_cancelar_Click(object sender, EventArgs e)
         {
-            if (dataGridView2.Rows.Count == 0)
+            if (modificar)
             {
-                MessageBox.Show("Debe completar la informacion", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                if (dataGridView2.Rows.Count == 0)
+                {
+                    MessageBox.Show("Debe completar la informacion", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                else
+                {
+                    this.Close();
+                }     
             }
             else
             {
@@ -325,24 +332,6 @@ namespace SistemaParaAdministrarRespaldos
             txt_contraseña.UseSystemPasswordChar = chk_visible.Checked ? false : true;
         }
 
-        private void btn_validar_Click(object sender, EventArgs e)
-        {
-            if (idtarea > 0)
-            {
-                SQLiteCommand comando = new SQLiteCommand("SELECT Contraseña FROM Tabla_Ruta WHERE ID_Tarea=" + idtarea, conexion);
-                string contraseñadesencriptada = StringCipher.Decrypt(comando.ExecuteScalar().ToString());
-
-                if (txt_contraseña.Text == contraseñadesencriptada)
-                {
-                    MessageBox.Show("Correcto");
-                }
-                else
-                {
-                    MessageBox.Show("Incorrecto");
-                }
-            }
-        }
-
         private void btn_visible_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button==System.Windows.Forms.MouseButtons.Left)
@@ -361,14 +350,20 @@ namespace SistemaParaAdministrarRespaldos
 
         private void chk_seleccionartodo_CheckedChanged(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dataGridView2.Rows)
+            if (dataGridView2.Rows.Count > 0)
             {
-                row.Cells["Seleccionar"].Value = true;
-                if (chk_seleccionartodo.Checked == false)
+                foreach (DataGridViewRow row in dataGridView2.Rows)
                 {
-                    row.Cells["Seleccionar"].Value = false;
-
+                    row.Cells["Seleccionar"].Value = true;
+                    if (chk_seleccionartodo.Checked == false)
+                    {
+                        row.Cells["Seleccionar"].Value = false;
+                    }
                 }
+            }
+            else
+            {
+                chk_seleccionartodo.Checked = false;
             }
         }
     }

@@ -35,14 +35,18 @@
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ID_Archivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID_Tarea = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Datos_Archivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.chk_seleccionartodo = new System.Windows.Forms.CheckBox();
             this.btn_quitar = new System.Windows.Forms.Button();
             this.btn_agregar = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.btn_validar = new System.Windows.Forms.Button();
             this.chk_visible = new System.Windows.Forms.CheckBox();
             this.btn_visible = new System.Windows.Forms.Button();
             this.txt_contraseña = new System.Windows.Forms.TextBox();
@@ -55,11 +59,6 @@
             this.fbd1 = new System.Windows.Forms.FolderBrowserDialog();
             this.btn_cancelar = new System.Windows.Forms.Button();
             this.btn_guardar = new System.Windows.Forms.Button();
-            this.chk_seleccionartodo = new System.Windows.Forms.CheckBox();
-            this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.ID_Archivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ID_Tarea = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Datos_Archivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -118,6 +117,36 @@
             this.dataGridView2.Size = new System.Drawing.Size(519, 150);
             this.dataGridView2.TabIndex = 5;
             // 
+            // Seleccionar
+            // 
+            this.Seleccionar.DataPropertyName = "Seleccionar";
+            this.Seleccionar.FillWeight = 111.6751F;
+            this.Seleccionar.HeaderText = "";
+            this.Seleccionar.MinimumWidth = 69;
+            this.Seleccionar.Name = "Seleccionar";
+            // 
+            // ID_Archivo
+            // 
+            this.ID_Archivo.DataPropertyName = "ID_Archivo";
+            this.ID_Archivo.HeaderText = "ID_Archivo";
+            this.ID_Archivo.Name = "ID_Archivo";
+            this.ID_Archivo.Visible = false;
+            // 
+            // ID_Tarea
+            // 
+            this.ID_Tarea.DataPropertyName = "ID_Tarea";
+            this.ID_Tarea.HeaderText = "ID_Tarea";
+            this.ID_Tarea.Name = "ID_Tarea";
+            this.ID_Tarea.Visible = false;
+            // 
+            // Datos_Archivo
+            // 
+            this.Datos_Archivo.DataPropertyName = "Datos_Archivo";
+            this.Datos_Archivo.FillWeight = 88.32487F;
+            this.Datos_Archivo.HeaderText = "Archivo";
+            this.Datos_Archivo.Name = "Datos_Archivo";
+            this.Datos_Archivo.ReadOnly = true;
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.AddExtension = false;
@@ -165,6 +194,16 @@
             this.tabPage2.Text = "Archivos a guardar";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // chk_seleccionartodo
+            // 
+            this.chk_seleccionartodo.AutoSize = true;
+            this.chk_seleccionartodo.Location = new System.Drawing.Point(75, 19);
+            this.chk_seleccionartodo.Name = "chk_seleccionartodo";
+            this.chk_seleccionartodo.Size = new System.Drawing.Size(15, 14);
+            this.chk_seleccionartodo.TabIndex = 8;
+            this.chk_seleccionartodo.UseVisualStyleBackColor = true;
+            this.chk_seleccionartodo.CheckedChanged += new System.EventHandler(this.chk_seleccionartodo_CheckedChanged);
+            // 
             // btn_quitar
             // 
             this.btn_quitar.Image = ((System.Drawing.Image)(resources.GetObject("btn_quitar.Image")));
@@ -193,7 +232,6 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.btn_validar);
             this.tabPage3.Controls.Add(this.chk_visible);
             this.tabPage3.Controls.Add(this.btn_visible);
             this.tabPage3.Controls.Add(this.txt_contraseña);
@@ -210,16 +248,6 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Ruta de salida";
             this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // btn_validar
-            // 
-            this.btn_validar.Location = new System.Drawing.Point(243, 142);
-            this.btn_validar.Name = "btn_validar";
-            this.btn_validar.Size = new System.Drawing.Size(75, 23);
-            this.btn_validar.TabIndex = 8;
-            this.btn_validar.Text = "Validar";
-            this.btn_validar.UseVisualStyleBackColor = true;
-            this.btn_validar.Click += new System.EventHandler(this.btn_validar_Click);
             // 
             // chk_visible
             // 
@@ -339,46 +367,6 @@
             this.btn_guardar.UseVisualStyleBackColor = true;
             this.btn_guardar.Click += new System.EventHandler(this.btn_guardar_Click);
             // 
-            // chk_seleccionartodo
-            // 
-            this.chk_seleccionartodo.AutoSize = true;
-            this.chk_seleccionartodo.Location = new System.Drawing.Point(75, 19);
-            this.chk_seleccionartodo.Name = "chk_seleccionartodo";
-            this.chk_seleccionartodo.Size = new System.Drawing.Size(15, 14);
-            this.chk_seleccionartodo.TabIndex = 8;
-            this.chk_seleccionartodo.UseVisualStyleBackColor = true;
-            this.chk_seleccionartodo.CheckedChanged += new System.EventHandler(this.chk_seleccionartodo_CheckedChanged);
-            // 
-            // Seleccionar
-            // 
-            this.Seleccionar.DataPropertyName = "Seleccionar";
-            this.Seleccionar.FillWeight = 111.6751F;
-            this.Seleccionar.HeaderText = "";
-            this.Seleccionar.MinimumWidth = 69;
-            this.Seleccionar.Name = "Seleccionar";
-            // 
-            // ID_Archivo
-            // 
-            this.ID_Archivo.DataPropertyName = "ID_Archivo";
-            this.ID_Archivo.HeaderText = "ID_Archivo";
-            this.ID_Archivo.Name = "ID_Archivo";
-            this.ID_Archivo.Visible = false;
-            // 
-            // ID_Tarea
-            // 
-            this.ID_Tarea.DataPropertyName = "ID_Tarea";
-            this.ID_Tarea.HeaderText = "ID_Tarea";
-            this.ID_Tarea.Name = "ID_Tarea";
-            this.ID_Tarea.Visible = false;
-            // 
-            // Datos_Archivo
-            // 
-            this.Datos_Archivo.DataPropertyName = "Datos_Archivo";
-            this.Datos_Archivo.FillWeight = 88.32487F;
-            this.Datos_Archivo.HeaderText = "Archivo";
-            this.Datos_Archivo.Name = "Datos_Archivo";
-            this.Datos_Archivo.ReadOnly = true;
-            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -432,7 +420,6 @@
         private System.Windows.Forms.FolderBrowserDialog fbd1;
         private System.Windows.Forms.Button btn_visible;
         private System.Windows.Forms.CheckBox chk_visible;
-        private System.Windows.Forms.Button btn_validar;
         private System.Windows.Forms.CheckBox chk_seleccionartodo;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Seleccionar;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID_Archivo;

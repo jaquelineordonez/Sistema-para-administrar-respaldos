@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Ionic.Zip;
+using Microsoft.VisualBasic.Devices;
+using System;
 using System.Data;
 using System.Data.SQLite;
 using System.IO;
-using System.IO.Compression;
 using System.Windows.Forms;
-using Microsoft.VisualBasic.Devices;
 
 namespace SistemaParaAdministrarRespaldos
 {
@@ -115,7 +115,7 @@ namespace SistemaParaAdministrarRespaldos
                 else
                 {
                     MessageBox.Show("Seleccione al menos una tarea", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    
+
                     object seleccionado = null;
                     for (int x = 0; x < dataGridView1.Rows.Count; x++)
                     {
@@ -144,7 +144,7 @@ namespace SistemaParaAdministrarRespaldos
             object id_Tarea = 0;
             try
             {
-                dataGridView1.EndEdit(); 
+                dataGridView1.EndEdit();
                 tabla.AcceptChanges();
 
                 DataRow[] rowsSeleccionados = tabla.Select("Seleccionar = " + true);
@@ -153,26 +153,44 @@ namespace SistemaParaAdministrarRespaldos
                     for (int x = 0; x < rowsSeleccionados.Length; x++)
                     {
                         id_Tarea = rowsSeleccionados[x][0];
-                        SQLiteCommand nom = new SQLiteCommand("SELECT Nombre_Tarea FROM Tabla_Tarea WHERE (ID_Tarea = " + id_Tarea + ")", conexion, transaccion);
-                        string nombreruta = nom.ExecuteScalar().ToString();
+                        SQLiteCommand nom = new SQLiteCommand("SELECT Nombre_Tarea FROM Tabla_Tarea WHERE (ID_Tarea= " + id_Tarea + ")", conexion, transaccion);
+                        string nombrezip = nom.ExecuteScalar().ToString();
 
                         SQLiteCommand comandosalida = new SQLiteCommand("SELECT Ruta_Salida FROM Tabla_Ruta WHERE (ID_Tarea= " + id_Tarea + ")", conexion, transaccion);
                         string rutasalida = comandosalida.ExecuteScalar().ToString();
 
+                        string contraseña;
+                        SQLiteCommand contra = new SQLiteCommand("SELECT Contraseña FROM Tabla_Ruta WHERE ID_Tarea=" + id_Tarea, conexion);
+                        string contras = contra.ExecuteScalar().ToString();
+
+                        if (contras == string.Empty)
+                        {
+                            contraseña = string.Empty;
+                        }
+                        else
+                        {
+                            contraseña = StringCipher.Decrypt(contras);
+                        }
+
                         SQLiteCommand comandoinicio = new SQLiteCommand("SELECT Datos_Archivo FROM Tabla_Archivo WHERE (ID_Tarea= " + id_Tarea + ")", conexion, transaccion);
                         SQLiteDataReader rutainicio = comandoinicio.ExecuteReader();
-                        string rutaArchivop = string.Empty;
+
+                        string rutaarchivo = string.Empty;
                         while (rutainicio.Read())
                         {
-                            rutaArchivop = Convert.ToString(rutainicio.GetValue(0)); 
-                            if (File.Exists(rutaArchivop))
+                            rutaarchivo = Convert.ToString(rutainicio.GetValue(0));
+                            if (File.Exists(rutaarchivo))
                             {
-                                
-                                File.Copy(rutaArchivop, rutasalida + "\\" + Path.GetFileName(rutaArchivop), true);
-                            }
-                            else
-                            {
-                                MessageBox.Show("El archivo ya no se encuentra en la ruta: " + rutaArchivop, "File not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                using (ZipFile zip = new ZipFile())
+                                {
+                                    if (contraseña!=string.Empty)
+                                    {
+                                        zip.Password = contraseña;
+                                    }
+                                    ///foreach
+                                    zip.AddFile(rutaarchivo);
+                                    zip.Save(rutasalida + "\\" + nombrezip + ".zip");
+                                }
                             }
                         }
                     }
@@ -213,13 +231,20 @@ namespace SistemaParaAdministrarRespaldos
 
         private void chk_seleccionartodo_CheckedChanged(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dataGridView1.Rows)
+            if (dataGridView1.Rows.Count > 0)
             {
-                row.Cells["Seleccionar"].Value = true;
-                if (chk_seleccionartodo.Checked == false)
+                foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
-                    row.Cells["Seleccionar"].Value = false;
+                    row.Cells["Seleccionar"].Value = true;
+                    if (chk_seleccionartodo.Checked == false)
+                    {
+                        row.Cells["Seleccionar"].Value = false;
+                    }
                 }
+            }
+            else
+            {
+                chk_seleccionartodo.Checked = false;
             }
         }
     }
