@@ -1,10 +1,11 @@
-﻿using Ionic.Zip;
-using Microsoft.VisualBasic.Devices;
-using System;
+﻿using System;
 using System.Data;
 using System.Data.SQLite;
 using System.IO;
 using System.Windows.Forms;
+using Ionic.Zip;
+using Microsoft.VisualBasic.Devices;
+
 
 namespace SistemaParaAdministrarRespaldos
 {
@@ -29,6 +30,9 @@ namespace SistemaParaAdministrarRespaldos
         private SQLiteDataAdapter adaptador;
         private SQLiteCommandBuilder builder;
 
+        private DataTable tbl = new DataTable();
+        private SQLiteDataAdapter adp;
+        private SQLiteCommandBuilder build;
 
         private void CargarDatos()
         {
@@ -40,16 +44,29 @@ namespace SistemaParaAdministrarRespaldos
             dataGridView1.DataSource = tabla;
         }
 
+        private void cargarejecucion()
+        {
+            tbl = new DataTable();
+            adp = new SQLiteDataAdapter("SELECT * FROM Tabla_Ejecucion", conexion);
+            adp.Fill(tbl);
+            build = new SQLiteCommandBuilder(adp);
+            dgv_ejecucion.DataSource = tbl;
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            timer1.Enabled = true;
             dataGridView1.AutoGenerateColumns = false;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgv_ejecucion.AutoGenerateColumns = false;
+            dgv_ejecucion.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
             try
             {
                 conexion = new SQLiteConnection("Data source = D:\\Sistema para manejar respaldos\\Sistema-para-administrar-respaldos\\mydatabase.sqlite;Version=3");
                 conexion.Open();
                 CargarDatos();
+                cargarejecucion();
             }
             catch (SQLiteException ex)
             {
@@ -176,28 +193,37 @@ namespace SistemaParaAdministrarRespaldos
                         SQLiteDataReader rutainicio = comandoinicio.ExecuteReader();
 
                         string rutaarchivo = string.Empty;
-                        while (rutainicio.Read())
+                        using (ZipFile zip = new ZipFile())
                         {
-                            rutaarchivo = Convert.ToString(rutainicio.GetValue(0));
-                            if (File.Exists(rutaarchivo))
+                            while (rutainicio.Read())
                             {
-                                using (ZipFile zip = new ZipFile())
+                                rutaarchivo = Convert.ToString(rutainicio.GetValue(0));
+                                if (File.Exists(rutaarchivo))
                                 {
-                                    if (contraseña!=string.Empty)
+
+                                    if (contraseña != string.Empty)
                                     {
                                         zip.Password = contraseña;
                                     }
-                                    ///foreach
-                                    zip.AddFile(rutaarchivo);
-                                    zip.Save(rutasalida + "\\" + nombrezip + ".zip");
+                                    zip.AddFile(rutaarchivo, string.Empty);
                                 }
                             }
+                            zip.Save(rutasalida + "\\" + nombrezip + ".zip");
                         }
+                        
+                        string comando = "insert into Tabla_Ejecucion (Nombre_TareaZip,FechaHoraZip,Ruta_SalidaZip,ID_Tarea)values(@Nombre_TareaZip,@FechaHoraZip,@Ruta_SalidaZip,@ID_Tarea)";
+                        SQLiteCommand insercion = new SQLiteCommand(comando, conexion, transaccion);
+                        insercion.Parameters.AddWithValue("@Nombre_TareaZip", nombrezip);
+                        insercion.Parameters.AddWithValue("@FechaHoraZip", lbl_fechahorazip.Text);
+                        insercion.Parameters.AddWithValue("@Ruta_SalidaZip", rutasalida);
+                        insercion.Parameters.AddWithValue("@ID_Tarea", id_Tarea);
+                        insercion.ExecuteNonQuery();
                     }
 
                     transaccion.Commit();
-                    MessageBox.Show("Tarea ejecutada");
                     CargarDatos();
+                    cargarejecucion();
+                    MessageBox.Show("Tarea ejecutada");
                 }
                 else
                 {
@@ -246,6 +272,22 @@ namespace SistemaParaAdministrarRespaldos
             {
                 chk_seleccionartodo.Checked = false;
             }
+        }
+
+       
+
+        private void list_ejecucion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lbl_fechahorazip.Text = DateTime.Now.ToString();
+        }
+
+        private void dgv_ejecucion_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            cargarejecucion();
         }
     }
 }
