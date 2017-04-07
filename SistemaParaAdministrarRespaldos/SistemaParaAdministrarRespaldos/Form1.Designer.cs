@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.ID_Tarea = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,14 +48,12 @@
             this.chk_seleccionartodo = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgv_ejecucion = new System.Windows.Forms.DataGridView();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.lbl_fechahorazip = new System.Windows.Forms.Label();
             this.Nombre_TareaZip = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaHoraZip = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ruta_SalidaZip = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -281,46 +278,6 @@
             this.dgv_ejecucion.TabIndex = 18;
             this.dgv_ejecucion.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_ejecucion_CellContentClick);
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.archivoToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(805, 24);
-            this.menuStrip1.TabIndex = 16;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // archivoToolStripMenuItem
-            // 
-            this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.salirToolStripMenuItem});
-            this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
-            this.archivoToolStripMenuItem.Text = "Archivo";
-            // 
-            // salirToolStripMenuItem
-            // 
-            this.salirToolStripMenuItem.Image = global::SistemaParaAdministrarRespaldos.Properties.Resources._1486521491_close2;
-            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
-            this.salirToolStripMenuItem.Text = "&Salir";
-            this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // lbl_fechahorazip
-            // 
-            this.lbl_fechahorazip.AutoSize = true;
-            this.lbl_fechahorazip.Location = new System.Drawing.Point(758, 46);
-            this.lbl_fechahorazip.Name = "lbl_fechahorazip";
-            this.lbl_fechahorazip.Size = new System.Drawing.Size(35, 13);
-            this.lbl_fechahorazip.TabIndex = 18;
-            this.lbl_fechahorazip.Text = "label1";
-            // 
             // Nombre_TareaZip
             // 
             this.Nombre_TareaZip.DataPropertyName = "Nombre_TareaZip";
@@ -348,13 +305,38 @@
             this.Ruta_SalidaZip.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             this.Ruta_SalidaZip.Width = 140;
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.archivoToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(805, 24);
+            this.menuStrip1.TabIndex = 16;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // archivoToolStripMenuItem
+            // 
+            this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.salirToolStripMenuItem});
+            this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
+            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.archivoToolStripMenuItem.Text = "Archivo";
+            // 
+            // salirToolStripMenuItem
+            // 
+            this.salirToolStripMenuItem.Image = global::SistemaParaAdministrarRespaldos.Properties.Resources._1486521491_close2;
+            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
+            this.salirToolStripMenuItem.Text = "&Salir";
+            this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(805, 406);
-            this.Controls.Add(this.lbl_fechahorazip);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.treeView2);
@@ -409,8 +391,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dgv_ejecucion;
-        private System.Windows.Forms.Label lbl_fechahorazip;
-        public System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre_TareaZip;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaHoraZip;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ruta_SalidaZip;

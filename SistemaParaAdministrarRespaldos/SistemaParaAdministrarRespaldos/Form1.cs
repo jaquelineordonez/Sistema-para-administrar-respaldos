@@ -55,11 +55,11 @@ namespace SistemaParaAdministrarRespaldos
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            timer1.Enabled = true;
             dataGridView1.AutoGenerateColumns = false;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgv_ejecucion.AutoGenerateColumns = false;
             dgv_ejecucion.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgv_ejecucion.Sort(FechaHoraZip, System.ComponentModel.ListSortDirection.Ascending);
 
             try
             {
@@ -211,10 +211,13 @@ namespace SistemaParaAdministrarRespaldos
                             zip.Save(rutasalida + "\\" + nombrezip + ".zip");
                         }
                         
+                        ////string hr = DateTime.Now.ToString();
+                        ////string formato = string.Format("yyyy-MM-dd HH:mm:ss", hr);
+                        ////string.Format("yyyy-MM-dd HH:mm:ss", DateTime.Now.Date.ToString()))
                         string comando = "insert into Tabla_Ejecucion (Nombre_TareaZip,FechaHoraZip,Ruta_SalidaZip,ID_Tarea)values(@Nombre_TareaZip,@FechaHoraZip,@Ruta_SalidaZip,@ID_Tarea)";
                         SQLiteCommand insercion = new SQLiteCommand(comando, conexion, transaccion);
                         insercion.Parameters.AddWithValue("@Nombre_TareaZip", nombrezip);
-                        insercion.Parameters.AddWithValue("@FechaHoraZip", lbl_fechahorazip.Text);
+                        insercion.Parameters.AddWithValue("@FechaHoraZip", DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss"));
                         insercion.Parameters.AddWithValue("@Ruta_SalidaZip", rutasalida);
                         insercion.Parameters.AddWithValue("@ID_Tarea", id_Tarea);
                         insercion.ExecuteNonQuery();
@@ -272,17 +275,6 @@ namespace SistemaParaAdministrarRespaldos
             {
                 chk_seleccionartodo.Checked = false;
             }
-        }
-
-       
-
-        private void list_ejecucion_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            lbl_fechahorazip.Text = DateTime.Now.ToString();
         }
 
         private void dgv_ejecucion_CellContentClick(object sender, DataGridViewCellEventArgs e)
