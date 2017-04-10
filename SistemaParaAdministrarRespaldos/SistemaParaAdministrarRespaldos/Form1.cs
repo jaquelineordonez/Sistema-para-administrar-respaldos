@@ -51,6 +51,7 @@ namespace SistemaParaAdministrarRespaldos
             adp.Fill(tbl);
             build = new SQLiteCommandBuilder(adp);
             dgv_ejecucion.DataSource = tbl;
+            dgv_ejecucion.Sort(FechaHoraZip, System.ComponentModel.ListSortDirection.Descending);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -59,7 +60,6 @@ namespace SistemaParaAdministrarRespaldos
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgv_ejecucion.AutoGenerateColumns = false;
             dgv_ejecucion.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dgv_ejecucion.Sort(FechaHoraZip, System.ComponentModel.ListSortDirection.Ascending);
 
             try
             {
@@ -170,6 +170,9 @@ namespace SistemaParaAdministrarRespaldos
                     for (int x = 0; x < rowsSeleccionados.Length; x++)
                     {
                         id_Tarea = rowsSeleccionados[x][0];
+                        SQLiteCommand chk = new SQLiteCommand("SELECT sobreescribir FROM Tabla_Ruta WHERE (ID_Tarea= " + id_Tarea + ")", conexion, transaccion);
+                        string chksobreescribir = chk.ExecuteScalar().ToString();
+
                         SQLiteCommand nom = new SQLiteCommand("SELECT Nombre_Tarea FROM Tabla_Tarea WHERE (ID_Tarea= " + id_Tarea + ")", conexion, transaccion);
                         string nombrezip = nom.ExecuteScalar().ToString();
 
@@ -208,16 +211,18 @@ namespace SistemaParaAdministrarRespaldos
                                     zip.AddFile(rutaarchivo, string.Empty);
                                 }
                             }
-                            zip.Save(rutasalida + "\\" + nombrezip + ".zip");
+     
+                                zip.Save(rutasalida + "\\" + nombrezip + ".zip");
+                           
                         }
                         
-                        ////string hr = DateTime.Now.ToString();
-                        ////string formato = string.Format("yyyy-MM-dd HH:mm:ss", hr);
-                        ////string.Format("yyyy-MM-dd HH:mm:ss", DateTime.Now.Date.ToString()))
                         string comando = "insert into Tabla_Ejecucion (Nombre_TareaZip,FechaHoraZip,Ruta_SalidaZip,ID_Tarea)values(@Nombre_TareaZip,@FechaHoraZip,@Ruta_SalidaZip,@ID_Tarea)";
                         SQLiteCommand insercion = new SQLiteCommand(comando, conexion, transaccion);
-                        insercion.Parameters.AddWithValue("@Nombre_TareaZip", nombrezip);
-                        insercion.Parameters.AddWithValue("@FechaHoraZip", DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss"));
+                        
+                            insercion.Parameters.AddWithValue("@Nombre_TareaZip", nombrezip);
+                       
+
+                        insercion.Parameters.AddWithValue("@FechaHoraZip", DateTime.Now);
                         insercion.Parameters.AddWithValue("@Ruta_SalidaZip", rutasalida);
                         insercion.Parameters.AddWithValue("@ID_Tarea", id_Tarea);
                         insercion.ExecuteNonQuery();

@@ -251,13 +251,14 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.AutoSize = true;
             this.groupBox1.BackColor = System.Drawing.SystemColors.Control;
             this.groupBox1.Controls.Add(this.dgv_ejecucion);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox1.Location = new System.Drawing.Point(6, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox1.Size = new System.Drawing.Size(510, 134);
+            this.groupBox1.Size = new System.Drawing.Size(420, 134);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Log de ejecuciones";
@@ -265,16 +266,19 @@
             // dgv_ejecucion
             // 
             this.dgv_ejecucion.AllowUserToAddRows = false;
+            this.dgv_ejecucion.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv_ejecucion.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgv_ejecucion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_ejecucion.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Nombre_TareaZip,
             this.FechaHoraZip,
             this.Ruta_SalidaZip});
-            this.dgv_ejecucion.Location = new System.Drawing.Point(6, 19);
+            this.dgv_ejecucion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv_ejecucion.Location = new System.Drawing.Point(3, 16);
             this.dgv_ejecucion.Name = "dgv_ejecucion";
             this.dgv_ejecucion.RowHeadersWidth = 5;
-            this.dgv_ejecucion.Size = new System.Drawing.Size(408, 106);
+            this.dgv_ejecucion.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv_ejecucion.Size = new System.Drawing.Size(414, 115);
             this.dgv_ejecucion.TabIndex = 18;
             this.dgv_ejecucion.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_ejecucion_CellContentClick);
             // 
@@ -285,7 +289,6 @@
             this.Nombre_TareaZip.Name = "Nombre_TareaZip";
             this.Nombre_TareaZip.ReadOnly = true;
             this.Nombre_TareaZip.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.Nombre_TareaZip.Width = 130;
             // 
             // FechaHoraZip
             // 
@@ -294,7 +297,6 @@
             this.FechaHoraZip.Name = "FechaHoraZip";
             this.FechaHoraZip.ReadOnly = true;
             this.FechaHoraZip.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.FechaHoraZip.Width = 130;
             // 
             // Ruta_SalidaZip
             // 
@@ -303,7 +305,6 @@
             this.Ruta_SalidaZip.Name = "Ruta_SalidaZip";
             this.Ruta_SalidaZip.ReadOnly = true;
             this.Ruta_SalidaZip.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.Ruta_SalidaZip.Width = 140;
             // 
             // menuStrip1
             // 
@@ -357,6 +358,7 @@
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
