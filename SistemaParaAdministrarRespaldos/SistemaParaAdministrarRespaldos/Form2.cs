@@ -113,9 +113,6 @@ namespace SistemaParaAdministrarRespaldos
                         SQLiteCommand comandoid = new SQLiteCommand("select last_insert_rowid()", conexion, transaccion);
                         int idtarea = System.Convert.ToInt16(comandoid.ExecuteScalar());
 
-                        string comando2 = "insert into Tabla_Archivo (Datos_Archivo,ID_Tarea) values(@Datos_Archivo,@idtarea)";
-                        SQLiteCommand insercion2 = new SQLiteCommand(comando2, conexion, transaccion);
-
                         string comando3 = ("insert into Tabla_Ruta (Ruta_Salida,sobreescribir,password,Contraseña,ID_Tarea) values(@Ruta_Salida,@sobreescribir,@password,@contraseña,@idtarea)");
                         SQLiteCommand insercion3 = new SQLiteCommand(comando3, conexion, transaccion);
                         insercion3.Parameters.AddWithValue("@Ruta_Salida", txt_ruta.Text);
@@ -132,6 +129,9 @@ namespace SistemaParaAdministrarRespaldos
                         }
                         insercion3.Parameters.AddWithValue("@idtarea", idtarea);
                         insercion3.ExecuteNonQuery();
+
+                        string comando2 = "insert into Tabla_Archivo (Datos_Archivo,ID_Tarea) values(@Datos_Archivo,@idtarea)";
+                        SQLiteCommand insercion2 = new SQLiteCommand(comando2, conexion, transaccion);
 
                         object archivoruta = 0;
                         for (int x = 0; x < dataGridView2.Rows.Count; x++)
@@ -212,7 +212,7 @@ namespace SistemaParaAdministrarRespaldos
                 }
             }
         }
-            
+
         private void btn_agregar_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
@@ -222,25 +222,77 @@ namespace SistemaParaAdministrarRespaldos
             {
                 string dir = openFileDialog1.FileName;
                 string[] ofdSelectedFiles = openFileDialog1.FileNames;
-                foreach (string nombres in ofdSelectedFiles)
-                {
-                    if (idtarea > 0)
-                    {
-                        tablaArchivos.Rows.Add(new object[]
-                        {
-                            null, nombres, idtarea, false
-                        });
+                
+                    validar(ofdSelectedFiles);
+                
+                
+                    //////foreach (string nombres in ofdSelectedFiles)
+                    //////{
+                    //////    if (idtarea > 0)
+                    //////    {
+                    //////        tablaArchivos.Rows.Add(new object[]
+                    //////        {
+                    //////            null, nombres, idtarea, false
+                    //////        });
+                    //////    }
+                    //////    else
+                    //////    {
+                    //////        dataGridView2.Rows.Add(new object[] { false, null, null, nombres });
+                    //////    }
+                    //////}
+                
+            }
+        }
 
+        private bool validar(string[] archivos)
+        {
+
+            bool validacion = true;
+            for (int x = 0; x < archivos.Length; x++)
+            {
+                if (idtarea > 0)
+                {
+                    DataRow[] repetido = tablaArchivos.Select("Datos_Archivo = '" + archivos[x] + "'");
+                    if (repetido != null && repetido.Length > 0)
+                    {
+                        validacion = false;
+                        MessageBox.Show("El archivo: " + archivos[0] + " ya esta en la tabla.");
                     }
                     else
                     {
-                        dataGridView2.Rows.Add(new object[] { false, null, null, nombres });
+                        if (idtarea > 0)
+                        {
+                            tablaArchivos.Rows.Add(new object[]
+                            {
+                                null, archivos[x], idtarea, false
+                            });
+                        }
+                        else
+                        {
+                            dataGridView2.Rows.Add(new object[] { false, null, null, archivos[x] });
+                        }
                     }
-
                 }
+                else
+                {
+                    dataGridView2.Rows.Add(new object[] { false, null, null, archivos[x] });
+                }     
             }
-        }
+                
             
+
+            ////foreach (DataGridViewRow row in dataGridView2.Rows)
+            ////{
+            ////    string valrow = Convert.ToString(row.Cells["Datos_Archivo"].Value);
+            ////    if (valrow == Convert.ToString(dataGridView2.CurrentRow.Cells[].Value))
+            ////    {
+            ////        x = false;
+            ////        dataGridView2.Rows.Remove(row);
+            ////    }
+            ////}
+            return validacion;
+        }
+
         private void btn_quitar_Click(object sender, EventArgs e)
         {
             tablaArchivos.AcceptChanges();
