@@ -211,9 +211,15 @@ namespace SistemaParaAdministrarRespaldos
                                     zip.AddFile(rutaarchivo, string.Empty);
                                 }
                             }
-     
-                                zip.Save(rutasalida + "\\" + nombrezip + ".zip");
-                           
+                            if (chksobreescribir == Convert.ToString(1))
+                            {
+                                zip.Save(rutasalida + Path.DirectorySeparatorChar + nombrezip + ".zip");
+                            }
+                            else
+                            {  
+                                string tiempo = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
+                                zip.Save(rutasalida + Path.DirectorySeparatorChar + tiempo + ".zip");
+                            }
                         }
                         
                         string comando = "insert into Tabla_Ejecucion (Nombre_TareaZip,FechaHoraZip,Ruta_SalidaZip,ID_Tarea)values(@Nombre_TareaZip,@FechaHoraZip,@Ruta_SalidaZip,@ID_Tarea)";

@@ -222,8 +222,8 @@ namespace SistemaParaAdministrarRespaldos
             {
                 string dir = openFileDialog1.FileName;
                 string[] ofdSelectedFiles = openFileDialog1.FileNames;
-                
-                    validar(ofdSelectedFiles);
+
+                agregar(ofdSelectedFiles);
                 
                 
                     //////foreach (string nombres in ofdSelectedFiles)
@@ -244,53 +244,77 @@ namespace SistemaParaAdministrarRespaldos
             }
         }
 
-        private bool validar(string[] archivos)
+        private bool agregar(string[] archivos)
         {
 
             bool validacion = true;
             for (int x = 0; x < archivos.Length; x++)
             {
-                if (idtarea > 0)
+                if (tablaArchivos.Rows.Count > 0)
                 {
                     DataRow[] repetido = tablaArchivos.Select("Datos_Archivo = '" + archivos[x] + "'");
                     if (repetido != null && repetido.Length > 0)
                     {
                         validacion = false;
-                        MessageBox.Show("El archivo: " + archivos[0] + " ya esta en la tabla.");
+                        MessageBox.Show("El archivo: " + archivos[x] + " ya existe en la lista.");
                     }
                     else
                     {
-                        if (idtarea > 0)
+                        tablaArchivos.Rows.Add(new object[]
                         {
-                            tablaArchivos.Rows.Add(new object[]
-                            {
                                 null, archivos[x], idtarea, false
-                            });
-                        }
-                        else
-                        {
-                            dataGridView2.Rows.Add(new object[] { false, null, null, archivos[x] });
-                        }
-                    }
+                        });
+                    }                    
                 }
                 else
                 {
-                    dataGridView2.Rows.Add(new object[] { false, null, null, archivos[x] });
+                    if (dataGridView2.Rows.Count > 0)
+                    {
+                        
+                        
+                                    validacion = false;
+                                    MessageBox.Show("Repetido");
+                                                 
+                    }
+                    else
+                    {
+                        dataGridView2.Rows.Add(new object[] { false, null, null, archivos[x] });
+                    }
                 }     
             }
-                
-            
-
-            ////foreach (DataGridViewRow row in dataGridView2.Rows)
-            ////{
-            ////    string valrow = Convert.ToString(row.Cells["Datos_Archivo"].Value);
-            ////    if (valrow == Convert.ToString(dataGridView2.CurrentRow.Cells[].Value))
-            ////    {
-            ////        x = false;
-            ////        dataGridView2.Rows.Remove(row);
-            ////    }
-            ////}
             return validacion;
+        }
+
+
+
+        ////foreach (DataGridViewRow row in dataGridView2.Rows)
+        ////{
+        ////    string valrow = Convert.ToString(row.Cells["Datos_Archivo"].Value);
+        ////    if (valrow == Convert.ToString(dataGridView2.CurrentRow.Cells[].Value))
+        ////    {
+        ////        x = false;
+        ////        dataGridView2.Rows.Remove(row);
+        ////    }
+        ////}
+
+        private Boolean existe(string rol)
+        {
+            Boolean existe = false;
+            foreach (DataGridViewRow row in dataGridView2.Rows)
+            {
+                string verificar = Convert.ToString(row.Cells["Datos_Archivo"].Value);
+                if (rol==verificar)
+                {
+                    MessageBox.Show("El archivo ya existe");
+                    existe = true;
+                    break;
+                }
+                else
+                {
+                    existe = false;
+                }
+            }
+            return existe;
         }
 
         private void btn_quitar_Click(object sender, EventArgs e)
