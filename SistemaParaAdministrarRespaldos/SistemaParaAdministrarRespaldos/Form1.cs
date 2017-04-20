@@ -211,14 +211,15 @@ namespace SistemaParaAdministrarRespaldos
                                     zip.AddFile(rutaarchivo, string.Empty);
                                 }
                             }
+
                             if (chksobreescribir == Convert.ToString(1))
                             {
                                 zip.Save(rutasalida + Path.DirectorySeparatorChar + nombrezip + ".zip");
                             }
                             else
                             {  
-                                string tiempo = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
-                                zip.Save(rutasalida + Path.DirectorySeparatorChar + tiempo + ".zip");
+                                string tiempo = DateTime.Now.ToString("dd-MM-yyyy HH_mm_ss");
+                                zip.Save(rutasalida + Path.DirectorySeparatorChar + "Respaldo " + tiempo + ".zip");
                             }
                         }
                         

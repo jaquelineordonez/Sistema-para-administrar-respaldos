@@ -222,35 +222,16 @@ namespace SistemaParaAdministrarRespaldos
             {
                 string dir = openFileDialog1.FileName;
                 string[] ofdSelectedFiles = openFileDialog1.FileNames;
-
-                agregar(ofdSelectedFiles);
-                
-                
-                    //////foreach (string nombres in ofdSelectedFiles)
-                    //////{
-                    //////    if (idtarea > 0)
-                    //////    {
-                    //////        tablaArchivos.Rows.Add(new object[]
-                    //////        {
-                    //////            null, nombres, idtarea, false
-                    //////        });
-                    //////    }
-                    //////    else
-                    //////    {
-                    //////        dataGridView2.Rows.Add(new object[] { false, null, null, nombres });
-                    //////    }
-                    //////}
-                
+                agregar(ofdSelectedFiles);             
             }
         }
 
         private bool agregar(string[] archivos)
         {
-
             bool validacion = true;
-            for (int x = 0; x < archivos.Length; x++)
+            if (tablaArchivos.Rows.Count > 0)
             {
-                if (tablaArchivos.Rows.Count > 0)
+                for (int x = 0; x < archivos.Length; x++)
                 {
                     DataRow[] repetido = tablaArchivos.Select("Datos_Archivo = '" + archivos[x] + "'");
                     if (repetido != null && repetido.Length > 0)
@@ -264,38 +245,44 @@ namespace SistemaParaAdministrarRespaldos
                         {
                                 null, archivos[x], idtarea, false
                         });
-                    }                    
+                    }
                 }
-                else
+            }
+            else
+            {
+                string archivo = string.Empty;
+                for (int x = 0; x < archivos.Length; x++)
                 {
-                    if (dataGridView2.Rows.Count > 0)
+                    archivo = archivos[x];
+
+                    if (dataGridView2.RowCount >= 1)
                     {
-                        
-                        
-                                    validacion = false;
-                                    MessageBox.Show("Repetido");
-                                                 
+                        bool estaRepetido = false;
+                        for (int y = 0; y < dataGridView2.Rows.Count; y++)
+                        {
+                            if (archivo == dataGridView2["Datos_Archivo", y].Value.ToString().TrimEnd())
+                            {
+                                MessageBox.Show("El archivo: " + archivos[x] + " ya existe en la lista.");
+                                validacion = false;
+                                estaRepetido = true;
+                            }
+                        }
+                        if (!estaRepetido)
+                        {
+                            dataGridView2.Rows.Add();
+                            dataGridView2["Datos_Archivo", dataGridView2.Rows.Count - 1].Value = archivo;
+                        }
+                        estaRepetido = false;
                     }
                     else
                     {
-                        dataGridView2.Rows.Add(new object[] { false, null, null, archivos[x] });
+                        dataGridView2.Rows.Add();
+                        dataGridView2["Datos_Archivo", dataGridView2.Rows.Count - 1].Value = archivo;
                     }
-                }     
+                }
             }
             return validacion;
         }
-
-
-
-        ////foreach (DataGridViewRow row in dataGridView2.Rows)
-        ////{
-        ////    string valrow = Convert.ToString(row.Cells["Datos_Archivo"].Value);
-        ////    if (valrow == Convert.ToString(dataGridView2.CurrentRow.Cells[].Value))
-        ////    {
-        ////        x = false;
-        ////        dataGridView2.Rows.Remove(row);
-        ////    }
-        ////}
 
         private Boolean existe(string rol)
         {
