@@ -197,10 +197,12 @@
             // chk_seleccionartodo
             // 
             this.chk_seleccionartodo.AutoSize = true;
-            this.chk_seleccionartodo.Location = new System.Drawing.Point(75, 19);
+            this.chk_seleccionartodo.Location = new System.Drawing.Point(74, 19);
             this.chk_seleccionartodo.Name = "chk_seleccionartodo";
+            this.chk_seleccionartodo.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chk_seleccionartodo.Size = new System.Drawing.Size(15, 14);
             this.chk_seleccionartodo.TabIndex = 8;
+            this.chk_seleccionartodo.TabStop = false;
             this.chk_seleccionartodo.UseVisualStyleBackColor = true;
             this.chk_seleccionartodo.CheckedChanged += new System.EventHandler(this.chk_seleccionartodo_CheckedChanged);
             // 
@@ -376,6 +378,7 @@
             this.Controls.Add(this.btn_guardar);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form2";

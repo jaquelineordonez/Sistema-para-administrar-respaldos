@@ -12,18 +12,12 @@ namespace SistemaParaAdministrarRespaldos
     public partial class Form1 : System.Windows.Forms.Form
     {
         private SQLiteConnection conexion;
-        private int idtarea;
+        private int idtareamostrarLog;
         private Computer mycomputer = new Computer();
 
         public Form1()
         {
             InitializeComponent();
-        }
-
-        public Form1(SQLiteConnection conexion, int id_tarea)
-        {
-            this.conexion = conexion;
-            this.idtarea = id_tarea;
         }
 
         private DataTable tabla = new DataTable();
@@ -33,6 +27,23 @@ namespace SistemaParaAdministrarRespaldos
         private DataTable tbl = new DataTable();
         private SQLiteDataAdapter adp;
         private SQLiteCommandBuilder build;
+
+        private DataTable dta = new DataTable();
+
+       private void cargarlista(int id_tarea)
+        {
+            list_ejecuciones.Items.Clear();
+            if (tbl!= null)
+            {
+                DataRow[] filas = tbl.Select("ID_Tarea = " + id_tarea);
+                foreach (DataRow dr in filas)
+                {
+                    ListViewItem item = new ListViewItem(dr["FechaHoraZip"].ToString());
+                    item.SubItems.Add(dr["Ruta_SalidaZip"].ToString());
+                    list_ejecuciones.Items.Add(item);
+                }
+            }
+        }
 
         private void CargarDatos()
         {
@@ -289,9 +300,18 @@ namespace SistemaParaAdministrarRespaldos
             }
         }
 
-        private void dgv_ejecucion_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            cargarejecucion();
+            if (dataGridView1.SelectedRows.Count ==1)
+            {
+                idtareamostrarLog = Convert.ToInt32(dataGridView1["ID_Tarea", dataGridView1.CurrentRow.Index].Value);
+                cargarlista(idtareamostrarLog);
+            }           
+        }
+
+        private void splitContainer2_Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

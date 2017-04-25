@@ -29,11 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.ID_Tarea = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Nombre_Tarea = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.tsb_nueva = new System.Windows.Forms.ToolStripButton();
             this.tsb_editar = new System.Windows.Forms.ToolStripButton();
@@ -41,11 +36,6 @@
             this.tsb_eliminar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsb_ejecutar = new System.Windows.Forms.ToolStripButton();
-            this.treeView1 = new System.Windows.Forms.TreeView();
-            this.treeView2 = new System.Windows.Forms.TreeView();
-            this.splitter1 = new System.Windows.Forms.Splitter();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.chk_seleccionartodo = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgv_ejecucion = new System.Windows.Forms.DataGridView();
             this.Nombre_TareaZip = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,80 +44,27 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.splitter1 = new System.Windows.Forms.Splitter();
+            this.list_ejecuciones = new System.Windows.Forms.ListView();
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.chk_seleccionartodo = new System.Windows.Forms.CheckBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.ID_Tarea = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Nombre_Tarea = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ejecucion)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ID_Tarea,
-            this.Seleccionar,
-            this.Nombre_Tarea,
-            this.Fecha});
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 20;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(432, 201);
-            this.dataGridView1.TabIndex = 5;
-            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
-            // 
-            // ID_Tarea
-            // 
-            this.ID_Tarea.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader;
-            this.ID_Tarea.DataPropertyName = "ID_Tarea";
-            this.ID_Tarea.FillWeight = 200F;
-            this.ID_Tarea.HeaderText = "ID";
-            this.ID_Tarea.MinimumWidth = 50;
-            this.ID_Tarea.Name = "ID_Tarea";
-            this.ID_Tarea.ReadOnly = true;
-            this.ID_Tarea.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ID_Tarea.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.ID_Tarea.Visible = false;
-            // 
-            // Seleccionar
-            // 
-            this.Seleccionar.DataPropertyName = "Seleccionar";
-            this.Seleccionar.HeaderText = "";
-            this.Seleccionar.MinimumWidth = 69;
-            this.Seleccionar.Name = "Seleccionar";
-            // 
-            // Nombre_Tarea
-            // 
-            this.Nombre_Tarea.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader;
-            this.Nombre_Tarea.DataPropertyName = "Nombre_Tarea";
-            this.Nombre_Tarea.FillWeight = 200F;
-            this.Nombre_Tarea.HeaderText = "Nombre de la Tarea";
-            this.Nombre_Tarea.MinimumWidth = 150;
-            this.Nombre_Tarea.Name = "Nombre_Tarea";
-            this.Nombre_Tarea.ReadOnly = true;
-            this.Nombre_Tarea.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.Nombre_Tarea.Width = 150;
-            // 
-            // Fecha
-            // 
-            this.Fecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader;
-            this.Fecha.DataPropertyName = "Fecha";
-            this.Fecha.FillWeight = 200F;
-            this.Fecha.HeaderText = "Fecha de creacion";
-            this.Fecha.MinimumWidth = 150;
-            this.Fecha.Name = "Fecha";
-            this.Fecha.ReadOnly = true;
-            this.Fecha.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.Fecha.Width = 150;
             // 
             // toolStrip2
             // 
@@ -141,7 +78,7 @@
             this.toolStrip2.Location = new System.Drawing.Point(0, 24);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip2.Size = new System.Drawing.Size(805, 38);
+            this.toolStrip2.Size = new System.Drawing.Size(796, 38);
             this.toolStrip2.TabIndex = 9;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -196,69 +133,19 @@
             this.tsb_ejecutar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsb_ejecutar.Click += new System.EventHandler(this.tsb_ejecutar_Click);
             // 
-            // treeView1
-            // 
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.treeView1.Location = new System.Drawing.Point(0, 62);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(160, 344);
-            this.treeView1.TabIndex = 11;
-            // 
-            // treeView2
-            // 
-            this.treeView2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.treeView2.Location = new System.Drawing.Point(595, 62);
-            this.treeView2.Name = "treeView2";
-            this.treeView2.Size = new System.Drawing.Size(210, 344);
-            this.treeView2.TabIndex = 12;
-            // 
-            // splitter1
-            // 
-            this.splitter1.Location = new System.Drawing.Point(160, 62);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 344);
-            this.splitter1.TabIndex = 13;
-            this.splitter1.TabStop = false;
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(163, 62);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.chk_seleccionartodo);
-            this.splitContainer1.Panel1.Controls.Add(this.dataGridView1);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
-            this.splitContainer1.Size = new System.Drawing.Size(432, 344);
-            this.splitContainer1.SplitterDistance = 201;
-            this.splitContainer1.TabIndex = 14;
-            // 
-            // chk_seleccionartodo
-            // 
-            this.chk_seleccionartodo.AutoSize = true;
-            this.chk_seleccionartodo.Location = new System.Drawing.Point(48, 4);
-            this.chk_seleccionartodo.Name = "chk_seleccionartodo";
-            this.chk_seleccionartodo.Size = new System.Drawing.Size(15, 14);
-            this.chk_seleccionartodo.TabIndex = 6;
-            this.chk_seleccionartodo.UseVisualStyleBackColor = true;
-            this.chk_seleccionartodo.CheckedChanged += new System.EventHandler(this.chk_seleccionartodo_CheckedChanged);
-            // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.AutoSize = true;
             this.groupBox1.BackColor = System.Drawing.SystemColors.Control;
             this.groupBox1.Controls.Add(this.dgv_ejecucion);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox1.Location = new System.Drawing.Point(6, 2);
+            this.groupBox1.Location = new System.Drawing.Point(6, 242);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox1.Size = new System.Drawing.Size(420, 134);
+            this.groupBox1.Size = new System.Drawing.Size(444, 102);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Log de ejecuciones";
@@ -278,9 +165,8 @@
             this.dgv_ejecucion.Name = "dgv_ejecucion";
             this.dgv_ejecucion.RowHeadersWidth = 5;
             this.dgv_ejecucion.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_ejecucion.Size = new System.Drawing.Size(414, 115);
+            this.dgv_ejecucion.Size = new System.Drawing.Size(438, 83);
             this.dgv_ejecucion.TabIndex = 18;
-            this.dgv_ejecucion.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_ejecucion_CellContentClick);
             // 
             // Nombre_TareaZip
             // 
@@ -312,7 +198,7 @@
             this.archivoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(805, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(796, 24);
             this.menuStrip1.TabIndex = 16;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -332,16 +218,149 @@
             this.salirToolStripMenuItem.Text = "&Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
+            // splitter1
+            // 
+            this.splitter1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.splitter1.Location = new System.Drawing.Point(793, 62);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(3, 344);
+            this.splitter1.TabIndex = 18;
+            this.splitter1.TabStop = false;
+            // 
+            // list_ejecuciones
+            // 
+            this.list_ejecuciones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.list_ejecuciones.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader2,
+            this.columnHeader3});
+            this.list_ejecuciones.Location = new System.Drawing.Point(3, 3);
+            this.list_ejecuciones.Name = "list_ejecuciones";
+            this.list_ejecuciones.Size = new System.Drawing.Size(330, 329);
+            this.list_ejecuciones.TabIndex = 20;
+            this.list_ejecuciones.UseCompatibleStateImageBehavior = false;
+            this.list_ejecuciones.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Fecha y hora";
+            this.columnHeader2.Width = 150;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Ruta salida Zip";
+            this.columnHeader3.Width = 180;
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.AllowDrop = true;
+            this.splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 62);
+            this.splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.chk_seleccionartodo);
+            this.splitContainer2.Panel1.Controls.Add(this.groupBox1);
+            this.splitContainer2.Panel1.Controls.Add(this.dataGridView1);
+            this.splitContainer2.Panel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.list_ejecuciones);
+            this.splitContainer2.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.splitContainer2.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer2_Panel2_Paint);
+            this.splitContainer2.Size = new System.Drawing.Size(793, 344);
+            this.splitContainer2.SplitterDistance = 453;
+            this.splitContainer2.TabIndex = 22;
+            // 
+            // chk_seleccionartodo
+            // 
+            this.chk_seleccionartodo.AutoSize = true;
+            this.chk_seleccionartodo.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chk_seleccionartodo.Location = new System.Drawing.Point(48, 7);
+            this.chk_seleccionartodo.Name = "chk_seleccionartodo";
+            this.chk_seleccionartodo.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chk_seleccionartodo.Size = new System.Drawing.Size(15, 14);
+            this.chk_seleccionartodo.TabIndex = 6;
+            this.chk_seleccionartodo.UseVisualStyleBackColor = true;
+            this.chk_seleccionartodo.CheckedChanged += new System.EventHandler(this.chk_seleccionartodo_CheckedChanged);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID_Tarea,
+            this.Seleccionar,
+            this.Nombre_Tarea,
+            this.Fecha});
+            this.dataGridView1.Location = new System.Drawing.Point(0, 3);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 20;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(440, 233);
+            this.dataGridView1.TabIndex = 5;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
+            // 
+            // ID_Tarea
+            // 
+            this.ID_Tarea.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader;
+            this.ID_Tarea.DataPropertyName = "ID_Tarea";
+            this.ID_Tarea.FillWeight = 200F;
+            this.ID_Tarea.HeaderText = "ID";
+            this.ID_Tarea.MinimumWidth = 50;
+            this.ID_Tarea.Name = "ID_Tarea";
+            this.ID_Tarea.ReadOnly = true;
+            this.ID_Tarea.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ID_Tarea.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.ID_Tarea.Visible = false;
+            // 
+            // Seleccionar
+            // 
+            this.Seleccionar.DataPropertyName = "Seleccionar";
+            this.Seleccionar.HeaderText = "";
+            this.Seleccionar.MinimumWidth = 69;
+            this.Seleccionar.Name = "Seleccionar";
+            // 
+            // Nombre_Tarea
+            // 
+            this.Nombre_Tarea.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader;
+            this.Nombre_Tarea.DataPropertyName = "Nombre_Tarea";
+            this.Nombre_Tarea.FillWeight = 200F;
+            this.Nombre_Tarea.HeaderText = "Nombre de la Tarea";
+            this.Nombre_Tarea.MinimumWidth = 150;
+            this.Nombre_Tarea.Name = "Nombre_Tarea";
+            this.Nombre_Tarea.ReadOnly = true;
+            this.Nombre_Tarea.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Nombre_Tarea.Width = 150;
+            // 
+            // Fecha
+            // 
+            this.Fecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader;
+            this.Fecha.DataPropertyName = "Fecha";
+            this.Fecha.FillWeight = 200F;
+            this.Fecha.HeaderText = "Fecha de creacion";
+            this.Fecha.MinimumWidth = 150;
+            this.Fecha.Name = "Fecha";
+            this.Fecha.ReadOnly = true;
+            this.Fecha.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Fecha.Width = 150;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(805, 406);
-            this.Controls.Add(this.splitContainer1);
+            this.ClientSize = new System.Drawing.Size(796, 406);
+            this.Controls.Add(this.splitContainer2);
             this.Controls.Add(this.splitter1);
-            this.Controls.Add(this.treeView2);
-            this.Controls.Add(this.treeView1);
             this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -351,20 +370,20 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Administracion de Respaldos";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel1.PerformLayout();
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            this.splitContainer1.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ejecucion)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel1.PerformLayout();
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -378,24 +397,25 @@
         private System.Windows.Forms.ToolStripButton tsb_eliminar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton tsb_ejecutar;
-        private System.Windows.Forms.TreeView treeView1;
-        private System.Windows.Forms.TreeView treeView2;
-        private System.Windows.Forms.Splitter splitter1;
-        private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.CheckBox chk_seleccionartodo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID_Tarea;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Seleccionar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre_Tarea;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dgv_ejecucion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre_TareaZip;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaHoraZip;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ruta_SalidaZip;
+        private System.Windows.Forms.Splitter splitter1;
+        private System.Windows.Forms.ListView list_ejecuciones;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.CheckBox chk_seleccionartodo;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID_Tarea;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Seleccionar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre_Tarea;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
     }
 }
 

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SQLite;
-using System.Security.Cryptography;
 using System.Windows.Forms;
-using SimpleCrypto;
 
 namespace SistemaParaAdministrarRespaldos
 {
@@ -40,6 +38,15 @@ namespace SistemaParaAdministrarRespaldos
 
         private void Form2_Load_1(object sender, EventArgs e)
         {
+            if (insertar)
+            {
+                this.Text = "Nueva Tarea";
+            }
+            if (modificar)
+            {
+                this.Text = string.Empty +nombreTarea;
+            }
+
             if (conexion.State != ConnectionState.Open)
             {
                 conexion.Open();
