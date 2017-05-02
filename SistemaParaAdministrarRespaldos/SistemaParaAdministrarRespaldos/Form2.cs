@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Configuration;
 using System.Data;
 using System.Data.SQLite;
 using System.Windows.Forms;
+using SistemaParaAdministrarRespaldos.Properties;
 
 namespace SistemaParaAdministrarRespaldos
 {
@@ -92,8 +94,13 @@ namespace SistemaParaAdministrarRespaldos
                 chk_password.Checked = Convert.ToBoolean(tb.Rows[0][3]);
 
                 SQLiteCommand comando = new SQLiteCommand("SELECT Contraseña FROM Tabla_Ruta WHERE ID_Tarea=" + idtarea, conexion);
-                string contraseñadesencriptada = StringCipher.Decrypt(comando.ExecuteScalar().ToString());
-                txt_contraseña.Text = contraseñadesencriptada;
+                string contras = comando.ExecuteScalar().ToString();
+
+                if (contras != null && contras !=string.Empty)
+                {
+                    string contraseñadesencriptada = StringCipher.Decrypt(comando.ExecuteScalar().ToString());
+                    txt_contraseña.Text = contraseñadesencriptada;
+                }
             }
         }
 
@@ -127,7 +134,7 @@ namespace SistemaParaAdministrarRespaldos
                         insercion3.Parameters.AddWithValue("@password", chk_password.Checked);
                         if (string.IsNullOrEmpty(txt_contraseña.Text))
                         {
-                            insercion3.Parameters.AddWithValue("@Contraseña", string.Empty);
+                            insercion3.Parameters.AddWithValue("@Contraseña", null);
                         }
                         else
                         {
@@ -192,7 +199,7 @@ namespace SistemaParaAdministrarRespaldos
                             actualizacion2.Parameters.AddWithValue("@password", chk_password.Checked);
                             if (string.IsNullOrEmpty(txt_contraseña.Text))
                             {
-                                actualizacion2.Parameters.AddWithValue("@Contraseña", string.Empty);
+                                actualizacion2.Parameters.AddWithValue("@Contraseña", null);
                             }
                             else
                             {
@@ -289,26 +296,6 @@ namespace SistemaParaAdministrarRespaldos
                 }
             }
             return validacion;
-        }
-
-        private Boolean existe(string rol)
-        {
-            Boolean existe = false;
-            foreach (DataGridViewRow row in dataGridView2.Rows)
-            {
-                string verificar = Convert.ToString(row.Cells["Datos_Archivo"].Value);
-                if (rol==verificar)
-                {
-                    MessageBox.Show("El archivo ya existe");
-                    existe = true;
-                    break;
-                }
-                else
-                {
-                    existe = false;
-                }
-            }
-            return existe;
         }
 
         private void btn_quitar_Click(object sender, EventArgs e)

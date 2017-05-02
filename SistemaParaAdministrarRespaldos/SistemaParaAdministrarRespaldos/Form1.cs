@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Configuration;
 using System.Data;
 using System.Data.SQLite;
 using System.IO;
 using System.Windows.Forms;
 using Ionic.Zip;
 using Microsoft.VisualBasic.Devices;
+using SistemaParaAdministrarRespaldos.Properties;
 
 
 namespace SistemaParaAdministrarRespaldos
@@ -13,7 +15,6 @@ namespace SistemaParaAdministrarRespaldos
     {
         private SQLiteConnection conexion;
         private int idtareamostrarLog;
-        private Computer mycomputer = new Computer();
 
         public Form1()
         {
@@ -65,6 +66,11 @@ namespace SistemaParaAdministrarRespaldos
             dgv_ejecucion.Sort(FechaHoraZip, System.ComponentModel.ListSortDirection.Descending);
         }
 
+        private static string cadenadeconexion()
+        {
+            return Settings.Default.mydatabaseConnectionString;
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             dataGridView1.AutoGenerateColumns = false;
@@ -74,7 +80,7 @@ namespace SistemaParaAdministrarRespaldos
 
             try
             {
-                conexion = new SQLiteConnection("Data source = D:\\Sistema para manejar respaldos\\Sistema-para-administrar-respaldos\\mydatabase.sqlite;Version=3");
+                conexion = new SQLiteConnection(cadenadeconexion());
                 conexion.Open();
                 CargarDatos();
                 cargarejecucion();
@@ -130,12 +136,17 @@ namespace SistemaParaAdministrarRespaldos
                             comando.ExecuteNonQuery();
                             comando = new SQLiteCommand("DELETE FROM Tabla_Ruta WHERE (ID_Tarea = " + id_Tarea + ")", conexion, transaccion);
                             comando.ExecuteNonQuery();
+                            comando = new SQLiteCommand("DELETE FROM Tabla_Ejecucion WHERE (ID_Tarea = " + id_Tarea + ")", conexion, transaccion);
+                            comando.ExecuteNonQuery();
                             rowsSeleccionados[x].Delete();
                         }
 
                         dataGridView1.DataSource = null;
                         dataGridView1.DataSource = tabla;
+                        dgv_ejecucion.DataSource = null;
+                        dgv_ejecucion.DataSource = tbl;
                         CargarDatos();
+                        cargarejecucion();
 
                         transaccion.Commit();
                     }
@@ -194,9 +205,9 @@ namespace SistemaParaAdministrarRespaldos
                         SQLiteCommand contra = new SQLiteCommand("SELECT Contraseña FROM Tabla_Ruta WHERE ID_Tarea=" + id_Tarea, conexion);
                         string contras = contra.ExecuteScalar().ToString();
 
-                        if (contras == string.Empty)
+                        if (contras == null)
                         {
-                            contraseña = string.Empty;
+                            contraseña = null;
                         }
                         else
                         {
@@ -215,7 +226,7 @@ namespace SistemaParaAdministrarRespaldos
                                 if (File.Exists(rutaarchivo))
                                 {
 
-                                    if (contraseña != string.Empty)
+                                    if (contraseña != null)
                                     {
                                         zip.Password = contraseña;
                                     }
@@ -307,11 +318,6 @@ namespace SistemaParaAdministrarRespaldos
                 idtareamostrarLog = Convert.ToInt32(dataGridView1["ID_Tarea", dataGridView1.CurrentRow.Index].Value);
                 cargarlista(idtareamostrarLog);
             }           
-        }
-
-        private void splitContainer2_Panel2_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

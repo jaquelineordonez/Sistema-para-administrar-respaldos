@@ -69,7 +69,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 20);
+            this.label1.Location = new System.Drawing.Point(34, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(97, 13);
             this.label1.TabIndex = 0;
@@ -77,14 +77,14 @@
             // 
             // txt_nombretarea
             // 
-            this.txt_nombretarea.Location = new System.Drawing.Point(16, 36);
+            this.txt_nombretarea.Location = new System.Drawing.Point(34, 47);
             this.txt_nombretarea.Name = "txt_nombretarea";
             this.txt_nombretarea.Size = new System.Drawing.Size(328, 20);
             this.txt_nombretarea.TabIndex = 1;
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(16, 106);
+            this.dateTimePicker1.Location = new System.Drawing.Point(34, 115);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker1.TabIndex = 3;
@@ -92,7 +92,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 87);
+            this.label2.Location = new System.Drawing.Point(34, 98);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(37, 13);
             this.label2.TabIndex = 4;
@@ -114,7 +114,7 @@
             this.dataGridView2.Location = new System.Drawing.Point(6, 15);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(519, 150);
+            this.dataGridView2.Size = new System.Drawing.Size(632, 164);
             this.dataGridView2.TabIndex = 5;
             // 
             // Seleccionar
@@ -161,7 +161,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(539, 244);
+            this.tabControl1.Size = new System.Drawing.Size(652, 259);
             this.tabControl1.TabIndex = 8;
             // 
             // tabPage1
@@ -174,7 +174,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(531, 218);
+            this.tabPage1.Size = new System.Drawing.Size(644, 233);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Configuracion Principal";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -189,7 +189,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(531, 218);
+            this.tabPage2.Size = new System.Drawing.Size(644, 233);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Archivos a guardar";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -210,7 +210,7 @@
             // 
             this.btn_quitar.Image = ((System.Drawing.Image)(resources.GetObject("btn_quitar.Image")));
             this.btn_quitar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_quitar.Location = new System.Drawing.Point(109, 168);
+            this.btn_quitar.Location = new System.Drawing.Point(109, 185);
             this.btn_quitar.Name = "btn_quitar";
             this.btn_quitar.Size = new System.Drawing.Size(55, 40);
             this.btn_quitar.TabIndex = 7;
@@ -223,7 +223,7 @@
             // 
             this.btn_agregar.Image = ((System.Drawing.Image)(resources.GetObject("btn_agregar.Image")));
             this.btn_agregar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_agregar.Location = new System.Drawing.Point(37, 168);
+            this.btn_agregar.Location = new System.Drawing.Point(37, 185);
             this.btn_agregar.Name = "btn_agregar";
             this.btn_agregar.Size = new System.Drawing.Size(55, 40);
             this.btn_agregar.TabIndex = 6;
@@ -246,7 +246,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(531, 218);
+            this.tabPage3.Size = new System.Drawing.Size(644, 233);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Ruta de salida";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -255,7 +255,7 @@
             // 
             this.chk_visible.AutoSize = true;
             this.chk_visible.Image = global::SistemaParaAdministrarRespaldos.Properties.Resources._1489533888_eye;
-            this.chk_visible.Location = new System.Drawing.Point(458, 86);
+            this.chk_visible.Location = new System.Drawing.Point(479, 86);
             this.chk_visible.Name = "chk_visible";
             this.chk_visible.Size = new System.Drawing.Size(47, 32);
             this.chk_visible.TabIndex = 7;
@@ -265,7 +265,7 @@
             // btn_visible
             // 
             this.btn_visible.Image = global::SistemaParaAdministrarRespaldos.Properties.Resources._1489533888_eye;
-            this.btn_visible.Location = new System.Drawing.Point(41, 86);
+            this.btn_visible.Location = new System.Drawing.Point(62, 86);
             this.btn_visible.Name = "btn_visible";
             this.btn_visible.Size = new System.Drawing.Size(35, 25);
             this.btn_visible.TabIndex = 6;
@@ -276,7 +276,7 @@
             // txt_contraseña
             // 
             this.txt_contraseña.Enabled = false;
-            this.txt_contraseña.Location = new System.Drawing.Point(168, 91);
+            this.txt_contraseña.Location = new System.Drawing.Point(189, 91);
             this.txt_contraseña.MaxLength = 100;
             this.txt_contraseña.Name = "txt_contraseña";
             this.txt_contraseña.Size = new System.Drawing.Size(284, 20);
@@ -286,7 +286,7 @@
             // chk_password
             // 
             this.chk_password.AutoSize = true;
-            this.chk_password.Location = new System.Drawing.Point(81, 91);
+            this.chk_password.Location = new System.Drawing.Point(102, 91);
             this.chk_password.Name = "chk_password";
             this.chk_password.Size = new System.Drawing.Size(80, 17);
             this.chk_password.TabIndex = 4;
@@ -297,7 +297,7 @@
             // chk_sobreescribir
             // 
             this.chk_sobreescribir.AutoSize = true;
-            this.chk_sobreescribir.Location = new System.Drawing.Point(81, 68);
+            this.chk_sobreescribir.Location = new System.Drawing.Point(102, 68);
             this.chk_sobreescribir.Name = "chk_sobreescribir";
             this.chk_sobreescribir.Size = new System.Drawing.Size(133, 17);
             this.chk_sobreescribir.TabIndex = 3;
@@ -307,7 +307,7 @@
             // btn_ruta
             // 
             this.btn_ruta.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_ruta.Location = new System.Drawing.Point(458, 26);
+            this.btn_ruta.Location = new System.Drawing.Point(479, 26);
             this.btn_ruta.Name = "btn_ruta";
             this.btn_ruta.Size = new System.Drawing.Size(35, 23);
             this.btn_ruta.TabIndex = 2;
@@ -317,7 +317,7 @@
             // 
             // txt_ruta
             // 
-            this.txt_ruta.Location = new System.Drawing.Point(81, 28);
+            this.txt_ruta.Location = new System.Drawing.Point(102, 28);
             this.txt_ruta.Name = "txt_ruta";
             this.txt_ruta.Size = new System.Drawing.Size(371, 20);
             this.txt_ruta.TabIndex = 1;
@@ -325,7 +325,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 30);
+            this.label3.Location = new System.Drawing.Point(34, 30);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 13);
             this.label3.TabIndex = 0;
@@ -347,7 +347,7 @@
             // 
             this.btn_cancelar.Image = ((System.Drawing.Image)(resources.GetObject("btn_cancelar.Image")));
             this.btn_cancelar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_cancelar.Location = new System.Drawing.Point(461, 262);
+            this.btn_cancelar.Location = new System.Drawing.Point(516, 277);
             this.btn_cancelar.Name = "btn_cancelar";
             this.btn_cancelar.Size = new System.Drawing.Size(65, 40);
             this.btn_cancelar.TabIndex = 9;
@@ -360,7 +360,7 @@
             // 
             this.btn_guardar.Image = ((System.Drawing.Image)(resources.GetObject("btn_guardar.Image")));
             this.btn_guardar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_guardar.Location = new System.Drawing.Point(359, 262);
+            this.btn_guardar.Location = new System.Drawing.Point(414, 276);
             this.btn_guardar.Name = "btn_guardar";
             this.btn_guardar.Size = new System.Drawing.Size(65, 40);
             this.btn_guardar.TabIndex = 2;
@@ -373,7 +373,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(560, 311);
+            this.ClientSize = new System.Drawing.Size(676, 325);
             this.Controls.Add(this.btn_cancelar);
             this.Controls.Add(this.btn_guardar);
             this.Controls.Add(this.tabControl1);
