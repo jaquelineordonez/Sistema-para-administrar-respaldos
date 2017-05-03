@@ -30,8 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.tsb_nueva = new System.Windows.Forms.ToolStripButton();
+            this.tsb_editar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsb_eliminar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsb_ejecutar = new System.Windows.Forms.ToolStripButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgv_ejecucion = new System.Windows.Forms.DataGridView();
             this.Nombre_TareaZip = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -39,23 +43,20 @@
             this.Ruta_SalidaZip = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.list_ejecuciones = new System.Windows.Forms.ListView();
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.chk_seleccionartodo = new System.Windows.Forms.CheckBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.tsb_nueva = new System.Windows.Forms.ToolStripButton();
-            this.tsb_editar = new System.Windows.Forms.ToolStripButton();
-            this.tsb_eliminar = new System.Windows.Forms.ToolStripButton();
-            this.tsb_ejecutar = new System.Windows.Forms.ToolStripButton();
-            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre_Tarea = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ID_Tarea = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Nombre_Tarea = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.toolStrip2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ejecucion)).BeginInit();
@@ -64,8 +65,9 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip2
@@ -84,22 +86,62 @@
             this.toolStrip2.TabIndex = 9;
             this.toolStrip2.Text = "toolStrip2";
             // 
+            // tsb_nueva
+            // 
+            this.tsb_nueva.Image = ((System.Drawing.Image)(resources.GetObject("tsb_nueva.Image")));
+            this.tsb_nueva.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsb_nueva.Name = "tsb_nueva";
+            this.tsb_nueva.Size = new System.Drawing.Size(77, 35);
+            this.tsb_nueva.Text = "Nueva Tarea";
+            this.tsb_nueva.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsb_nueva.Click += new System.EventHandler(this.tsb_nueva_Click);
+            // 
+            // tsb_editar
+            // 
+            this.tsb_editar.Image = ((System.Drawing.Image)(resources.GetObject("tsb_editar.Image")));
+            this.tsb_editar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsb_editar.Name = "tsb_editar";
+            this.tsb_editar.Size = new System.Drawing.Size(73, 35);
+            this.tsb_editar.Text = "Editar Tarea";
+            this.tsb_editar.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
+            this.tsb_editar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsb_editar.Click += new System.EventHandler(this.tsb_editar_Click);
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 38);
+            // 
+            // tsb_eliminar
+            // 
+            this.tsb_eliminar.Image = ((System.Drawing.Image)(resources.GetObject("tsb_eliminar.Image")));
+            this.tsb_eliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsb_eliminar.Name = "tsb_eliminar";
+            this.tsb_eliminar.Size = new System.Drawing.Size(86, 35);
+            this.tsb_eliminar.Text = "Eliminar Tarea";
+            this.tsb_eliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsb_eliminar.Click += new System.EventHandler(this.tsb_eliminar_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 38);
             // 
+            // tsb_ejecutar
+            // 
+            this.tsb_ejecutar.Image = ((System.Drawing.Image)(resources.GetObject("tsb_ejecutar.Image")));
+            this.tsb_ejecutar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsb_ejecutar.Name = "tsb_ejecutar";
+            this.tsb_ejecutar.Size = new System.Drawing.Size(53, 35);
+            this.tsb_ejecutar.Text = "Ejecutar";
+            this.tsb_ejecutar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsb_ejecutar.Click += new System.EventHandler(this.tsb_ejecutar_Click);
+            // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.AutoSize = true;
             this.groupBox1.BackColor = System.Drawing.SystemColors.Control;
             this.groupBox1.Controls.Add(this.dgv_ejecucion);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -173,6 +215,14 @@
             this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.archivoToolStripMenuItem.Text = "Archivo";
             // 
+            // salirToolStripMenuItem
+            // 
+            this.salirToolStripMenuItem.Image = global::SistemaParaAdministrarRespaldos.Properties.Resources._1486521491_close2;
+            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
+            this.salirToolStripMenuItem.Text = "&Salir";
+            this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
+            // 
             // splitter1
             // 
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Right;
@@ -184,14 +234,15 @@
             // 
             // list_ejecuciones
             // 
-            this.list_ejecuciones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.list_ejecuciones.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.list_ejecuciones.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader2,
             this.columnHeader3});
-            this.list_ejecuciones.Location = new System.Drawing.Point(3, 3);
+            this.list_ejecuciones.Location = new System.Drawing.Point(3, 11);
             this.list_ejecuciones.Name = "list_ejecuciones";
-            this.list_ejecuciones.Size = new System.Drawing.Size(330, 363);
+            this.list_ejecuciones.Size = new System.Drawing.Size(324, 360);
             this.list_ejecuciones.TabIndex = 20;
             this.list_ejecuciones.UseCompatibleStateImageBehavior = false;
             this.list_ejecuciones.View = System.Windows.Forms.View.Details;
@@ -224,11 +275,23 @@
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.list_ejecuciones);
+            this.splitContainer2.Panel2.Controls.Add(this.groupBox3);
             this.splitContainer2.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.splitContainer2.Size = new System.Drawing.Size(835, 378);
             this.splitContainer2.SplitterDistance = 495;
             this.splitContainer2.TabIndex = 22;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.chk_seleccionartodo);
+            this.groupBox2.Controls.Add(this.dataGridView1);
+            this.groupBox2.Location = new System.Drawing.Point(6, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(486, 233);
+            this.groupBox2.TabIndex = 7;
+            this.groupBox2.TabStop = false;
             // 
             // chk_seleccionartodo
             // 
@@ -260,96 +323,10 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 5;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(465, 211);
+            this.dataGridView1.Size = new System.Drawing.Size(474, 211);
             this.dataGridView1.TabIndex = 5;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.chk_seleccionartodo);
-            this.groupBox2.Controls.Add(this.dataGridView1);
-            this.groupBox2.Location = new System.Drawing.Point(12, 3);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(477, 233);
-            this.groupBox2.TabIndex = 7;
-            this.groupBox2.TabStop = false;
-            // 
-            // tsb_nueva
-            // 
-            this.tsb_nueva.Image = ((System.Drawing.Image)(resources.GetObject("tsb_nueva.Image")));
-            this.tsb_nueva.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsb_nueva.Name = "tsb_nueva";
-            this.tsb_nueva.Size = new System.Drawing.Size(77, 35);
-            this.tsb_nueva.Text = "Nueva Tarea";
-            this.tsb_nueva.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsb_nueva.Click += new System.EventHandler(this.tsb_nueva_Click);
-            // 
-            // tsb_editar
-            // 
-            this.tsb_editar.Image = ((System.Drawing.Image)(resources.GetObject("tsb_editar.Image")));
-            this.tsb_editar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsb_editar.Name = "tsb_editar";
-            this.tsb_editar.Size = new System.Drawing.Size(73, 35);
-            this.tsb_editar.Text = "Editar Tarea";
-            this.tsb_editar.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
-            this.tsb_editar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsb_editar.Click += new System.EventHandler(this.tsb_editar_Click);
-            // 
-            // tsb_eliminar
-            // 
-            this.tsb_eliminar.Image = ((System.Drawing.Image)(resources.GetObject("tsb_eliminar.Image")));
-            this.tsb_eliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsb_eliminar.Name = "tsb_eliminar";
-            this.tsb_eliminar.Size = new System.Drawing.Size(86, 35);
-            this.tsb_eliminar.Text = "Eliminar Tarea";
-            this.tsb_eliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsb_eliminar.Click += new System.EventHandler(this.tsb_eliminar_Click);
-            // 
-            // tsb_ejecutar
-            // 
-            this.tsb_ejecutar.Image = ((System.Drawing.Image)(resources.GetObject("tsb_ejecutar.Image")));
-            this.tsb_ejecutar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsb_ejecutar.Name = "tsb_ejecutar";
-            this.tsb_ejecutar.Size = new System.Drawing.Size(53, 35);
-            this.tsb_ejecutar.Text = "Ejecutar";
-            this.tsb_ejecutar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsb_ejecutar.Click += new System.EventHandler(this.tsb_ejecutar_Click);
-            // 
-            // salirToolStripMenuItem
-            // 
-            this.salirToolStripMenuItem.Image = global::SistemaParaAdministrarRespaldos.Properties.Resources._1486521491_close2;
-            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
-            this.salirToolStripMenuItem.Text = "&Salir";
-            this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
-            // 
-            // Fecha
-            // 
-            this.Fecha.DataPropertyName = "Fecha";
-            this.Fecha.FillWeight = 200F;
-            this.Fecha.HeaderText = "Fecha de creacion";
-            this.Fecha.MinimumWidth = 150;
-            this.Fecha.Name = "Fecha";
-            this.Fecha.ReadOnly = true;
-            this.Fecha.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Nombre_Tarea
-            // 
-            this.Nombre_Tarea.DataPropertyName = "Nombre_Tarea";
-            this.Nombre_Tarea.FillWeight = 200F;
-            this.Nombre_Tarea.HeaderText = "Nombre de la Tarea";
-            this.Nombre_Tarea.MinimumWidth = 150;
-            this.Nombre_Tarea.Name = "Nombre_Tarea";
-            this.Nombre_Tarea.ReadOnly = true;
-            this.Nombre_Tarea.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Seleccionar
-            // 
-            this.Seleccionar.DataPropertyName = "Seleccionar";
-            this.Seleccionar.HeaderText = "";
-            this.Seleccionar.MinimumWidth = 69;
-            this.Seleccionar.Name = "Seleccionar";
             // 
             // ID_Tarea
             // 
@@ -363,7 +340,45 @@
             this.ID_Tarea.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.ID_Tarea.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             this.ID_Tarea.Visible = false;
-            this.ID_Tarea.Width = 50;
+            // 
+            // Seleccionar
+            // 
+            this.Seleccionar.DataPropertyName = "Seleccionar";
+            this.Seleccionar.HeaderText = "";
+            this.Seleccionar.MinimumWidth = 69;
+            this.Seleccionar.Name = "Seleccionar";
+            // 
+            // Nombre_Tarea
+            // 
+            this.Nombre_Tarea.DataPropertyName = "Nombre_Tarea";
+            this.Nombre_Tarea.FillWeight = 200F;
+            this.Nombre_Tarea.HeaderText = "Nombre de la Tarea";
+            this.Nombre_Tarea.MinimumWidth = 150;
+            this.Nombre_Tarea.Name = "Nombre_Tarea";
+            this.Nombre_Tarea.ReadOnly = true;
+            this.Nombre_Tarea.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // Fecha
+            // 
+            this.Fecha.DataPropertyName = "Fecha";
+            this.Fecha.FillWeight = 200F;
+            this.Fecha.HeaderText = "Fecha de creacion";
+            this.Fecha.MinimumWidth = 150;
+            this.Fecha.Name = "Fecha";
+            this.Fecha.ReadOnly = true;
+            this.Fecha.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.list_ejecuciones);
+            this.groupBox3.Location = new System.Drawing.Point(3, 3);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(330, 372);
+            this.groupBox3.TabIndex = 0;
+            this.groupBox3.TabStop = false;
             // 
             // Form1
             // 
@@ -391,13 +406,13 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.splitContainer2.Panel1.ResumeLayout(false);
-            this.splitContainer2.Panel1.PerformLayout();
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -431,6 +446,7 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn Seleccionar;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre_Tarea;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
+        private System.Windows.Forms.GroupBox groupBox3;
     }
 }
 
