@@ -93,9 +93,89 @@ namespace SistemaParaAdministrarRespaldos.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _1493858880_Folder_Mac {
+            get {
+                object obj = ResourceManager.GetObject("1493858880_Folder_Mac", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _1493858960_Folder_Win {
+            get {
+                object obj = ResourceManager.GetObject("1493858960_Folder_Win", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _1493859211_Folder {
+            get {
+                object obj = ResourceManager.GetObject("1493859211_Folder", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _1493859473_gnome_fs_directory_accept {
+            get {
+                object obj = ResourceManager.GetObject("1493859473_gnome-fs-directory-accept", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _1493859647_gnome_fs_directory_accept {
+            get {
+                object obj = ResourceManager.GetObject("1493859647_gnome-fs-directory-accept", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Ampeross_Qetto_Folder_documents_2 {
+            get {
+                object obj = ResourceManager.GetObject("Ampeross-Qetto-Folder-documents-2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Chrysanthemum {
             get {
                 object obj = ResourceManager.GetObject("Chrysanthemum", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Hopstarter_Mac_Folders_2_Folder_Documents {
+            get {
+                object obj = ResourceManager.GetObject("Hopstarter-Mac-Folders-2-Folder-Documents", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Toma4025_Rumax_Folder_documents {
+            get {
+                object obj = ResourceManager.GetObject("Toma4025-Rumax-Folder-documents", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

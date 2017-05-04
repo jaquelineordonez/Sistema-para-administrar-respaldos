@@ -53,7 +53,7 @@ namespace SistemaParaAdministrarRespaldos
             adaptador.Fill(tabla);
             builder = new SQLiteCommandBuilder(adaptador);
             tabla.Columns.Add("Seleccionar", typeof(bool));
-            dataGridView1.DataSource = tabla;
+            dgv_tareas.DataSource = tabla;
         }
 
         private void cargarejecucion()
@@ -73,8 +73,8 @@ namespace SistemaParaAdministrarRespaldos
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            dataGridView1.AutoGenerateColumns = false;
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgv_tareas.AutoGenerateColumns = false;
+            dgv_tareas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgv_ejecucion.AutoGenerateColumns = false;
             dgv_ejecucion.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
@@ -103,7 +103,7 @@ namespace SistemaParaAdministrarRespaldos
 
         private void tsb_editar_Click(object sender, EventArgs e)
         {
-            Form2 form2 = new Form2(conexion, Convert.ToInt32(dataGridView1["ID_Tarea", dataGridView1.CurrentRow.Index].Value), dataGridView1["Nombre_Tarea", dataGridView1.CurrentRow.Index].Value, System.Convert.ToDateTime(dataGridView1["Fecha", dataGridView1.CurrentRow.Index].Value));
+            Form2 form2 = new Form2(conexion, Convert.ToInt32(dgv_tareas["ID_Tarea", dgv_tareas.CurrentRow.Index].Value), dgv_tareas["Nombre_Tarea", dgv_tareas.CurrentRow.Index].Value, System.Convert.ToDateTime(dgv_tareas["Fecha", dgv_tareas.CurrentRow.Index].Value));
             if (form2.ShowDialog(this) == DialogResult.OK)
             {
                 CargarDatos();
@@ -118,7 +118,7 @@ namespace SistemaParaAdministrarRespaldos
             SQLiteCommand comando;
             try
             {
-                dataGridView1.EndEdit(); ///se abria beginEdit() pero no se cerraba, por eso no funcionaba el check  hasta que el foco dejaba de estar en el renglon
+                dgv_tareas.EndEdit(); ///se abria beginEdit() pero no se cerraba, por eso no funcionaba el check  hasta que el foco dejaba de estar en el renglon
                 tabla.AcceptChanges();
 
                 DataRow[] rowsSeleccionados = tabla.Select("Seleccionar = " + true);
@@ -141,8 +141,8 @@ namespace SistemaParaAdministrarRespaldos
                             rowsSeleccionados[x].Delete();
                         }
 
-                        dataGridView1.DataSource = null;
-                        dataGridView1.DataSource = tabla;
+                        dgv_tareas.DataSource = null;
+                        dgv_tareas.DataSource = tabla;
                         dgv_ejecucion.DataSource = null;
                         dgv_ejecucion.DataSource = tbl;
                         CargarDatos();
@@ -156,14 +156,14 @@ namespace SistemaParaAdministrarRespaldos
                     MessageBox.Show("Seleccione al menos una tarea", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                     object seleccionado = null;
-                    for (int x = 0; x < dataGridView1.Rows.Count; x++)
+                    for (int x = 0; x < dgv_tareas.Rows.Count; x++)
                     {
-                        seleccionado = dataGridView1["Seleccionar", x].Value;
+                        seleccionado = dgv_tareas["Seleccionar", x].Value;
                         if (seleccionado != DBNull.Value)
                         {
                             if (Convert.ToBoolean(seleccionado))
                             {
-                                dataGridView1.Rows.RemoveAt(x);
+                                dgv_tareas.Rows.RemoveAt(x);
                                 x--;
                             }
                         }
@@ -183,7 +183,7 @@ namespace SistemaParaAdministrarRespaldos
             object id_Tarea = 0;
             try
             {
-                dataGridView1.EndEdit();
+                dgv_tareas.EndEdit();
                 tabla.AcceptChanges();
 
                 DataRow[] rowsSeleccionados = tabla.Select("Seleccionar = " + true);
@@ -205,7 +205,7 @@ namespace SistemaParaAdministrarRespaldos
                         SQLiteCommand contra = new SQLiteCommand("SELECT Contraseña FROM Tabla_Ruta WHERE ID_Tarea=" + id_Tarea, conexion);
                         string contras = contra.ExecuteScalar().ToString();
 
-                        if (contras == null)
+                        if (contras == null | contras== string.Empty)
                         {
                             contraseña = null;
                         }
@@ -216,6 +216,9 @@ namespace SistemaParaAdministrarRespaldos
 
                         SQLiteCommand comandoinicio = new SQLiteCommand("SELECT Datos_Archivo FROM Tabla_Archivo WHERE (ID_Tarea= " + id_Tarea + ")", conexion, transaccion);
                         SQLiteDataReader rutainicio = comandoinicio.ExecuteReader();
+
+                        string tiempo = DateTime.Now.ToString(" dd-MM-yyyy HH_mm_ss");
+                        string nombreFinalZip = nombrezip + tiempo;
 
                         string rutaarchivo = string.Empty;
                         using (ZipFile zip = new ZipFile())
@@ -239,21 +242,27 @@ namespace SistemaParaAdministrarRespaldos
                                 zip.Save(rutasalida + Path.DirectorySeparatorChar + nombrezip + ".zip");
                             }
                             else
-                            {  
-                                string tiempo = DateTime.Now.ToString("dd-MM-yyyy HH_mm_ss");
-                                zip.Save(rutasalida + Path.DirectorySeparatorChar + "Respaldo " + tiempo + ".zip");
+                            {          
+                                zip.Save(rutasalida + Path.DirectorySeparatorChar + nombreFinalZip + ".zip");
                             }
                         }
                         
-                        string comando = "insert into Tabla_Ejecucion (Nombre_TareaZip,FechaHoraZip,Ruta_SalidaZip,ID_Tarea)values(@Nombre_TareaZip,@FechaHoraZip,@Ruta_SalidaZip,@ID_Tarea)";
+                        string comando = "insert into Tabla_Ejecucion (Nombre_TareaZip,FechaHoraZip,Ruta_SalidaZip,ID_Tarea,Nombre_FinalZip)values(@Nombre_TareaZip,@FechaHoraZip,@Ruta_SalidaZip,@ID_Tarea,@Nombre_FinalZip)";
                         SQLiteCommand insercion = new SQLiteCommand(comando, conexion, transaccion);
                         
-                            insercion.Parameters.AddWithValue("@Nombre_TareaZip", nombrezip);
-                       
-
+                        insercion.Parameters.AddWithValue("@Nombre_TareaZip", nombrezip);
                         insercion.Parameters.AddWithValue("@FechaHoraZip", DateTime.Now);
                         insercion.Parameters.AddWithValue("@Ruta_SalidaZip", rutasalida);
                         insercion.Parameters.AddWithValue("@ID_Tarea", id_Tarea);
+                        if (chksobreescribir == Convert.ToString(1))
+                        {
+                            insercion.Parameters.AddWithValue("@Nombre_FinalZip", nombrezip);
+                        }
+                        else
+                        {
+                            insercion.Parameters.AddWithValue("@Nombre_FinalZip", nombreFinalZip);
+                        }
+
                         insercion.ExecuteNonQuery();
                     }
 
@@ -276,7 +285,7 @@ namespace SistemaParaAdministrarRespaldos
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            Form2 form2 = new Form2(conexion, Convert.ToInt32(dataGridView1["ID_Tarea", dataGridView1.CurrentRow.Index].Value), dataGridView1["Nombre_Tarea", dataGridView1.CurrentRow.Index].Value, System.Convert.ToDateTime(dataGridView1["Fecha", dataGridView1.CurrentRow.Index].Value));
+            Form2 form2 = new Form2(conexion, Convert.ToInt32(dgv_tareas["ID_Tarea", dgv_tareas.CurrentRow.Index].Value), dgv_tareas["Nombre_Tarea", dgv_tareas.CurrentRow.Index].Value, System.Convert.ToDateTime(dgv_tareas["Fecha", dgv_tareas.CurrentRow.Index].Value));
             if (form2.ShowDialog(this) == DialogResult.OK)
             {
                 CargarDatos();
@@ -294,9 +303,9 @@ namespace SistemaParaAdministrarRespaldos
 
         private void chk_seleccionartodo_CheckedChanged(object sender, EventArgs e)
         {
-            if (dataGridView1.Rows.Count > 0)
+            if (dgv_tareas.Rows.Count > 0)
             {
-                foreach (DataGridViewRow row in dataGridView1.Rows)
+                foreach (DataGridViewRow row in dgv_tareas.Rows)
                 {
                     row.Cells["Seleccionar"].Value = true;
                     if (chk_seleccionartodo.Checked == false)
@@ -313,9 +322,9 @@ namespace SistemaParaAdministrarRespaldos
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count ==1)
+            if (dgv_tareas.SelectedRows.Count ==1)
             {
-                idtareamostrarLog = Convert.ToInt32(dataGridView1["ID_Tarea", dataGridView1.CurrentRow.Index].Value);
+                idtareamostrarLog = Convert.ToInt32(dgv_tareas["ID_Tarea", dgv_tareas.CurrentRow.Index].Value);
                 cargarlista(idtareamostrarLog);
             }           
         }

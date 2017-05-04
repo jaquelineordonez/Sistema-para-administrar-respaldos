@@ -54,8 +54,8 @@ namespace SistemaParaAdministrarRespaldos
                 conexion.Open();
             }
 
-            dataGridView2.AutoGenerateColumns = false;
-            dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgv_archivos.AutoGenerateColumns = false;
+            dgv_archivos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
             if (idtarea > 0)
             {
@@ -77,7 +77,7 @@ namespace SistemaParaAdministrarRespaldos
             adapter.Fill(tablaArchivos);
             builder = new SQLiteCommandBuilder(adapter);
             tablaArchivos.Columns.Add("Seleccionar", typeof(bool));
-            dataGridView2.DataSource = tablaArchivos;
+            dgv_archivos.DataSource = tablaArchivos;
         }
 
         private void cargarrutas()
@@ -108,7 +108,7 @@ namespace SistemaParaAdministrarRespaldos
         {
             if (insertar)
             {
-                if (string.IsNullOrEmpty(txt_nombretarea.Text) || (dataGridView2.Rows.Count == 0) || string.IsNullOrEmpty(txt_ruta.Text))
+                if (string.IsNullOrEmpty(txt_nombretarea.Text) || (dgv_archivos.Rows.Count == 0) || string.IsNullOrEmpty(txt_ruta.Text))
                 {
                     MessageBox.Show("Debe completar la informacion", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
@@ -148,9 +148,9 @@ namespace SistemaParaAdministrarRespaldos
                         SQLiteCommand insercion2 = new SQLiteCommand(comando2, conexion, transaccion);
 
                         object archivoruta = 0;
-                        for (int x = 0; x < dataGridView2.Rows.Count; x++)
+                        for (int x = 0; x < dgv_archivos.Rows.Count; x++)
                         {
-                            archivoruta = dataGridView2["Datos_Archivo", x].Value;
+                            archivoruta = dgv_archivos["Datos_Archivo", x].Value;
                             insercion2.Parameters.AddWithValue("@Datos_Archivo", archivoruta);
                             insercion2.Parameters.AddWithValue("@idtarea", idtarea);
                             insercion2.ExecuteNonQuery();
@@ -171,7 +171,7 @@ namespace SistemaParaAdministrarRespaldos
             {
                 if (modificar)
                 {
-                    if (string.IsNullOrEmpty(txt_nombretarea.Text) || (dataGridView2.Rows.Count == 0) || string.IsNullOrEmpty(txt_ruta.Text))
+                    if (string.IsNullOrEmpty(txt_nombretarea.Text) || (dgv_archivos.Rows.Count == 0) || string.IsNullOrEmpty(txt_ruta.Text))
                     {
                         MessageBox.Show("Debe completar la informacion", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
@@ -186,11 +186,11 @@ namespace SistemaParaAdministrarRespaldos
                             actualizacion.Parameters.AddWithValue("@Fecha", dateTimePicker1.Value);
                             actualizacion.Parameters.AddWithValue("@ID_Tarea", idtarea);
 
-                            dataGridView2.EndEdit();
+                            dgv_archivos.EndEdit();
                             adapter.Update(tablaArchivos);
                             tablaArchivos.AcceptChanges();
-                            dataGridView2.DataSource = null;
-                            dataGridView2.DataSource = tablaArchivos;
+                            dgv_archivos.DataSource = null;
+                            dgv_archivos.DataSource = tablaArchivos;
 
                             string modif = "UPDATE Tabla_Ruta SET Ruta_Salida=@Ruta_Salida, sobreescribir=@sobreescribir, password=@password, Contraseña=@Contraseña WHERE (ID_Tarea = @ID_Tarea)";
                             SQLiteCommand actualizacion2 = new SQLiteCommand(modif, conexion);
@@ -269,12 +269,12 @@ namespace SistemaParaAdministrarRespaldos
                 {
                     archivo = archivos[x];
 
-                    if (dataGridView2.RowCount >= 1)
+                    if (dgv_archivos.RowCount >= 1)
                     {
                         bool estaRepetido = false;
-                        for (int y = 0; y < dataGridView2.Rows.Count; y++)
+                        for (int y = 0; y < dgv_archivos.Rows.Count; y++)
                         {
-                            if (archivo == dataGridView2["Datos_Archivo", y].Value.ToString().TrimEnd())
+                            if (archivo == dgv_archivos["Datos_Archivo", y].Value.ToString().TrimEnd())
                             {
                                 MessageBox.Show("El archivo: " + archivos[x] + " ya existe en la lista.");
                                 validacion = false;
@@ -283,15 +283,15 @@ namespace SistemaParaAdministrarRespaldos
                         }
                         if (!estaRepetido)
                         {
-                            dataGridView2.Rows.Add();
-                            dataGridView2["Datos_Archivo", dataGridView2.Rows.Count - 1].Value = archivo;
+                            dgv_archivos.Rows.Add();
+                            dgv_archivos["Datos_Archivo", dgv_archivos.Rows.Count - 1].Value = archivo;
                         }
                         estaRepetido = false;
                     }
                     else
                     {
-                        dataGridView2.Rows.Add();
-                        dataGridView2["Datos_Archivo", dataGridView2.Rows.Count - 1].Value = archivo;
+                        dgv_archivos.Rows.Add();
+                        dgv_archivos["Datos_Archivo", dgv_archivos.Rows.Count - 1].Value = archivo;
                     }
                 }
             }
@@ -315,8 +315,8 @@ namespace SistemaParaAdministrarRespaldos
                         }
 
                         adapter.Update(tablaArchivos);
-                        dataGridView2.DataSource = null;
-                        dataGridView2.DataSource = tablaArchivos;
+                        dgv_archivos.DataSource = null;
+                        dgv_archivos.DataSource = tablaArchivos;
                     }
 
                 }
@@ -328,14 +328,14 @@ namespace SistemaParaAdministrarRespaldos
             else
             {
                 object seleccionado = false;
-                for (int x = 0; x < dataGridView2.Rows.Count; x++)
+                for (int x = 0; x < dgv_archivos.Rows.Count; x++)
                 {
-                    seleccionado = dataGridView2["Seleccionar", x].Value;
+                    seleccionado = dgv_archivos["Seleccionar", x].Value;
                     if (seleccionado != DBNull.Value)
                     {
                         if (Convert.ToBoolean(seleccionado))
                         {
-                            dataGridView2.Rows.RemoveAt(x);
+                            dgv_archivos.Rows.RemoveAt(x);
                             x--;
                         }
                     }
@@ -347,7 +347,7 @@ namespace SistemaParaAdministrarRespaldos
         {
             if (modificar)
             {
-                if (dataGridView2.Rows.Count == 0)
+                if (dgv_archivos.Rows.Count == 0)
                 {
                     MessageBox.Show("Debe completar la informacion", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
@@ -407,9 +407,9 @@ namespace SistemaParaAdministrarRespaldos
 
         private void chk_seleccionartodo_CheckedChanged(object sender, EventArgs e)
         {
-            if (dataGridView2.Rows.Count > 0)
+            if (dgv_archivos.Rows.Count > 0)
             {
-                foreach (DataGridViewRow row in dataGridView2.Rows)
+                foreach (DataGridViewRow row in dgv_archivos.Rows)
                 {
                     row.Cells["Seleccionar"].Value = true;
                     if (chk_seleccionartodo.Checked == false)

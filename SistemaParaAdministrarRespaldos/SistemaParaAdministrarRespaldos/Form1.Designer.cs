@@ -38,9 +38,6 @@
             this.tsb_ejecutar = new System.Windows.Forms.ToolStripButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgv_ejecucion = new System.Windows.Forms.DataGridView();
-            this.Nombre_TareaZip = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaHoraZip = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ruta_SalidaZip = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,12 +48,16 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.chk_seleccionartodo = new System.Windows.Forms.CheckBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgv_tareas = new System.Windows.Forms.DataGridView();
             this.ID_Tarea = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Nombre_Tarea = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.Nombre_TareaZip = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaHoraZip = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ruta_SalidaZip = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre_FinalZip = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ejecucion)).BeginInit();
@@ -66,7 +67,7 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_tareas)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -148,7 +149,7 @@
             this.groupBox1.Location = new System.Drawing.Point(6, 242);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox1.Size = new System.Drawing.Size(486, 146);
+            this.groupBox1.Size = new System.Drawing.Size(486, 132);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Log de ejecuciones";
@@ -156,46 +157,22 @@
             // dgv_ejecucion
             // 
             this.dgv_ejecucion.AllowUserToAddRows = false;
-            this.dgv_ejecucion.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgv_ejecucion.AllowUserToDeleteRows = false;
             this.dgv_ejecucion.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv_ejecucion.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgv_ejecucion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_ejecucion.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Nombre_TareaZip,
             this.FechaHoraZip,
-            this.Ruta_SalidaZip});
+            this.Ruta_SalidaZip,
+            this.Nombre_FinalZip});
+            this.dgv_ejecucion.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_ejecucion.Location = new System.Drawing.Point(3, 16);
             this.dgv_ejecucion.Name = "dgv_ejecucion";
             this.dgv_ejecucion.RowHeadersWidth = 5;
             this.dgv_ejecucion.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_ejecucion.Size = new System.Drawing.Size(477, 111);
+            this.dgv_ejecucion.Size = new System.Drawing.Size(480, 113);
             this.dgv_ejecucion.TabIndex = 18;
-            // 
-            // Nombre_TareaZip
-            // 
-            this.Nombre_TareaZip.DataPropertyName = "Nombre_TareaZip";
-            this.Nombre_TareaZip.HeaderText = "Nombre de la tarea";
-            this.Nombre_TareaZip.Name = "Nombre_TareaZip";
-            this.Nombre_TareaZip.ReadOnly = true;
-            this.Nombre_TareaZip.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // FechaHoraZip
-            // 
-            this.FechaHoraZip.DataPropertyName = "FechaHoraZip";
-            this.FechaHoraZip.HeaderText = "Fecha de ejecucion";
-            this.FechaHoraZip.Name = "FechaHoraZip";
-            this.FechaHoraZip.ReadOnly = true;
-            this.FechaHoraZip.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Ruta_SalidaZip
-            // 
-            this.Ruta_SalidaZip.DataPropertyName = "Ruta_SalidaZip";
-            this.Ruta_SalidaZip.HeaderText = "Ruta de salida del zip";
-            this.Ruta_SalidaZip.Name = "Ruta_SalidaZip";
-            this.Ruta_SalidaZip.ReadOnly = true;
-            this.Ruta_SalidaZip.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // menuStrip1
             // 
@@ -255,7 +232,7 @@
             // columnHeader3
             // 
             this.columnHeader3.Text = "Ruta salida Zip";
-            this.columnHeader3.Width = 180;
+            this.columnHeader3.Width = 260;
             // 
             // splitContainer2
             // 
@@ -286,7 +263,7 @@
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.chk_seleccionartodo);
-            this.groupBox2.Controls.Add(this.dataGridView1);
+            this.groupBox2.Controls.Add(this.dgv_tareas);
             this.groupBox2.Location = new System.Drawing.Point(6, 3);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(486, 233);
@@ -297,7 +274,7 @@
             // 
             this.chk_seleccionartodo.AutoSize = true;
             this.chk_seleccionartodo.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chk_seleccionartodo.Location = new System.Drawing.Point(39, 21);
+            this.chk_seleccionartodo.Location = new System.Drawing.Point(36, 21);
             this.chk_seleccionartodo.Name = "chk_seleccionartodo";
             this.chk_seleccionartodo.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chk_seleccionartodo.Size = new System.Drawing.Size(15, 14);
@@ -305,28 +282,27 @@
             this.chk_seleccionartodo.UseVisualStyleBackColor = true;
             this.chk_seleccionartodo.CheckedChanged += new System.EventHandler(this.chk_seleccionartodo_CheckedChanged);
             // 
-            // dataGridView1
+            // dgv_tareas
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgv_tareas.AllowUserToAddRows = false;
+            this.dgv_tareas.AllowUserToDeleteRows = false;
+            this.dgv_tareas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgv_tareas.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dgv_tareas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_tareas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID_Tarea,
             this.Seleccionar,
             this.Nombre_Tarea,
             this.Fecha});
-            this.dataGridView1.Location = new System.Drawing.Point(6, 16);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 5;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(474, 211);
-            this.dataGridView1.TabIndex = 5;
-            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
+            this.dgv_tareas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv_tareas.Location = new System.Drawing.Point(3, 16);
+            this.dgv_tareas.Name = "dgv_tareas";
+            this.dgv_tareas.RowHeadersWidth = 5;
+            this.dgv_tareas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv_tareas.Size = new System.Drawing.Size(480, 214);
+            this.dgv_tareas.TabIndex = 5;
+            this.dgv_tareas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dgv_tareas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
             // ID_Tarea
             // 
@@ -380,6 +356,38 @@
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             // 
+            // Nombre_TareaZip
+            // 
+            this.Nombre_TareaZip.DataPropertyName = "Nombre_TareaZip";
+            this.Nombre_TareaZip.HeaderText = "Nombre de la tarea";
+            this.Nombre_TareaZip.Name = "Nombre_TareaZip";
+            this.Nombre_TareaZip.ReadOnly = true;
+            this.Nombre_TareaZip.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // FechaHoraZip
+            // 
+            this.FechaHoraZip.DataPropertyName = "FechaHoraZip";
+            this.FechaHoraZip.HeaderText = "Fecha de ejecucion";
+            this.FechaHoraZip.Name = "FechaHoraZip";
+            this.FechaHoraZip.ReadOnly = true;
+            this.FechaHoraZip.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // Ruta_SalidaZip
+            // 
+            this.Ruta_SalidaZip.DataPropertyName = "Ruta_SalidaZip";
+            this.Ruta_SalidaZip.HeaderText = "Ruta de salida del zip";
+            this.Ruta_SalidaZip.Name = "Ruta_SalidaZip";
+            this.Ruta_SalidaZip.ReadOnly = true;
+            this.Ruta_SalidaZip.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // Nombre_FinalZip
+            // 
+            this.Nombre_FinalZip.DataPropertyName = "Nombre_FinalZip";
+            this.Nombre_FinalZip.HeaderText = "Nombre del zip";
+            this.Nombre_FinalZip.Name = "Nombre_FinalZip";
+            this.Nombre_FinalZip.ReadOnly = true;
+            this.Nombre_FinalZip.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -411,7 +419,7 @@
             this.splitContainer2.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_tareas)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -431,22 +439,23 @@
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dgv_ejecucion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre_TareaZip;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FechaHoraZip;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ruta_SalidaZip;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.ListView list_ejecuciones;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.CheckBox chk_seleccionartodo;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgv_tareas;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID_Tarea;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Seleccionar;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre_Tarea;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
-        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre_TareaZip;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaHoraZip;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ruta_SalidaZip;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre_FinalZip;
     }
 }
 

@@ -163,6 +163,14 @@
     <None Include="Resources\1486521491_close2.ico" />
     <None Include="Resources\1489533756_eye.png" />
     <None Include="Resources\1489533888_eye.ico" />
+    <None Include="Resources\Toma4025-Rumax-Folder-documents.ico" />
+    <None Include="Resources\Hopstarter-Mac-Folders-2-Folder-Documents.ico" />
+    <None Include="Resources\Ampeross-Qetto-Folder-documents-2.ico" />
+    <None Include="Resources\1493858880_Folder_Mac.ico" />
+    <None Include="Resources\1493858960_Folder_Win.png" />
+    <None Include="Resources\1493859211_Folder.ico" />
+    <None Include="Resources\1493859473_gnome-fs-directory-accept.ico" />
+    <None Include="Resources\1493859647_gnome-fs-directory-accept.ico" />
     <Content Include="Toma4025-Rumax-Folder-documents.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
