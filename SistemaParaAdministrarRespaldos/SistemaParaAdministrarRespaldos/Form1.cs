@@ -63,7 +63,10 @@ namespace SistemaParaAdministrarRespaldos
             adp.Fill(tbl);
             build = new SQLiteCommandBuilder(adp);
             dgv_ejecucion.DataSource = tbl;
-            dgv_ejecucion.Sort(FechaHoraZip, System.ComponentModel.ListSortDirection.Descending);
+            if (dgv_ejecucion.Rows.Count >= 0)
+            {
+                dgv_ejecucion.Sort(FechaHoraZip, System.ComponentModel.ListSortDirection.Descending);
+            }
         }
 
         private static string cadenadeconexion()
@@ -75,8 +78,12 @@ namespace SistemaParaAdministrarRespaldos
         {
             dgv_tareas.AutoGenerateColumns = false;
             dgv_tareas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgv_tareas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv_tareas.Columns[1].Width = 50;
+            dgv_tareas.Columns[1].Frozen = true;
+
             dgv_ejecucion.AutoGenerateColumns = false;
-            dgv_ejecucion.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgv_ejecucion.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             try
             {
@@ -247,22 +254,20 @@ namespace SistemaParaAdministrarRespaldos
                             }
                         }
                         
-                        string comando = "insert into Tabla_Ejecucion (Nombre_TareaZip,FechaHoraZip,Ruta_SalidaZip,ID_Tarea,Nombre_FinalZip)values(@Nombre_TareaZip,@FechaHoraZip,@Ruta_SalidaZip,@ID_Tarea,@Nombre_FinalZip)";
+                        string comando = "insert into Tabla_Ejecucion (Nombre_TareaZip,FechaHoraZip,Ruta_SalidaZip,ID_Tarea)values(@Nombre_TareaZip,@FechaHoraZip,@Ruta_SalidaZip,@ID_Tarea)";
                         SQLiteCommand insercion = new SQLiteCommand(comando, conexion, transaccion);
                         
                         insercion.Parameters.AddWithValue("@Nombre_TareaZip", nombrezip);
                         insercion.Parameters.AddWithValue("@FechaHoraZip", DateTime.Now);
-                        insercion.Parameters.AddWithValue("@Ruta_SalidaZip", rutasalida);
-                        insercion.Parameters.AddWithValue("@ID_Tarea", id_Tarea);
                         if (chksobreescribir == Convert.ToString(1))
                         {
-                            insercion.Parameters.AddWithValue("@Nombre_FinalZip", nombrezip);
+                            insercion.Parameters.AddWithValue("@Ruta_SalidaZip", rutasalida + Path.DirectorySeparatorChar + nombrezip + ".zip");
                         }
                         else
                         {
-                            insercion.Parameters.AddWithValue("@Nombre_FinalZip", nombreFinalZip);
+                            insercion.Parameters.AddWithValue("@Ruta_SalidaZip", rutasalida + Path.DirectorySeparatorChar + nombreFinalZip + ".zip");
                         }
-
+                        insercion.Parameters.AddWithValue("@ID_Tarea", id_Tarea);
                         insercion.ExecuteNonQuery();
                     }
 

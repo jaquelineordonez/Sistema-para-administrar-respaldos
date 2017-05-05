@@ -55,7 +55,9 @@ namespace SistemaParaAdministrarRespaldos
             }
 
             dgv_archivos.AutoGenerateColumns = false;
-            dgv_archivos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgv_archivos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dgv_archivos.Columns[0].Width = 50;
+            dgv_archivos.Columns[2].Frozen = true;
 
             if (idtarea > 0)
             {

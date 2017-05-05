@@ -35,30 +35,30 @@
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.dgv_archivos = new System.Windows.Forms.DataGridView();
-            this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.ID_Archivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ID_Tarea = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Datos_Archivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.chk_seleccionartodo = new System.Windows.Forms.CheckBox();
+            this.btn_quitar = new System.Windows.Forms.Button();
+            this.btn_agregar = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.chk_visible = new System.Windows.Forms.CheckBox();
+            this.btn_visible = new System.Windows.Forms.Button();
             this.txt_contraseña = new System.Windows.Forms.TextBox();
             this.chk_password = new System.Windows.Forms.CheckBox();
             this.chk_sobreescribir = new System.Windows.Forms.CheckBox();
+            this.btn_ruta = new System.Windows.Forms.Button();
             this.txt_ruta = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.fbd1 = new System.Windows.Forms.FolderBrowserDialog();
             this.btn_cancelar = new System.Windows.Forms.Button();
             this.btn_guardar = new System.Windows.Forms.Button();
-            this.btn_quitar = new System.Windows.Forms.Button();
-            this.btn_agregar = new System.Windows.Forms.Button();
-            this.chk_visible = new System.Windows.Forms.CheckBox();
-            this.btn_visible = new System.Windows.Forms.Button();
-            this.btn_ruta = new System.Windows.Forms.Button();
+            this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ID_Archivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID_Tarea = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Datos_Archivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_archivos)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -116,36 +116,6 @@
             this.dgv_archivos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_archivos.Size = new System.Drawing.Size(632, 164);
             this.dgv_archivos.TabIndex = 5;
-            // 
-            // Seleccionar
-            // 
-            this.Seleccionar.DataPropertyName = "Seleccionar";
-            this.Seleccionar.FillWeight = 111.6751F;
-            this.Seleccionar.HeaderText = "";
-            this.Seleccionar.MinimumWidth = 69;
-            this.Seleccionar.Name = "Seleccionar";
-            // 
-            // ID_Archivo
-            // 
-            this.ID_Archivo.DataPropertyName = "ID_Archivo";
-            this.ID_Archivo.HeaderText = "ID_Archivo";
-            this.ID_Archivo.Name = "ID_Archivo";
-            this.ID_Archivo.Visible = false;
-            // 
-            // ID_Tarea
-            // 
-            this.ID_Tarea.DataPropertyName = "ID_Tarea";
-            this.ID_Tarea.HeaderText = "ID_Tarea";
-            this.ID_Tarea.Name = "ID_Tarea";
-            this.ID_Tarea.Visible = false;
-            // 
-            // Datos_Archivo
-            // 
-            this.Datos_Archivo.DataPropertyName = "Datos_Archivo";
-            this.Datos_Archivo.FillWeight = 88.32487F;
-            this.Datos_Archivo.HeaderText = "Archivo";
-            this.Datos_Archivo.Name = "Datos_Archivo";
-            this.Datos_Archivo.ReadOnly = true;
             // 
             // openFileDialog1
             // 
@@ -206,6 +176,32 @@
             this.chk_seleccionartodo.UseVisualStyleBackColor = true;
             this.chk_seleccionartodo.CheckedChanged += new System.EventHandler(this.chk_seleccionartodo_CheckedChanged);
             // 
+            // btn_quitar
+            // 
+            this.btn_quitar.Image = ((System.Drawing.Image)(resources.GetObject("btn_quitar.Image")));
+            this.btn_quitar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btn_quitar.Location = new System.Drawing.Point(109, 185);
+            this.btn_quitar.Name = "btn_quitar";
+            this.btn_quitar.Size = new System.Drawing.Size(55, 40);
+            this.btn_quitar.TabIndex = 7;
+            this.btn_quitar.Text = "&Quitar";
+            this.btn_quitar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btn_quitar.UseVisualStyleBackColor = true;
+            this.btn_quitar.Click += new System.EventHandler(this.btn_quitar_Click);
+            // 
+            // btn_agregar
+            // 
+            this.btn_agregar.Image = ((System.Drawing.Image)(resources.GetObject("btn_agregar.Image")));
+            this.btn_agregar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btn_agregar.Location = new System.Drawing.Point(37, 185);
+            this.btn_agregar.Name = "btn_agregar";
+            this.btn_agregar.Size = new System.Drawing.Size(55, 40);
+            this.btn_agregar.TabIndex = 6;
+            this.btn_agregar.Text = "&Agregar";
+            this.btn_agregar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btn_agregar.UseVisualStyleBackColor = true;
+            this.btn_agregar.Click += new System.EventHandler(this.btn_agregar_Click);
+            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.chk_visible);
@@ -224,6 +220,28 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Ruta de salida";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // chk_visible
+            // 
+            this.chk_visible.AutoSize = true;
+            this.chk_visible.Image = global::SistemaParaAdministrarRespaldos.Properties.Resources._1489533888_eye;
+            this.chk_visible.Location = new System.Drawing.Point(479, 86);
+            this.chk_visible.Name = "chk_visible";
+            this.chk_visible.Size = new System.Drawing.Size(47, 32);
+            this.chk_visible.TabIndex = 7;
+            this.chk_visible.UseVisualStyleBackColor = true;
+            this.chk_visible.CheckedChanged += new System.EventHandler(this.chk_visible_CheckedChanged);
+            // 
+            // btn_visible
+            // 
+            this.btn_visible.Image = global::SistemaParaAdministrarRespaldos.Properties.Resources._1489533888_eye;
+            this.btn_visible.Location = new System.Drawing.Point(62, 86);
+            this.btn_visible.Name = "btn_visible";
+            this.btn_visible.Size = new System.Drawing.Size(35, 25);
+            this.btn_visible.TabIndex = 6;
+            this.btn_visible.UseVisualStyleBackColor = true;
+            this.btn_visible.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn_visible_MouseDown);
+            this.btn_visible.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn_visible_MouseUp);
             // 
             // txt_contraseña
             // 
@@ -255,6 +273,17 @@
             this.chk_sobreescribir.TabIndex = 3;
             this.chk_sobreescribir.Text = "Sobre escribir respaldo";
             this.chk_sobreescribir.UseVisualStyleBackColor = true;
+            // 
+            // btn_ruta
+            // 
+            this.btn_ruta.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_ruta.Image = ((System.Drawing.Image)(resources.GetObject("btn_ruta.Image")));
+            this.btn_ruta.Location = new System.Drawing.Point(479, 26);
+            this.btn_ruta.Name = "btn_ruta";
+            this.btn_ruta.Size = new System.Drawing.Size(35, 23);
+            this.btn_ruta.TabIndex = 2;
+            this.btn_ruta.UseVisualStyleBackColor = true;
+            this.btn_ruta.Click += new System.EventHandler(this.btn_ruta_Click);
             // 
             // txt_ruta
             // 
@@ -310,64 +339,43 @@
             this.btn_guardar.UseVisualStyleBackColor = true;
             this.btn_guardar.Click += new System.EventHandler(this.btn_guardar_Click);
             // 
-            // btn_quitar
+            // Seleccionar
             // 
-            this.btn_quitar.Image = ((System.Drawing.Image)(resources.GetObject("btn_quitar.Image")));
-            this.btn_quitar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_quitar.Location = new System.Drawing.Point(109, 185);
-            this.btn_quitar.Name = "btn_quitar";
-            this.btn_quitar.Size = new System.Drawing.Size(55, 40);
-            this.btn_quitar.TabIndex = 7;
-            this.btn_quitar.Text = "&Quitar";
-            this.btn_quitar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btn_quitar.UseVisualStyleBackColor = true;
-            this.btn_quitar.Click += new System.EventHandler(this.btn_quitar_Click);
+            this.Seleccionar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Seleccionar.DataPropertyName = "Seleccionar";
+            this.Seleccionar.FillWeight = 111.6751F;
+            this.Seleccionar.Frozen = true;
+            this.Seleccionar.HeaderText = "";
+            this.Seleccionar.MinimumWidth = 69;
+            this.Seleccionar.Name = "Seleccionar";
+            this.Seleccionar.Width = 329;
             // 
-            // btn_agregar
+            // ID_Archivo
             // 
-            this.btn_agregar.Image = ((System.Drawing.Image)(resources.GetObject("btn_agregar.Image")));
-            this.btn_agregar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_agregar.Location = new System.Drawing.Point(37, 185);
-            this.btn_agregar.Name = "btn_agregar";
-            this.btn_agregar.Size = new System.Drawing.Size(55, 40);
-            this.btn_agregar.TabIndex = 6;
-            this.btn_agregar.Text = "&Agregar";
-            this.btn_agregar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btn_agregar.UseVisualStyleBackColor = true;
-            this.btn_agregar.Click += new System.EventHandler(this.btn_agregar_Click);
+            this.ID_Archivo.DataPropertyName = "ID_Archivo";
+            this.ID_Archivo.Frozen = true;
+            this.ID_Archivo.HeaderText = "ID_Archivo";
+            this.ID_Archivo.Name = "ID_Archivo";
+            this.ID_Archivo.Visible = false;
             // 
-            // chk_visible
+            // ID_Tarea
             // 
-            this.chk_visible.AutoSize = true;
-            this.chk_visible.Image = global::SistemaParaAdministrarRespaldos.Properties.Resources._1489533888_eye;
-            this.chk_visible.Location = new System.Drawing.Point(479, 86);
-            this.chk_visible.Name = "chk_visible";
-            this.chk_visible.Size = new System.Drawing.Size(47, 32);
-            this.chk_visible.TabIndex = 7;
-            this.chk_visible.UseVisualStyleBackColor = true;
-            this.chk_visible.CheckedChanged += new System.EventHandler(this.chk_visible_CheckedChanged);
+            this.ID_Tarea.DataPropertyName = "ID_Tarea";
+            this.ID_Tarea.Frozen = true;
+            this.ID_Tarea.HeaderText = "ID_Tarea";
+            this.ID_Tarea.Name = "ID_Tarea";
+            this.ID_Tarea.Visible = false;
             // 
-            // btn_visible
+            // Datos_Archivo
             // 
-            this.btn_visible.Image = global::SistemaParaAdministrarRespaldos.Properties.Resources._1489533888_eye;
-            this.btn_visible.Location = new System.Drawing.Point(62, 86);
-            this.btn_visible.Name = "btn_visible";
-            this.btn_visible.Size = new System.Drawing.Size(35, 25);
-            this.btn_visible.TabIndex = 6;
-            this.btn_visible.UseVisualStyleBackColor = true;
-            this.btn_visible.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn_visible_MouseDown);
-            this.btn_visible.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn_visible_MouseUp);
-            // 
-            // btn_ruta
-            // 
-            this.btn_ruta.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_ruta.Image = ((System.Drawing.Image)(resources.GetObject("btn_ruta.Image")));
-            this.btn_ruta.Location = new System.Drawing.Point(479, 26);
-            this.btn_ruta.Name = "btn_ruta";
-            this.btn_ruta.Size = new System.Drawing.Size(35, 23);
-            this.btn_ruta.TabIndex = 2;
-            this.btn_ruta.UseVisualStyleBackColor = true;
-            this.btn_ruta.Click += new System.EventHandler(this.btn_ruta_Click);
+            this.Datos_Archivo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Datos_Archivo.DataPropertyName = "Datos_Archivo";
+            this.Datos_Archivo.FillWeight = 88.32487F;
+            this.Datos_Archivo.Frozen = true;
+            this.Datos_Archivo.HeaderText = "Archivo";
+            this.Datos_Archivo.Name = "Datos_Archivo";
+            this.Datos_Archivo.ReadOnly = true;
+            this.Datos_Archivo.Width = 68;
             // 
             // Form2
             // 
