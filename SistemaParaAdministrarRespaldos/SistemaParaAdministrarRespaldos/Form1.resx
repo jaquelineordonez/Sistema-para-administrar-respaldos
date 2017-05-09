@@ -165,6 +165,17 @@
         w8cvj086gy25siLsE2nPAivyvAZE0S84J08PjeF3PQAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="tsb_imprimir.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEUSURBVDhPY4ADcVduNgVbf055mwB8GKSGQcaCE6oLATiV
+        rEw4FGynsina+ODDHIo207nkrQyg2hAAZAC7vG0GlIsTsCva5lDXAE5F22AORev5bPK2i4GS64BOnIEP
+        A9WsZ1O0XQT0zgJweHDK2xawydtrQM0jAEKZOeRtJoP0sCrZ64BcQ5oBKmZ8QFdsBGpcTp4BQMChbCvL
+        oOTCj2IAkJGNLc7xYTYFmzyEAcDQB9HEpgN2BZtcdkWbLBQvkBqNGF7gULQrJtYATkWbQqgXshk4Vexl
+        QE6DeQWqDicAGQDyAliPrJUUVJhKSRkUQNhCHBlzKNrOYlWw1odqQwKSxlzAJOqNHOLYsa03g7w9B0QT
+        AwMASTJwV53asFYAAAAASUVORK5CYII=
+</value>
+  </data>
   <metadata name="Nombre_TareaZip.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -185,6 +196,18 @@
   </metadata>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>227, 17</value>
+  </metadata>
+  <metadata name="ID_Tarea.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Seleccionar.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Nombre_Tarea.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Fecha.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
   <metadata name="ID_Tarea.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

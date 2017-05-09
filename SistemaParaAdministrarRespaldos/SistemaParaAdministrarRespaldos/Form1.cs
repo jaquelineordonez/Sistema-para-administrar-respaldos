@@ -333,5 +333,28 @@ namespace SistemaParaAdministrarRespaldos
                 cargarlista(idtareamostrarLog);
             }           
         }
+
+        private void tsb_imprimir_Click(object sender, EventArgs e)
+        {
+            dgv_tareas.EndEdit();
+            tabla.AcceptChanges();
+            object id_Tarea = 0;
+            DataRow[] rowsSeleccionados = tabla.Select("Seleccionar = " + true);
+            if (rowsSeleccionados != null && rowsSeleccionados.Length >= 1)
+            {
+                for (int x = 0; x < rowsSeleccionados.Length; x++)
+                {
+                    id_Tarea = rowsSeleccionados[x][0];
+                    Form4 form4 = new Form4();
+                    form4.Show();
+                    
+                }
+            }
+            else
+            {
+                MessageBox.Show("Seleccione al menos una tarea", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
+        
     }
 }
