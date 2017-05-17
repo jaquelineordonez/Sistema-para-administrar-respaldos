@@ -4,10 +4,10 @@ using System.Data;
 using System.Data.SQLite;
 using System.IO;
 using System.Windows.Forms;
+using CrystalDecisions.Shared;
 using Ionic.Zip;
 using Microsoft.VisualBasic.Devices;
 using SistemaParaAdministrarRespaldos.Properties;
-
 
 namespace SistemaParaAdministrarRespaldos
 {
@@ -31,10 +31,10 @@ namespace SistemaParaAdministrarRespaldos
 
         private DataTable dta = new DataTable();
 
-       private void cargarlista(int id_tarea)
+        private void cargarlista(int id_tarea)
         {
             list_ejecuciones.Items.Clear();
-            if (tbl!= null)
+            if (tbl != null)
             {
                 DataRow[] filas = tbl.Select("ID_Tarea = " + id_tarea);
                 foreach (DataRow dr in filas)
@@ -212,7 +212,7 @@ namespace SistemaParaAdministrarRespaldos
                         SQLiteCommand contra = new SQLiteCommand("SELECT Contraseña FROM Tabla_Ruta WHERE ID_Tarea=" + id_Tarea, conexion);
                         string contras = contra.ExecuteScalar().ToString();
 
-                        if (contras == null | contras== string.Empty)
+                        if (contras == null | contras == string.Empty)
                         {
                             contraseña = null;
                         }
@@ -249,14 +249,14 @@ namespace SistemaParaAdministrarRespaldos
                                 zip.Save(rutasalida + Path.DirectorySeparatorChar + nombrezip + ".zip");
                             }
                             else
-                            {          
+                            {
                                 zip.Save(rutasalida + Path.DirectorySeparatorChar + nombreFinalZip + ".zip");
                             }
                         }
-                        
+
                         string comando = "insert into Tabla_Ejecucion (Nombre_TareaZip,FechaHoraZip,Ruta_SalidaZip,ID_Tarea)values(@Nombre_TareaZip,@FechaHoraZip,@Ruta_SalidaZip,@ID_Tarea)";
                         SQLiteCommand insercion = new SQLiteCommand(comando, conexion, transaccion);
-                        
+
                         insercion.Parameters.AddWithValue("@Nombre_TareaZip", nombrezip);
                         insercion.Parameters.AddWithValue("@FechaHoraZip", DateTime.Now);
                         if (chksobreescribir == Convert.ToString(1))
@@ -327,27 +327,26 @@ namespace SistemaParaAdministrarRespaldos
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgv_tareas.SelectedRows.Count ==1)
+            if (dgv_tareas.SelectedRows.Count == 1)
             {
                 idtareamostrarLog = Convert.ToInt32(dgv_tareas["ID_Tarea", dgv_tareas.CurrentRow.Index].Value);
                 cargarlista(idtareamostrarLog);
-            }           
+            }
         }
 
         private void tsb_imprimir_Click(object sender, EventArgs e)
         {
             dgv_tareas.EndEdit();
             tabla.AcceptChanges();
-            object id_Tarea = 0;
+            object idTarea = 0;
             DataRow[] rowsSeleccionados = tabla.Select("Seleccionar = " + true);
             if (rowsSeleccionados != null && rowsSeleccionados.Length >= 1)
             {
                 for (int x = 0; x < rowsSeleccionados.Length; x++)
                 {
-                    id_Tarea = rowsSeleccionados[x][0];
-                    Form4 form4 = new Form4();
-                    form4.Show();
-                    
+                    idTarea = rowsSeleccionados[x][0];
+                    ReporteTarea report = new ReporteTarea(Convert.ToInt32(idTarea)); /*FORMULARIO QUE CONTIENE EL REPORTE*/
+                    report.Show();
                 }
             }
             else

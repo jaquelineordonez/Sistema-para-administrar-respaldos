@@ -32,11 +32,11 @@ namespace SistemaParaAdministrarRespaldos {
         
         private Tabla_TareaDataTable tableTabla_Tarea;
         
-        private global::System.Data.DataRelation relationFK_Tabla_Archivo_0_0;
+        private global::System.Data.DataRelation relationFK_Tabla_Ruta_0_0;
         
         private global::System.Data.DataRelation relationFK_Tabla_Ejecucion_0_0;
         
-        private global::System.Data.DataRelation relationFK_Tabla_Ruta_0_0;
+        private global::System.Data.DataRelation relationFK_Tabla_Archivo_0_0;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -272,9 +272,9 @@ namespace SistemaParaAdministrarRespaldos {
                     this.tableTabla_Tarea.InitVars();
                 }
             }
-            this.relationFK_Tabla_Archivo_0_0 = this.Relations["FK_Tabla_Archivo_0_0"];
-            this.relationFK_Tabla_Ejecucion_0_0 = this.Relations["FK_Tabla_Ejecucion_0_0"];
             this.relationFK_Tabla_Ruta_0_0 = this.Relations["FK_Tabla_Ruta_0_0"];
+            this.relationFK_Tabla_Ejecucion_0_0 = this.Relations["FK_Tabla_Ejecucion_0_0"];
+            this.relationFK_Tabla_Archivo_0_0 = this.Relations["FK_Tabla_Archivo_0_0"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -293,18 +293,18 @@ namespace SistemaParaAdministrarRespaldos {
             base.Tables.Add(this.tableTabla_Ruta);
             this.tableTabla_Tarea = new Tabla_TareaDataTable();
             base.Tables.Add(this.tableTabla_Tarea);
-            this.relationFK_Tabla_Archivo_0_0 = new global::System.Data.DataRelation("FK_Tabla_Archivo_0_0", new global::System.Data.DataColumn[] {
-                        this.tableTabla_Tarea.ID_TareaColumn}, new global::System.Data.DataColumn[] {
-                        this.tableTabla_Archivo.ID_TareaColumn}, false);
-            this.Relations.Add(this.relationFK_Tabla_Archivo_0_0);
-            this.relationFK_Tabla_Ejecucion_0_0 = new global::System.Data.DataRelation("FK_Tabla_Ejecucion_0_0", new global::System.Data.DataColumn[] {
-                        this.tableTabla_Tarea.ID_TareaColumn}, new global::System.Data.DataColumn[] {
-                        this.tableTabla_Ejecucion.ID_TareaColumn}, false);
-            this.Relations.Add(this.relationFK_Tabla_Ejecucion_0_0);
             this.relationFK_Tabla_Ruta_0_0 = new global::System.Data.DataRelation("FK_Tabla_Ruta_0_0", new global::System.Data.DataColumn[] {
                         this.tableTabla_Tarea.ID_TareaColumn}, new global::System.Data.DataColumn[] {
                         this.tableTabla_Ruta.ID_TareaColumn}, false);
             this.Relations.Add(this.relationFK_Tabla_Ruta_0_0);
+            this.relationFK_Tabla_Ejecucion_0_0 = new global::System.Data.DataRelation("FK_Tabla_Ejecucion_0_0", new global::System.Data.DataColumn[] {
+                        this.tableTabla_Tarea.ID_TareaColumn}, new global::System.Data.DataColumn[] {
+                        this.tableTabla_Ejecucion.ID_TareaColumn}, false);
+            this.Relations.Add(this.relationFK_Tabla_Ejecucion_0_0);
+            this.relationFK_Tabla_Archivo_0_0 = new global::System.Data.DataRelation("FK_Tabla_Archivo_0_0", new global::System.Data.DataColumn[] {
+                        this.tableTabla_Tarea.ID_TareaColumn}, new global::System.Data.DataColumn[] {
+                        this.tableTabla_Archivo.ID_TareaColumn}, false);
+            this.Relations.Add(this.relationFK_Tabla_Archivo_0_0);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2027,12 +2027,12 @@ namespace SistemaParaAdministrarRespaldos {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Tabla_ArchivoRow[] GetTabla_ArchivoRows() {
-                if ((this.Table.ChildRelations["FK_Tabla_Archivo_0_0"] == null)) {
-                    return new Tabla_ArchivoRow[0];
+            public Tabla_RutaRow[] GetTabla_RutaRows() {
+                if ((this.Table.ChildRelations["FK_Tabla_Ruta_0_0"] == null)) {
+                    return new Tabla_RutaRow[0];
                 }
                 else {
-                    return ((Tabla_ArchivoRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Tabla_Archivo_0_0"])));
+                    return ((Tabla_RutaRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Tabla_Ruta_0_0"])));
                 }
             }
             
@@ -2049,12 +2049,12 @@ namespace SistemaParaAdministrarRespaldos {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Tabla_RutaRow[] GetTabla_RutaRows() {
-                if ((this.Table.ChildRelations["FK_Tabla_Ruta_0_0"] == null)) {
-                    return new Tabla_RutaRow[0];
+            public Tabla_ArchivoRow[] GetTabla_ArchivoRows() {
+                if ((this.Table.ChildRelations["FK_Tabla_Archivo_0_0"] == null)) {
+                    return new Tabla_ArchivoRow[0];
                 }
                 else {
-                    return ((Tabla_RutaRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Tabla_Ruta_0_0"])));
+                    return ((Tabla_ArchivoRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Tabla_Archivo_0_0"])));
                 }
             }
         }
@@ -2430,11 +2430,23 @@ namespace SistemaParaAdministrarRespaldos.mydatabaseDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SQLite.SQLiteCommand[1];
+            this._commandCollection = new global::System.Data.SQLite.SQLiteCommand[2];
             this._commandCollection[0] = new global::System.Data.SQLite.SQLiteCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT [ID_Archivo], [Datos_Archivo], [ID_Tarea] FROM [Tabla_Archivo]";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SQLite.SQLiteCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT ID_Archivo, Datos_Archivo, ID_Tarea\r\nFROM Tabla_Archivo\r\nWHERE (ID_Tarea =" +
+                " @ID_Tarea)";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            global::System.Data.SQLite.SQLiteParameter param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@ID_Tarea";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.Size = 8;
+            param.SourceColumn = "ID_Tarea";
+            this._commandCollection[1].Parameters.Add(param);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2456,6 +2468,23 @@ namespace SistemaParaAdministrarRespaldos.mydatabaseDataSetTableAdapters {
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual mydatabaseDataSet.Tabla_ArchivoDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
+            mydatabaseDataSet.Tabla_ArchivoDataTable dataTable = new mydatabaseDataSet.Tabla_ArchivoDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual mydatabaseDataSet.Tabla_ArchivoDataTable ObtenerArchivo(global::System.Nullable<long> ID_Tarea) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((ID_Tarea.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((long)(ID_Tarea.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
             mydatabaseDataSet.Tabla_ArchivoDataTable dataTable = new mydatabaseDataSet.Tabla_ArchivoDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
@@ -3939,7 +3968,7 @@ namespace SistemaParaAdministrarRespaldos.mydatabaseDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SQLite.SQLiteCommand[2];
+            this._commandCollection = new global::System.Data.SQLite.SQLiteCommand[3];
             this._commandCollection[0] = new global::System.Data.SQLite.SQLiteCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT [ID_Tarea], [Nombre_Tarea], [Fecha] FROM [Tabla_Tarea]";
@@ -3948,6 +3977,18 @@ namespace SistemaParaAdministrarRespaldos.mydatabaseDataSetTableAdapters {
             this._commandCollection[1].Connection = this.Connection;
             this._commandCollection[1].CommandText = "SELECT  [Nombre_Tarea] FROM [Tabla_Tarea]";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2] = new global::System.Data.SQLite.SQLiteCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "SELECT       ID_Tarea, Nombre_Tarea, Fecha\r\nFROM            Tabla_Tarea\r\nWHERE   " +
+                "     (ID_Tarea = @ID_Tarea)";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            global::System.Data.SQLite.SQLiteParameter param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@ID_Tarea";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.Size = 8;
+            param.SourceColumn = "ID_Tarea";
+            this._commandCollection[2].Parameters.Add(param);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3993,6 +4034,18 @@ namespace SistemaParaAdministrarRespaldos.mydatabaseDataSetTableAdapters {
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
         public virtual mydatabaseDataSet.Tabla_TareaDataTable GetDataBy() {
             this.Adapter.SelectCommand = this.CommandCollection[1];
+            mydatabaseDataSet.Tabla_TareaDataTable dataTable = new mydatabaseDataSet.Tabla_TareaDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual mydatabaseDataSet.Tabla_TareaDataTable ObtenerTareaPorID(long ID_Tarea) {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((long)(ID_Tarea));
             mydatabaseDataSet.Tabla_TareaDataTable dataTable = new mydatabaseDataSet.Tabla_TareaDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
