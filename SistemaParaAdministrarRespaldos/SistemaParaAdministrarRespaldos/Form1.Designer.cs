@@ -30,8 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.tsb_nueva = new System.Windows.Forms.ToolStripButton();
+            this.tsb_editar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsb_eliminar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsb_ejecutar = new System.Windows.Forms.ToolStripButton();
+            this.tsb_imprimir = new System.Windows.Forms.ToolStripButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgv_ejecucion = new System.Windows.Forms.DataGridView();
             this.Nombre_TareaZip = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -39,6 +44,7 @@
             this.Ruta_SalidaZip = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.list_ejecuciones = new System.Windows.Forms.ListView();
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -52,12 +58,6 @@
             this.Nombre_Tarea = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.tsb_nueva = new System.Windows.Forms.ToolStripButton();
-            this.tsb_editar = new System.Windows.Forms.ToolStripButton();
-            this.tsb_eliminar = new System.Windows.Forms.ToolStripButton();
-            this.tsb_ejecutar = new System.Windows.Forms.ToolStripButton();
-            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsb_imprimir = new System.Windows.Forms.ToolStripButton();
             this.toolStrip2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ejecucion)).BeginInit();
@@ -88,15 +88,66 @@
             this.toolStrip2.TabIndex = 9;
             this.toolStrip2.Text = "toolStrip2";
             // 
+            // tsb_nueva
+            // 
+            this.tsb_nueva.Image = ((System.Drawing.Image)(resources.GetObject("tsb_nueva.Image")));
+            this.tsb_nueva.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsb_nueva.Name = "tsb_nueva";
+            this.tsb_nueva.Size = new System.Drawing.Size(77, 35);
+            this.tsb_nueva.Text = "Nueva Tarea";
+            this.tsb_nueva.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsb_nueva.Click += new System.EventHandler(this.tsb_nueva_Click);
+            // 
+            // tsb_editar
+            // 
+            this.tsb_editar.Image = ((System.Drawing.Image)(resources.GetObject("tsb_editar.Image")));
+            this.tsb_editar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsb_editar.Name = "tsb_editar";
+            this.tsb_editar.Size = new System.Drawing.Size(73, 35);
+            this.tsb_editar.Text = "Editar Tarea";
+            this.tsb_editar.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
+            this.tsb_editar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsb_editar.Click += new System.EventHandler(this.tsb_editar_Click);
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 38);
             // 
+            // tsb_eliminar
+            // 
+            this.tsb_eliminar.Image = ((System.Drawing.Image)(resources.GetObject("tsb_eliminar.Image")));
+            this.tsb_eliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsb_eliminar.Name = "tsb_eliminar";
+            this.tsb_eliminar.Size = new System.Drawing.Size(86, 35);
+            this.tsb_eliminar.Text = "Eliminar Tarea";
+            this.tsb_eliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsb_eliminar.Click += new System.EventHandler(this.tsb_eliminar_Click);
+            // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 38);
+            // 
+            // tsb_ejecutar
+            // 
+            this.tsb_ejecutar.Image = ((System.Drawing.Image)(resources.GetObject("tsb_ejecutar.Image")));
+            this.tsb_ejecutar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsb_ejecutar.Name = "tsb_ejecutar";
+            this.tsb_ejecutar.Size = new System.Drawing.Size(53, 35);
+            this.tsb_ejecutar.Text = "Ejecutar";
+            this.tsb_ejecutar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsb_ejecutar.Click += new System.EventHandler(this.tsb_ejecutar_Click);
+            // 
+            // tsb_imprimir
+            // 
+            this.tsb_imprimir.Image = ((System.Drawing.Image)(resources.GetObject("tsb_imprimir.Image")));
+            this.tsb_imprimir.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsb_imprimir.Name = "tsb_imprimir";
+            this.tsb_imprimir.Size = new System.Drawing.Size(57, 35);
+            this.tsb_imprimir.Text = "Imprimir";
+            this.tsb_imprimir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsb_imprimir.Click += new System.EventHandler(this.tsb_imprimir_Click);
             // 
             // groupBox1
             // 
@@ -177,6 +228,14 @@
             this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
             this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.archivoToolStripMenuItem.Text = "Archivo";
+            // 
+            // salirToolStripMenuItem
+            // 
+            this.salirToolStripMenuItem.Image = global::SistemaParaAdministrarRespaldos.Properties.Resources._1486521491_close2;
+            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
+            this.salirToolStripMenuItem.Text = "&Salir";
+            this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
             // splitter1
             // 
@@ -294,7 +353,6 @@
             this.ID_Tarea.ReadOnly = true;
             this.ID_Tarea.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             this.ID_Tarea.Visible = false;
-            this.ID_Tarea.Width = 50;
             // 
             // Seleccionar
             // 
@@ -334,65 +392,6 @@
             this.groupBox3.Size = new System.Drawing.Size(330, 372);
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
-            // 
-            // tsb_nueva
-            // 
-            this.tsb_nueva.Image = ((System.Drawing.Image)(resources.GetObject("tsb_nueva.Image")));
-            this.tsb_nueva.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsb_nueva.Name = "tsb_nueva";
-            this.tsb_nueva.Size = new System.Drawing.Size(77, 35);
-            this.tsb_nueva.Text = "Nueva Tarea";
-            this.tsb_nueva.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsb_nueva.Click += new System.EventHandler(this.tsb_nueva_Click);
-            // 
-            // tsb_editar
-            // 
-            this.tsb_editar.Image = ((System.Drawing.Image)(resources.GetObject("tsb_editar.Image")));
-            this.tsb_editar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsb_editar.Name = "tsb_editar";
-            this.tsb_editar.Size = new System.Drawing.Size(73, 35);
-            this.tsb_editar.Text = "Editar Tarea";
-            this.tsb_editar.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
-            this.tsb_editar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsb_editar.Click += new System.EventHandler(this.tsb_editar_Click);
-            // 
-            // tsb_eliminar
-            // 
-            this.tsb_eliminar.Image = ((System.Drawing.Image)(resources.GetObject("tsb_eliminar.Image")));
-            this.tsb_eliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsb_eliminar.Name = "tsb_eliminar";
-            this.tsb_eliminar.Size = new System.Drawing.Size(86, 35);
-            this.tsb_eliminar.Text = "Eliminar Tarea";
-            this.tsb_eliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsb_eliminar.Click += new System.EventHandler(this.tsb_eliminar_Click);
-            // 
-            // tsb_ejecutar
-            // 
-            this.tsb_ejecutar.Image = ((System.Drawing.Image)(resources.GetObject("tsb_ejecutar.Image")));
-            this.tsb_ejecutar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsb_ejecutar.Name = "tsb_ejecutar";
-            this.tsb_ejecutar.Size = new System.Drawing.Size(53, 35);
-            this.tsb_ejecutar.Text = "Ejecutar";
-            this.tsb_ejecutar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsb_ejecutar.Click += new System.EventHandler(this.tsb_ejecutar_Click);
-            // 
-            // salirToolStripMenuItem
-            // 
-            this.salirToolStripMenuItem.Image = global::SistemaParaAdministrarRespaldos.Properties.Resources._1486521491_close2;
-            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
-            this.salirToolStripMenuItem.Text = "&Salir";
-            this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
-            // 
-            // tsb_imprimir
-            // 
-            this.tsb_imprimir.Image = ((System.Drawing.Image)(resources.GetObject("tsb_imprimir.Image")));
-            this.tsb_imprimir.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsb_imprimir.Name = "tsb_imprimir";
-            this.tsb_imprimir.Size = new System.Drawing.Size(57, 35);
-            this.tsb_imprimir.Text = "Imprimir";
-            this.tsb_imprimir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsb_imprimir.Click += new System.EventHandler(this.tsb_imprimir_Click);
             // 
             // Form1
             // 

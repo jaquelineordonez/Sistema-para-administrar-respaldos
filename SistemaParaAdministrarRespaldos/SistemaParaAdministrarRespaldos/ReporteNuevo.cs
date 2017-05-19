@@ -16,14 +16,14 @@ namespace SistemaParaAdministrarRespaldos {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class Reporte : ReportClass {
+    public class ReporteNuevo : ReportClass {
         
-        public Reporte() {
+        public ReporteNuevo() {
         }
         
         public override string ResourceName {
             get {
-                return "Reporte.rpt";
+                return "ReporteNuevo.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace SistemaParaAdministrarRespaldos {
         
         public override string FullResourceName {
             get {
-                return "SistemaParaAdministrarRespaldos.Reporte.rpt";
+                return "SistemaParaAdministrarRespaldos.ReporteNuevo.rpt";
             }
             set {
                 // Do nothing
@@ -66,7 +66,7 @@ namespace SistemaParaAdministrarRespaldos {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection1 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
             get {
                 return this.ReportDefinition.Sections[2];
             }
@@ -74,7 +74,7 @@ namespace SistemaParaAdministrarRespaldos {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
             get {
                 return this.ReportDefinition.Sections[3];
             }
@@ -82,33 +82,17 @@ namespace SistemaParaAdministrarRespaldos {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection1 {
-            get {
-                return this.ReportDefinition.Sections[4];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
-            get {
-                return this.ReportDefinition.Sections[5];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public CrystalDecisions.CrystalReports.Engine.Section Section5 {
             get {
-                return this.ReportDefinition.Sections[6];
+                return this.ReportDefinition.Sections[4];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedReporte : Component, ICachedReport {
+    public class CachedReporteNuevo : Component, ICachedReport {
         
-        public CachedReporte() {
+        public CachedReporteNuevo() {
         }
         
         [Browsable(false)]
@@ -145,7 +129,7 @@ namespace SistemaParaAdministrarRespaldos {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            Reporte rpt = new Reporte();
+            ReporteNuevo rpt = new ReporteNuevo();
             rpt.Site = this.Site;
             return rpt;
         }

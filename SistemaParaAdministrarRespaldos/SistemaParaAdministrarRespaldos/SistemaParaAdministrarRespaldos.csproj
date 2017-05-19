@@ -93,6 +93,12 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ejecuciones.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Ejecuciones.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="mydatabaseDataSet.cs">
       <DependentUpon>mydatabaseDataSet.xsd</DependentUpon>
     </Compile>
@@ -101,10 +107,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>mydatabaseDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Reporte.cs">
+    <Compile Include="ReporteNuevo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Reporte.rpt</DependentUpon>
+      <DependentUpon>ReporteNuevo.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ReporteTarea.cs">
@@ -134,6 +140,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Ejecuciones.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Ejecuciones.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -148,9 +158,9 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reporte.rpt">
+    <EmbeddedResource Include="ReporteNuevo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>Reporte.cs</LastGenOutput>
+      <LastGenOutput>ReporteNuevo.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ReporteTarea.resx">
       <DependentUpon>ReporteTarea.cs</DependentUpon>
