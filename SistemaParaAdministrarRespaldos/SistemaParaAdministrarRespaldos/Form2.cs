@@ -35,7 +35,7 @@ namespace SistemaParaAdministrarRespaldos
             this.fecha = fecha;
             this.txt_nombretarea.Text = Convert.ToString(nombretarea);
             this.dateTimePicker1.Value = fecha;
-            this.btn_guardar.Text = "Actualizar";
+            this.tsbGuardar.Text = "Actualizar";
         }
 
         private void Form2_Load_1(object sender, EventArgs e)
@@ -53,6 +53,8 @@ namespace SistemaParaAdministrarRespaldos
             {
                 conexion.Open();
             }
+
+            chk_visible.Enabled = false;
 
             dgv_archivos.AutoGenerateColumns = false;
             dgv_archivos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
@@ -106,7 +108,216 @@ namespace SistemaParaAdministrarRespaldos
             }
         }
 
-        private void btn_guardar_Click(object sender, EventArgs e)
+        private bool agregar(string[] archivos)
+        {
+            bool validacion = true;
+            if (tablaArchivos.Rows.Count > 0)
+            {
+                for (int x = 0; x < archivos.Length; x++)
+                {
+                    DataRow[] repetido = tablaArchivos.Select("Datos_Archivo = '" + archivos[x] + "'");
+                    if (repetido != null && repetido.Length > 0)
+                    {
+                        validacion = false;
+                        MessageBox.Show("El archivo: " + archivos[x] + " ya existe en la lista.");
+                    }
+                    else
+                    {
+                        tablaArchivos.Rows.Add(new object[]
+                        {
+                                null, archivos[x], idtarea, false
+                        });
+                    }
+                }
+            }
+            else
+            {
+                string archivo = string.Empty;
+                for (int x = 0; x < archivos.Length; x++)
+                {
+                    archivo = archivos[x];
+
+                    if (dgv_archivos.RowCount >= 1)
+                    {
+                        bool estaRepetido = false;
+                        for (int y = 0; y < dgv_archivos.Rows.Count; y++)
+                        {
+                            if (archivo == dgv_archivos["Datos_Archivo", y].Value.ToString().TrimEnd())
+                            {
+                                MessageBox.Show("El archivo: " + archivos[x] + " ya existe en la lista.");
+                                validacion = false;
+                                estaRepetido = true;
+                            }
+                        }
+                        if (!estaRepetido)
+                        {
+                            dgv_archivos.Rows.Add();
+                            dgv_archivos["Datos_Archivo", dgv_archivos.Rows.Count - 1].Value = archivo;
+                        }
+                        estaRepetido = false;
+                    }
+                    else
+                    {
+                        dgv_archivos.Rows.Add();
+                        dgv_archivos["Datos_Archivo", dgv_archivos.Rows.Count - 1].Value = archivo;
+                    }
+                }
+            }
+            return validacion;
+        }
+
+        private void chk_contraseña_CheckedChanged(object sender, EventArgs e)
+        {
+            if (idtarea>0)
+            {
+                if (chk_password.Checked == true)
+                {
+                    txt_contraseña.Enabled = true;
+                    txt_confirmarcontraseña.Enabled = true;
+                    chk_visible.Enabled = true;
+                }
+                else
+                {
+                    txt_contraseña.Enabled = false;
+                    txt_contraseña.Clear();
+                    txt_confirmarcontraseña.Clear();
+                    txt_confirmarcontraseña.Enabled = false;
+                    chk_visible.Checked = false;
+                    chk_visible.Enabled = false;
+                    tsbGuardar.Enabled = true;
+                }
+            }
+            else
+            {
+                if (chk_password.Checked == true)
+                {
+                    txt_contraseña.Enabled = true;
+                    txt_confirmarcontraseña.Enabled = true;
+                    chk_visible.Enabled = true;
+                    tsbGuardar.Enabled = false;
+                }
+                else
+                {
+                    txt_contraseña.Enabled = false;
+                    txt_contraseña.Clear();
+                    txt_confirmarcontraseña.Clear();
+                    txt_confirmarcontraseña.Enabled = false;
+                    chk_visible.Checked = false;
+                    chk_visible.Enabled = false;
+                    tsbGuardar.Enabled = true;
+                }
+            }          
+        }
+
+        private void btn_ruta_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog fbd1 = new FolderBrowserDialog();
+            if (fbd1.ShowDialog() == DialogResult.OK)
+            {
+                txt_ruta.Text = fbd1.SelectedPath;
+            }
+        }
+        
+    private void chk_visible_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chk_password.Checked == true)
+            {
+                txt_contraseña.UseSystemPasswordChar = chk_visible.Checked ? false : true;
+
+                if (chk_visible.Checked == true)
+                {
+                    txt_confirmarcontraseña.Enabled = false;
+                    txt_confirmarcontraseña.Clear();
+                    tsbGuardar.Enabled = true;
+                    errorProvider1.Clear();
+                }
+                else
+                {
+                    txt_confirmarcontraseña.Enabled = true;
+                    tsbGuardar.Enabled = false;
+                }
+            }
+        }
+        
+        private void chk_seleccionartodo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (dgv_archivos.Rows.Count > 0)
+            {
+                foreach (DataGridViewRow row in dgv_archivos.Rows)
+                {
+                    row.Cells["Seleccionar"].Value = true;
+                    if (chk_seleccionartodo.Checked == false)
+                    {
+                        row.Cells["Seleccionar"].Value = false;
+                    }
+                }
+            }
+            else
+            {
+                chk_seleccionartodo.Checked = false;
+            }
+        }
+
+        private void tsbQuitar_Click(object sender, EventArgs e) 
+        {
+            dgv_archivos.EndEdit();
+            tablaArchivos.AcceptChanges();
+            if (idtarea > 0)
+            {
+                DataRow[] rowsSeleccionados = tablaArchivos.Select("Seleccionar = " + true);
+                if (rowsSeleccionados != null && rowsSeleccionados.Length >= 1)
+                {
+
+                    if (MessageBox.Show("¿Seguro que desea eliminar este registro?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        for (int x = 0; x < rowsSeleccionados.Length; x++)
+                        {
+                            rowsSeleccionados[x].Delete();
+                        }
+
+                        adapter.Update(tablaArchivos);
+                        dgv_archivos.DataSource = null;
+                        dgv_archivos.DataSource = tablaArchivos;
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Seleccione al menos un archivo", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+            else
+            {
+                object seleccionado = false;
+                for (int x = 0; x < dgv_archivos.Rows.Count; x++)
+                {
+                    seleccionado = dgv_archivos["Seleccionar", x].Value;
+                    if (seleccionado != DBNull.Value)
+                    {
+                        if (Convert.ToBoolean(seleccionado))
+                        {
+                            dgv_archivos.Rows.RemoveAt(x);
+                            x--;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void tsbAgregar_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Multiselect = true;
+            openFileDialog1.Filter = "Todos los archivos| *.*";
+            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string dir = openFileDialog1.FileName;
+                string[] ofdSelectedFiles = openFileDialog1.FileNames;
+                agregar(ofdSelectedFiles);
+            }
+        }
+
+        private void tsbGuardar_Click(object sender, EventArgs e)
         {
             if (insertar)
             {
@@ -229,123 +440,7 @@ namespace SistemaParaAdministrarRespaldos
             }
         }
 
-        private void btn_agregar_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Multiselect = true;
-            openFileDialog1.Filter = "Todos los archivos| *.*";
-            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                string dir = openFileDialog1.FileName;
-                string[] ofdSelectedFiles = openFileDialog1.FileNames;
-                agregar(ofdSelectedFiles);             
-            }
-        }
-
-        private bool agregar(string[] archivos)
-        {
-            bool validacion = true;
-            if (tablaArchivos.Rows.Count > 0)
-            {
-                for (int x = 0; x < archivos.Length; x++)
-                {
-                    DataRow[] repetido = tablaArchivos.Select("Datos_Archivo = '" + archivos[x] + "'");
-                    if (repetido != null && repetido.Length > 0)
-                    {
-                        validacion = false;
-                        MessageBox.Show("El archivo: " + archivos[x] + " ya existe en la lista.");
-                    }
-                    else
-                    {
-                        tablaArchivos.Rows.Add(new object[]
-                        {
-                                null, archivos[x], idtarea, false
-                        });
-                    }
-                }
-            }
-            else
-            {
-                string archivo = string.Empty;
-                for (int x = 0; x < archivos.Length; x++)
-                {
-                    archivo = archivos[x];
-
-                    if (dgv_archivos.RowCount >= 1)
-                    {
-                        bool estaRepetido = false;
-                        for (int y = 0; y < dgv_archivos.Rows.Count; y++)
-                        {
-                            if (archivo == dgv_archivos["Datos_Archivo", y].Value.ToString().TrimEnd())
-                            {
-                                MessageBox.Show("El archivo: " + archivos[x] + " ya existe en la lista.");
-                                validacion = false;
-                                estaRepetido = true;
-                            }
-                        }
-                        if (!estaRepetido)
-                        {
-                            dgv_archivos.Rows.Add();
-                            dgv_archivos["Datos_Archivo", dgv_archivos.Rows.Count - 1].Value = archivo;
-                        }
-                        estaRepetido = false;
-                    }
-                    else
-                    {
-                        dgv_archivos.Rows.Add();
-                        dgv_archivos["Datos_Archivo", dgv_archivos.Rows.Count - 1].Value = archivo;
-                    }
-                }
-            }
-            return validacion;
-        }
-
-        private void btn_quitar_Click(object sender, EventArgs e)
-        {
-            tablaArchivos.AcceptChanges();
-            if (idtarea > 0)
-            {
-                DataRow[] rowsSeleccionados = tablaArchivos.Select("Seleccionar = " + true);
-                if (rowsSeleccionados != null && rowsSeleccionados.Length >= 1)
-                {
-
-                    if (MessageBox.Show("¿Seguro que desea eliminar este registro?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    {
-                        for (int x = 0; x < rowsSeleccionados.Length; x++)
-                        {
-                            rowsSeleccionados[x].Delete();
-                        }
-
-                        adapter.Update(tablaArchivos);
-                        dgv_archivos.DataSource = null;
-                        dgv_archivos.DataSource = tablaArchivos;
-                    }
-
-                }
-                else
-                {
-                    MessageBox.Show("Seleccione al menos un archivo", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                }
-            }
-            else
-            {
-                object seleccionado = false;
-                for (int x = 0; x < dgv_archivos.Rows.Count; x++)
-                {
-                    seleccionado = dgv_archivos["Seleccionar", x].Value;
-                    if (seleccionado != DBNull.Value)
-                    {
-                        if (Convert.ToBoolean(seleccionado))
-                        {
-                            dgv_archivos.Rows.RemoveAt(x);
-                            x--;
-                        }
-                    }
-                }
-            }
-        }
-
-        private void btn_cancelar_Click(object sender, EventArgs e)
+        private void tsbCancelar_Click(object sender, EventArgs e)
         {
             if (modificar)
             {
@@ -356,7 +451,7 @@ namespace SistemaParaAdministrarRespaldos
                 else
                 {
                     this.Close();
-                }     
+                }
             }
             else
             {
@@ -364,66 +459,18 @@ namespace SistemaParaAdministrarRespaldos
             }
         }
 
-        private void chk_contraseña_CheckedChanged(object sender, EventArgs e)
+        private void txt_confirmarcontraseña_TextChanged(object sender, EventArgs e)
         {
-            if (chk_password.Checked == true)
+            if (txt_contraseña.Text != txt_confirmarcontraseña.Text)
             {
-                txt_contraseña.Enabled = true;
+                errorProvider1.SetError(txt_confirmarcontraseña, "Las contraseñas no coinciden");
+                tsbGuardar.Enabled = false;
             }
             else
             {
-                txt_contraseña.Enabled = false;
-                txt_contraseña.Clear();
+                errorProvider1.Clear();
+                tsbGuardar.Enabled = true;
             }
-        }
-
-        private void btn_ruta_Click(object sender, EventArgs e)
-        {
-            FolderBrowserDialog fbd1 = new FolderBrowserDialog();
-            if (fbd1.ShowDialog() == DialogResult.OK)
-            {
-                txt_ruta.Text = fbd1.SelectedPath;
-            }
-        }
-
-        private void chk_visible_CheckedChanged(object sender, EventArgs e)
-        {
-            txt_contraseña.UseSystemPasswordChar = chk_visible.Checked ? false : true;
-        }
-
-        private void btn_visible_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button==System.Windows.Forms.MouseButtons.Left)
-            {
-                txt_contraseña.UseSystemPasswordChar = false;
-            }
-        }
-
-        private void btn_visible_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (e.Button == System.Windows.Forms.MouseButtons.Left)
-            {
-                txt_contraseña.UseSystemPasswordChar = true;
-            }
-        }
-
-        private void chk_seleccionartodo_CheckedChanged(object sender, EventArgs e)
-        {
-            if (dgv_archivos.Rows.Count > 0)
-            {
-                foreach (DataGridViewRow row in dgv_archivos.Rows)
-                {
-                    row.Cells["Seleccionar"].Value = true;
-                    if (chk_seleccionartodo.Checked == false)
-                    {
-                        row.Cells["Seleccionar"].Value = false;
-                    }
-                }
-            }
-            else
-            {
-                chk_seleccionartodo.Checked = false;
-            }
-        }
+        }   
     }
 }

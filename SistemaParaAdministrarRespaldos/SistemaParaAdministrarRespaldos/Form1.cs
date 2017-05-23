@@ -298,14 +298,6 @@ namespace SistemaParaAdministrarRespaldos
             }
         }
 
-        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("¿Seguro que desea salir?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
-            {
-                Application.Exit();
-            }
-        }
-
         private void chk_seleccionartodo_CheckedChanged(object sender, EventArgs e)
         {
             if (dgv_tareas.Rows.Count > 0)
@@ -354,6 +346,13 @@ namespace SistemaParaAdministrarRespaldos
                 MessageBox.Show("Seleccione al menos una tarea", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
-        
+
+        private void archivoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("¿Seguro que desea salir?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+        }
     }
 }

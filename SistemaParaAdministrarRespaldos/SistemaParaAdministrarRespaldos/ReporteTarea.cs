@@ -30,10 +30,10 @@ namespace SistemaParaAdministrarRespaldos
         private void ReporteTarea_Load(object sender, EventArgs e)
         {           
             ReporteNuevo rpt = new ReporteNuevo();
-            DataTable tablita = (DataTable)new mydatabaseDataSetTableAdapters.Tabla_TodoTableAdapter().llenarReporte(idTarea);
-            rpt.SetDataSource(tablita);
-            DataTable tablota = (DataTable)new mydatabaseDataSetTableAdapters.Tabla_EjecucionTableAdapter().llenarEjecuciones(idTarea);
-            rpt.Subreports[0].SetDataSource(tablota);
+            DataTable tabla = (DataTable)new mydatabaseDataSetTableAdapters.Tabla_TodoTableAdapter().llenarReporte(idTarea);
+            rpt.SetDataSource(tabla);
+            DataTable tablaej = (DataTable)new mydatabaseDataSetTableAdapters.Tabla_EjecucionTableAdapter().llenarEjecuciones(idTarea);
+            rpt.Subreports[0].SetDataSource(tablaej);
             crystalReportViewer1.ReportSource = rpt;
             crystalReportViewer1.Refresh();
         }

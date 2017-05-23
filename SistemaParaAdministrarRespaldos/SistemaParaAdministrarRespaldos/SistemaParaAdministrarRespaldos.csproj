@@ -228,6 +228,7 @@
     <None Include="Resources\1493859211_Folder.ico" />
     <None Include="Resources\1493859473_gnome-fs-directory-accept.ico" />
     <None Include="Resources\1493859647_gnome-fs-directory-accept.ico" />
+    <None Include="Resources\1486521690_check.ico" />
     <Content Include="Toma4025-Rumax-Folder-documents.ico" />
   </ItemGroup>
   <ItemGroup>
