@@ -1,6 +1,6 @@
 ﻿namespace SistemaParaAdministrarRespaldos
 {
-    partial class Form1
+    partial class FormPrincipal
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPrincipal));
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.tsb_nueva = new System.Windows.Forms.ToolStripButton();
             this.tsb_editar = new System.Windows.Forms.ToolStripButton();
@@ -42,8 +42,6 @@
             this.Nombre_TareaZip = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaHoraZip = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ruta_SalidaZip = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.list_ejecuciones = new System.Windows.Forms.ListView();
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -60,7 +58,6 @@
             this.toolStrip2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ejecucion)).BeginInit();
-            this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -80,7 +77,7 @@
             this.toolStripSeparator3,
             this.tsb_ejecutar,
             this.tsb_imprimir});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 24);
+            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.toolStrip2.Size = new System.Drawing.Size(838, 38);
@@ -159,7 +156,7 @@
             this.groupBox1.Location = new System.Drawing.Point(6, 242);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox1.Size = new System.Drawing.Size(486, 132);
+            this.groupBox1.Size = new System.Drawing.Size(486, 156);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Log de ejecuciones";
@@ -180,7 +177,7 @@
             this.dgv_ejecucion.Name = "dgv_ejecucion";
             this.dgv_ejecucion.RowHeadersWidth = 5;
             this.dgv_ejecucion.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_ejecucion.Size = new System.Drawing.Size(480, 113);
+            this.dgv_ejecucion.Size = new System.Drawing.Size(480, 137);
             this.dgv_ejecucion.TabIndex = 18;
             // 
             // Nombre_TareaZip
@@ -210,31 +207,12 @@
             this.Ruta_SalidaZip.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             this.Ruta_SalidaZip.Width = 95;
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.archivoToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.menuStrip1.Size = new System.Drawing.Size(838, 24);
-            this.menuStrip1.TabIndex = 16;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // archivoToolStripMenuItem
-            // 
-            this.archivoToolStripMenuItem.Image = global::SistemaParaAdministrarRespaldos.Properties.Resources._1486521491_close2;
-            this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
-            this.archivoToolStripMenuItem.Text = "Salir";
-            this.archivoToolStripMenuItem.Click += new System.EventHandler(this.archivoToolStripMenuItem_Click);
-            // 
             // splitter1
             // 
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitter1.Location = new System.Drawing.Point(835, 62);
+            this.splitter1.Location = new System.Drawing.Point(835, 38);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 378);
+            this.splitter1.Size = new System.Drawing.Size(3, 402);
             this.splitter1.TabIndex = 18;
             this.splitter1.TabStop = false;
             // 
@@ -248,7 +226,7 @@
             this.columnHeader3});
             this.list_ejecuciones.Location = new System.Drawing.Point(3, 11);
             this.list_ejecuciones.Name = "list_ejecuciones";
-            this.list_ejecuciones.Size = new System.Drawing.Size(324, 360);
+            this.list_ejecuciones.Size = new System.Drawing.Size(324, 384);
             this.list_ejecuciones.TabIndex = 20;
             this.list_ejecuciones.UseCompatibleStateImageBehavior = false;
             this.list_ejecuciones.View = System.Windows.Forms.View.Details;
@@ -270,7 +248,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer2.Location = new System.Drawing.Point(0, 62);
+            this.splitContainer2.Location = new System.Drawing.Point(0, 38);
             this.splitContainer2.Name = "splitContainer2";
             // 
             // splitContainer2.Panel1
@@ -283,7 +261,7 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.groupBox3);
             this.splitContainer2.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.splitContainer2.Size = new System.Drawing.Size(835, 378);
+            this.splitContainer2.Size = new System.Drawing.Size(835, 402);
             this.splitContainer2.SplitterDistance = 495;
             this.splitContainer2.TabIndex = 22;
             // 
@@ -381,11 +359,11 @@
             this.groupBox3.Controls.Add(this.list_ejecuciones);
             this.groupBox3.Location = new System.Drawing.Point(3, 3);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(330, 372);
+            this.groupBox3.Size = new System.Drawing.Size(330, 396);
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             // 
-            // Form1
+            // FormPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -394,12 +372,10 @@
             this.Controls.Add(this.splitContainer2);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.toolStrip2);
-            this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
-            this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
+            this.Name = "FormPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Administracion de Respaldos";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -408,8 +384,6 @@
             this.toolStrip2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ejecucion)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
@@ -431,8 +405,6 @@
         private System.Windows.Forms.ToolStripButton tsb_eliminar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton tsb_ejecutar;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dgv_ejecucion;
         private System.Windows.Forms.Splitter splitter1;

@@ -1,6 +1,6 @@
 ﻿namespace SistemaParaAdministrarRespaldos
 {
-    partial class Form2
+    partial class FormSecundario
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSecundario));
             this.label1 = new System.Windows.Forms.Label();
             this.txt_nombretarea = new System.Windows.Forms.TextBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
@@ -87,9 +87,11 @@
             // txt_nombretarea
             // 
             this.txt_nombretarea.Location = new System.Drawing.Point(34, 47);
+            this.txt_nombretarea.MaxLength = 50;
             this.txt_nombretarea.Name = "txt_nombretarea";
             this.txt_nombretarea.Size = new System.Drawing.Size(328, 20);
             this.txt_nombretarea.TabIndex = 1;
+            this.txt_nombretarea.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_nombretarea_KeyPress);
             // 
             // dateTimePicker1
             // 
@@ -191,7 +193,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(644, 233);
+            this.tabPage1.Size = new System.Drawing.Size(644, 224);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Configuracion Principal";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -345,6 +347,7 @@
             // 
             this.txt_ruta.Location = new System.Drawing.Point(102, 28);
             this.txt_ruta.Name = "txt_ruta";
+            this.txt_ruta.ReadOnly = true;
             this.txt_ruta.Size = new System.Drawing.Size(371, 20);
             this.txt_ruta.TabIndex = 1;
             // 
@@ -423,7 +426,7 @@
             this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider1.ContainerControl = this;
             // 
-            // Form2
+            // FormSecundario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -434,7 +437,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form2";
+            this.Name = "FormSecundario";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Datos de la Tarea";
             this.Load += new System.EventHandler(this.Form2_Load_1);

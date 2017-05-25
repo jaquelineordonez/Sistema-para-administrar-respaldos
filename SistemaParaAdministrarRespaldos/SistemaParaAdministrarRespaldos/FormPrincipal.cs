@@ -11,12 +11,12 @@ using SistemaParaAdministrarRespaldos.Properties;
 
 namespace SistemaParaAdministrarRespaldos
 {
-    public partial class Form1 : System.Windows.Forms.Form
+    public partial class FormPrincipal : System.Windows.Forms.Form
     {
         private SQLiteConnection conexion;
         private int idtareamostrarLog;
 
-        public Form1()
+        public FormPrincipal()
         {
             InitializeComponent();
         }
@@ -27,7 +27,7 @@ namespace SistemaParaAdministrarRespaldos
 
         private DataTable tbl = new DataTable();
         private SQLiteDataAdapter adp;
-        private SQLiteCommandBuilder build;
+        private SQLiteCommandBuilder build;  
 
         private DataTable dta = new DataTable();
 
@@ -100,21 +100,21 @@ namespace SistemaParaAdministrarRespaldos
 
         private void tsb_nueva_Click(object sender, EventArgs e)
         {
-            Form2 form2 = new Form2(conexion);
+            FormSecundario form2 = new FormSecundario(conexion);
             if (form2.ShowDialog(this) == DialogResult.OK)
             {
                 CargarDatos();
-                MessageBox.Show("Tarea Agregada");
+                MessageBox.Show("Tarea agregada", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
         private void tsb_editar_Click(object sender, EventArgs e)
         {
-            Form2 form2 = new Form2(conexion, Convert.ToInt32(dgv_tareas["ID_Tarea", dgv_tareas.CurrentRow.Index].Value), dgv_tareas["Nombre_Tarea", dgv_tareas.CurrentRow.Index].Value, System.Convert.ToDateTime(dgv_tareas["Fecha", dgv_tareas.CurrentRow.Index].Value));
+            FormSecundario form2 = new FormSecundario(conexion, Convert.ToInt32(dgv_tareas["ID_Tarea", dgv_tareas.CurrentRow.Index].Value), dgv_tareas["Nombre_Tarea", dgv_tareas.CurrentRow.Index].Value, System.Convert.ToDateTime(dgv_tareas["Fecha", dgv_tareas.CurrentRow.Index].Value));
             if (form2.ShowDialog(this) == DialogResult.OK)
             {
                 CargarDatos();
-                MessageBox.Show("Tarea Modificada");
+                MessageBox.Show("Tarea modificada", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -196,105 +196,113 @@ namespace SistemaParaAdministrarRespaldos
                 DataRow[] rowsSeleccionados = tabla.Select("Seleccionar = " + true);
                 if (rowsSeleccionados != null && rowsSeleccionados.Length >= 1)
                 {
-                    for (int x = 0; x < rowsSeleccionados.Length; x++)
+                    if (MessageBox.Show("¿Seguro que desea ejecutar las tareas seleccionadas?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        id_Tarea = rowsSeleccionados[x][0];
-                        SQLiteCommand chk = new SQLiteCommand("SELECT sobreescribir FROM Tabla_Ruta WHERE (ID_Tarea= " + id_Tarea + ")", conexion, transaccion);
-                        string chksobreescribir = chk.ExecuteScalar().ToString();
 
-                        SQLiteCommand nom = new SQLiteCommand("SELECT Nombre_Tarea FROM Tabla_Tarea WHERE (ID_Tarea= " + id_Tarea + ")", conexion, transaccion);
-                        string nombrezip = nom.ExecuteScalar().ToString();
-
-                        SQLiteCommand comandosalida = new SQLiteCommand("SELECT Ruta_Salida FROM Tabla_Ruta WHERE (ID_Tarea= " + id_Tarea + ")", conexion, transaccion);
-                        string rutasalida = comandosalida.ExecuteScalar().ToString();
-
-                        string contraseña;
-                        SQLiteCommand contra = new SQLiteCommand("SELECT Contraseña FROM Tabla_Ruta WHERE ID_Tarea=" + id_Tarea, conexion);
-                        string contras = contra.ExecuteScalar().ToString();
-
-                        if (contras == null | contras == string.Empty)
+                        for (int x = 0; x < rowsSeleccionados.Length; x++)
                         {
-                            contraseña = null;
-                        }
-                        else
-                        {
-                            contraseña = StringCipher.Decrypt(contras);
-                        }
+                            id_Tarea = rowsSeleccionados[x][0];
+                            SQLiteCommand chk = new SQLiteCommand("SELECT sobreescribir FROM Tabla_Ruta WHERE (ID_Tarea= " + id_Tarea + ")", conexion, transaccion);
+                            string chksobreescribir = chk.ExecuteScalar().ToString();
 
-                        SQLiteCommand comandoinicio = new SQLiteCommand("SELECT Datos_Archivo FROM Tabla_Archivo WHERE (ID_Tarea= " + id_Tarea + ")", conexion, transaccion);
-                        SQLiteDataReader rutainicio = comandoinicio.ExecuteReader();
+                            SQLiteCommand nom = new SQLiteCommand("SELECT Nombre_Tarea FROM Tabla_Tarea WHERE (ID_Tarea= " + id_Tarea + ")", conexion, transaccion);
+                            string nombrezip = nom.ExecuteScalar().ToString();
 
-                        string tiempo = DateTime.Now.ToString(" dd-MM-yyyy HH_mm_ss");
-                        string nombreFinalZip = nombrezip + tiempo;
+                            SQLiteCommand comandosalida = new SQLiteCommand("SELECT Ruta_Salida FROM Tabla_Ruta WHERE (ID_Tarea= " + id_Tarea + ")", conexion, transaccion);
+                            string rutasalida = comandosalida.ExecuteScalar().ToString();
 
-                        string rutaarchivo = string.Empty;
-                        using (ZipFile zip = new ZipFile())
-                        {
-                            while (rutainicio.Read())
+                            string contraseña;
+                            SQLiteCommand contra = new SQLiteCommand("SELECT Contraseña FROM Tabla_Ruta WHERE ID_Tarea=" + id_Tarea, conexion);
+                            string contras = contra.ExecuteScalar().ToString();
+
+                            if (contras == null | contras == string.Empty)
                             {
-                                rutaarchivo = Convert.ToString(rutainicio.GetValue(0));
-                                if (File.Exists(rutaarchivo))
-                                {
-
-                                    if (contraseña != null)
-                                    {
-                                        zip.Password = contraseña;
-                                    }
-                                    zip.AddFile(rutaarchivo, string.Empty);
-                                }
-                            }
-
-                            if (chksobreescribir == Convert.ToString(1))
-                            {
-                                zip.Save(rutasalida + Path.DirectorySeparatorChar + nombrezip + ".zip");
+                                contraseña = null;
                             }
                             else
                             {
-                                zip.Save(rutasalida + Path.DirectorySeparatorChar + nombreFinalZip + ".zip");
+                                contraseña = StringCipher.Decrypt(contras);
                             }
+
+                            SQLiteCommand comandoinicio = new SQLiteCommand("SELECT Datos_Archivo FROM Tabla_Archivo WHERE (ID_Tarea= " + id_Tarea + ")", conexion, transaccion);
+                            SQLiteDataReader rutainicio = comandoinicio.ExecuteReader();
+
+                            string tiempo = DateTime.Now.ToString(" dd-MM-yyyy HH_mm_ss");
+                            string nombreFinalZip = nombrezip + tiempo;
+
+                            string rutaarchivo = string.Empty;
+                            using (ZipFile zip = new ZipFile())
+                            {
+                                while (rutainicio.Read())
+                                {
+                                    rutaarchivo = Convert.ToString(rutainicio.GetValue(0));
+                                    if (File.Exists(rutaarchivo))
+                                    {
+
+                                        if (contraseña != null)
+                                        {
+                                            zip.Password = contraseña;
+                                        }
+                                        zip.AddFile(rutaarchivo, string.Empty);
+                                    }
+                                }
+
+                             
+
+                                if (chksobreescribir == Convert.ToString(1))
+                                {
+                                    zip.Save(rutasalida + Path.DirectorySeparatorChar + nombrezip + ".zip");
+                                }
+                                else
+                                {
+                                    zip.Save(rutasalida + Path.DirectorySeparatorChar + nombreFinalZip + ".zip");
+                                }
+                            }
+
+                            string comando = "insert into Tabla_Ejecucion (Nombre_TareaZip,FechaHoraZip,Ruta_SalidaZip,ID_Tarea)values(@Nombre_TareaZip,@FechaHoraZip,@Ruta_SalidaZip,@ID_Tarea)";
+                            SQLiteCommand insercion = new SQLiteCommand(comando, conexion, transaccion);
+
+                            insercion.Parameters.AddWithValue("@Nombre_TareaZip", nombrezip);
+                            insercion.Parameters.AddWithValue("@FechaHoraZip", DateTime.Now);
+                            if (chksobreescribir == Convert.ToString(1))
+                            {
+                                insercion.Parameters.AddWithValue("@Ruta_SalidaZip", rutasalida + Path.DirectorySeparatorChar + nombrezip + ".zip");
+                            }
+                            else
+                            {
+                                insercion.Parameters.AddWithValue("@Ruta_SalidaZip", rutasalida + Path.DirectorySeparatorChar + nombreFinalZip + ".zip");
+                            }
+                            insercion.Parameters.AddWithValue("@ID_Tarea", id_Tarea);
+                            insercion.ExecuteNonQuery();
                         }
 
-                        string comando = "insert into Tabla_Ejecucion (Nombre_TareaZip,FechaHoraZip,Ruta_SalidaZip,ID_Tarea)values(@Nombre_TareaZip,@FechaHoraZip,@Ruta_SalidaZip,@ID_Tarea)";
-                        SQLiteCommand insercion = new SQLiteCommand(comando, conexion, transaccion);
-
-                        insercion.Parameters.AddWithValue("@Nombre_TareaZip", nombrezip);
-                        insercion.Parameters.AddWithValue("@FechaHoraZip", DateTime.Now);
-                        if (chksobreescribir == Convert.ToString(1))
-                        {
-                            insercion.Parameters.AddWithValue("@Ruta_SalidaZip", rutasalida + Path.DirectorySeparatorChar + nombrezip + ".zip");
-                        }
-                        else
-                        {
-                            insercion.Parameters.AddWithValue("@Ruta_SalidaZip", rutasalida + Path.DirectorySeparatorChar + nombreFinalZip + ".zip");
-                        }
-                        insercion.Parameters.AddWithValue("@ID_Tarea", id_Tarea);
-                        insercion.ExecuteNonQuery();
+                        transaccion.Commit();
+                        CargarDatos();
+                        cargarejecucion();
+                        MessageBox.Show("Tarea ejecutada", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
-                    transaccion.Commit();
-                    CargarDatos();
-                    cargarejecucion();
-                    MessageBox.Show("Tarea ejecutada");
                 }
                 else
                 {
                     MessageBox.Show("Seleccione al menos una tarea", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
+
             }
             catch
             {
-                MessageBox.Show("ERROR EN TRANSACCION");
+                MessageBox.Show("VERIFIQUE LOS DATOS", "ERROR EN EJECUCION", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 transaccion.Rollback();
             }
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            Form2 form2 = new Form2(conexion, Convert.ToInt32(dgv_tareas["ID_Tarea", dgv_tareas.CurrentRow.Index].Value), dgv_tareas["Nombre_Tarea", dgv_tareas.CurrentRow.Index].Value, System.Convert.ToDateTime(dgv_tareas["Fecha", dgv_tareas.CurrentRow.Index].Value));
+            FormSecundario form2 = new FormSecundario(conexion, Convert.ToInt32(dgv_tareas["ID_Tarea", dgv_tareas.CurrentRow.Index].Value), dgv_tareas["Nombre_Tarea", dgv_tareas.CurrentRow.Index].Value, System.Convert.ToDateTime(dgv_tareas["Fecha", dgv_tareas.CurrentRow.Index].Value));
             if (form2.ShowDialog(this) == DialogResult.OK)
             {
                 CargarDatos();
-                MessageBox.Show("Tarea Modificada");
+                MessageBox.Show("Tarea modificada", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -308,6 +316,7 @@ namespace SistemaParaAdministrarRespaldos
                     if (chk_seleccionartodo.Checked == false)
                     {
                         row.Cells["Seleccionar"].Value = false;
+
                     }
                 }
             }
@@ -344,14 +353,6 @@ namespace SistemaParaAdministrarRespaldos
             else
             {
                 MessageBox.Show("Seleccione al menos una tarea", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-        }
-
-        private void archivoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("¿Seguro que desea salir?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
-            {
-                Application.Exit();
             }
         }
     }

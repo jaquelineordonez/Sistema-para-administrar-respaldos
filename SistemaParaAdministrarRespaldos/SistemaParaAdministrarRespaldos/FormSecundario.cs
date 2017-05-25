@@ -7,7 +7,7 @@ using SistemaParaAdministrarRespaldos.Properties;
 
 namespace SistemaParaAdministrarRespaldos
 {
-    public partial class Form2 : System.Windows.Forms.Form
+    public partial class FormSecundario : System.Windows.Forms.Form
     {
         private SQLiteConnection conexion;
         private bool insertar = false;
@@ -16,7 +16,7 @@ namespace SistemaParaAdministrarRespaldos
         private DateTime fecha;
         private int idtarea;
 
-        public Form2(SQLiteConnection conexion)
+        public FormSecundario(SQLiteConnection conexion)
         {
             InitializeComponent();
 
@@ -24,7 +24,7 @@ namespace SistemaParaAdministrarRespaldos
             this.insertar = true;
         }
 
-        public Form2(SQLiteConnection conexion, int id_tarea, object nombretarea, DateTime fecha)
+        public FormSecundario(SQLiteConnection conexion, int id_tarea, object nombretarea, DateTime fecha)
         {
             InitializeComponent();
 
@@ -60,12 +60,9 @@ namespace SistemaParaAdministrarRespaldos
             dgv_archivos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgv_archivos.Columns[0].Width = 50;
             dgv_archivos.Columns[2].Frozen = true;
-
-            if (idtarea > 0)
-            {
+          
                 cargardatos();
-                cargarrutas();
-            }
+                cargarrutas();         
         }
 
         private DataTable tablaArchivos = new DataTable();
@@ -111,8 +108,7 @@ namespace SistemaParaAdministrarRespaldos
         private bool agregar(string[] archivos)
         {
             bool validacion = true;
-            if (tablaArchivos.Rows.Count > 0)
-            {
+          
                 for (int x = 0; x < archivos.Length; x++)
                 {
                     DataRow[] repetido = tablaArchivos.Select("Datos_Archivo = '" + archivos[x] + "'");
@@ -129,40 +125,6 @@ namespace SistemaParaAdministrarRespaldos
                         });
                     }
                 }
-            }
-            else
-            {
-                string archivo = string.Empty;
-                for (int x = 0; x < archivos.Length; x++)
-                {
-                    archivo = archivos[x];
-
-                    if (dgv_archivos.RowCount >= 1)
-                    {
-                        bool estaRepetido = false;
-                        for (int y = 0; y < dgv_archivos.Rows.Count; y++)
-                        {
-                            if (archivo == dgv_archivos["Datos_Archivo", y].Value.ToString().TrimEnd())
-                            {
-                                MessageBox.Show("El archivo: " + archivos[x] + " ya existe en la lista.");
-                                validacion = false;
-                                estaRepetido = true;
-                            }
-                        }
-                        if (!estaRepetido)
-                        {
-                            dgv_archivos.Rows.Add();
-                            dgv_archivos["Datos_Archivo", dgv_archivos.Rows.Count - 1].Value = archivo;
-                        }
-                        estaRepetido = false;
-                    }
-                    else
-                    {
-                        dgv_archivos.Rows.Add();
-                        dgv_archivos["Datos_Archivo", dgv_archivos.Rows.Count - 1].Value = archivo;
-                    }
-                }
-            }
             return validacion;
         }
 
@@ -272,14 +234,15 @@ namespace SistemaParaAdministrarRespaldos
                     {
                         for (int x = 0; x < rowsSeleccionados.Length; x++)
                         {
+
                             rowsSeleccionados[x].Delete();
                         }
 
                         adapter.Update(tablaArchivos);
                         dgv_archivos.DataSource = null;
                         dgv_archivos.DataSource = tablaArchivos;
-                    }
 
+                    }
                 }
                 else
                 {
@@ -323,7 +286,18 @@ namespace SistemaParaAdministrarRespaldos
             {
                 if (string.IsNullOrEmpty(txt_nombretarea.Text) || (dgv_archivos.Rows.Count == 0) || string.IsNullOrEmpty(txt_ruta.Text))
                 {
-                    MessageBox.Show("Debe completar la informacion", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    if (string.IsNullOrEmpty(txt_nombretarea.Text))
+                    {
+                        MessageBox.Show("Nombre de la tarea vacio", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+                    if ((dgv_archivos.Rows.Count == 0))
+                    {
+                        MessageBox.Show("La tarea no contiene archivos", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+                    if (string.IsNullOrEmpty(txt_ruta.Text))
+                    {
+                        MessageBox.Show("No existe ruta de salida", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
                 }
                 else
                 {
@@ -386,7 +360,18 @@ namespace SistemaParaAdministrarRespaldos
                 {
                     if (string.IsNullOrEmpty(txt_nombretarea.Text) || (dgv_archivos.Rows.Count == 0) || string.IsNullOrEmpty(txt_ruta.Text))
                     {
-                        MessageBox.Show("Debe completar la informacion", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        if (string.IsNullOrEmpty(txt_nombretarea.Text))
+                        {
+                            MessageBox.Show("Nombre de la tarea vacio", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        }
+                        if ((dgv_archivos.Rows.Count == 0))
+                        {
+                            MessageBox.Show("La tarea no contiene archivos", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        }
+                        if (string.IsNullOrEmpty(txt_ruta.Text))
+                        {
+                            MessageBox.Show("No existe ruta de salida", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        }
                     }
                     else
                     {
@@ -425,8 +410,8 @@ namespace SistemaParaAdministrarRespaldos
                             {
                                 modificar = true;
                             }
-
-                            transaccion.Commit();
+                         
+                            transaccion.Commit();                          
                             this.DialogResult = DialogResult.OK;
 
                         }
@@ -442,21 +427,7 @@ namespace SistemaParaAdministrarRespaldos
 
         private void tsbCancelar_Click(object sender, EventArgs e)
         {
-            if (modificar)
-            {
-                if (dgv_archivos.Rows.Count == 0)
-                {
-                    MessageBox.Show("Debe completar la informacion", "Mensaje informativo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                }
-                else
-                {
-                    this.Close();
-                }
-            }
-            else
-            {
-                this.Close();
-            }
+            this.Close();
         }
 
         private void txt_confirmarcontraseña_TextChanged(object sender, EventArgs e)
@@ -471,6 +442,23 @@ namespace SistemaParaAdministrarRespaldos
                 errorProvider1.Clear();
                 tsbGuardar.Enabled = true;
             }
-        }   
+        }
+
+        public void sololetras(KeyPressEventArgs e)
+        {
+            if (char.IsLetter(e.KeyChar) || char.IsNumber(e.KeyChar) || (char.IsControl(e.KeyChar)) || (char.IsSeparator(e.KeyChar)))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txt_nombretarea_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            sololetras(e);
+        }
     }
 }
