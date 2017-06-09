@@ -347,9 +347,14 @@ namespace SistemaParaAdministrarRespaldos
                         this.DialogResult = DialogResult.OK; // registra el resultado del boton OK para que realize lo del form1 if
 
                     }
-                    catch
+                    catch (SQLiteException el)
                     {
-                        MessageBox.Show("ERROR EN TRANSACCION");
+                        MessageBox.Show(el.Message, "ERROR EN TRANSACCION", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        transaccion.Rollback();
+                    }
+                    catch (Exception x)
+                    {
+                        MessageBox.Show(x.Message, "ERROR EN TRANSACCION", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         transaccion.Rollback();
                     }
                 }

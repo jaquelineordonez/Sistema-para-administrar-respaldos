@@ -8,24 +8,20 @@
   <Shapes>
     <Shape ID="DesignTable:Tabla_Archivo" ZOrder="8" X="353" Y="70" Height="134" Width="226" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="83" />
     <Shape ID="DesignTable:Tabla_Ejecucion" ZOrder="7" X="353" Y="274" Height="191" Width="236" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="24" OldDataTableHeight="24" SplitterPosition="121" />
-    <Shape ID="DesignTable:Tabla_Ruta" ZOrder="6" X="353" Y="516" Height="191" Width="208" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="140" />
+    <Shape ID="DesignTable:Tabla_Ruta" ZOrder="6" X="78" Y="321" Height="191" Width="208" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="140" />
     <Shape ID="DesignTable:Tabla_Tarea" ZOrder="2" X="70" Y="70" Height="172" Width="213" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="83" />
-    <Shape ID="DesignTable:Tabla_Todo" ZOrder="1" X="80" Y="328" Height="115" Width="211" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="64" />
+    <Shape ID="DesignTable:Tabla_Todo" ZOrder="1" X="357" Y="515" Height="115" Width="211" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="64" />
   </Shapes>
   <Connectors>
     <Connector ID="DesignRelation:FK_Tabla_Ruta_0_0" ZOrder="3" LineWidth="11">
       <RoutePoints>
         <Point>
-          <X>258</X>
+          <X>183</X>
           <Y>242</Y>
         </Point>
         <Point>
-          <X>258</X>
-          <Y>533</Y>
-        </Point>
-        <Point>
-          <X>353</X>
-          <Y>533</Y>
+          <X>183</X>
+          <Y>321</Y>
         </Point>
       </RoutePoints>
     </Connector>

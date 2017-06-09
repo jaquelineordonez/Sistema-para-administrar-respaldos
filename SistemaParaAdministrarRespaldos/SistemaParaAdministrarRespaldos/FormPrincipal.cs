@@ -27,7 +27,7 @@ namespace SistemaParaAdministrarRespaldos
 
         private DataTable tbl = new DataTable();
         private SQLiteDataAdapter adp;
-        private SQLiteCommandBuilder build;  
+        private SQLiteCommandBuilder build;
 
         private DataTable dta = new DataTable();
 
@@ -74,8 +74,19 @@ namespace SistemaParaAdministrarRespaldos
             return Settings.Default.mydatabaseConnectionString;
         }
 
+        private static SQLiteConnection cn;
+        private string cadenac;
+
+        private void obtenerpath()
+        {
+            cn = new SQLiteConnection();
+            cadenac = "data source =" + Directory.GetCurrentDirectory() + "mydatabase.sqlite";
+            cn.ConnectionString = cadenac;         
+        } 
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            obtenerpath();
             dgv_tareas.AutoGenerateColumns = false;
             dgv_tareas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgv_tareas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;

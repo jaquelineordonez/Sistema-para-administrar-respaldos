@@ -26,8 +26,7 @@ namespace SistemaParaAdministrarRespaldos.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("data source=\"D:\\Sistema para manejar respaldos\\Sistema-para-administrar-respaldos" +
-            "\\mydatabase.sqlite\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("data source=mydatabase.sqlite")]
         public string mydatabaseConnectionString {
             get {
                 return ((string)(this["mydatabaseConnectionString"]));
